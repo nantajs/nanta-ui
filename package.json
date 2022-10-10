@@ -17,6 +17,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "pg": "yarn --cwd ./playground/ dev",
     "build": "vue-tsc --noEmit && vite build",
     "package": "vite build && vue-tsc --emitDeclarationOnly",
     "preview": "vite preview",

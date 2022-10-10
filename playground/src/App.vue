@@ -60,7 +60,7 @@ const handleReset = () => {
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="nant-ui: vue3 + antd + vite + ts" />
+  <HelloWorld msg="nant-ui playground" />
   <NantaButton>1</NantaButton>
   <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm" @submit="handleSubmit"
     @reset="handleReset" />
