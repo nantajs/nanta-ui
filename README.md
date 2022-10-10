@@ -6,6 +6,9 @@ ant-design based ui framework.
 - Vue 3.0  
 - [ant-design-vue](https://github.com/vueComponent/ant-design-vue)
 
+## Notice
+nanta-ui is wip, current alpha stage.
+
 ## How to dev
 1. build package
 ```
