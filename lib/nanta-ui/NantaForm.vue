@@ -27,7 +27,7 @@ import NantaFormAction from './form/components/NantaFormAction.vue'
 import { handleInputNumberValue, itemIsDateType, dateUtil, tryDeconstructArray, tryDeconstructObject, handleRangeTimeValue, defaultValueComponents } from './form/helper'
 import { isNullOrUnDef } from './utils/is'
 import { deepMerge } from './utils/util'
-import type { Nullable, Recordable } from './types/type'
+import type { Nullable, Recordable } from '.'
 import { ref, unref, getCurrentInstance, reactive, computed, toRaw, watch, onMounted, nextTick, useAttrs } from 'vue'
 
 const props = defineProps(formPorps)

@@ -6,7 +6,7 @@ import type {
   UseModalInnerReturnType,
   RegisterFn
 } from "./type";
-import type { Nullable, Fn } from '../types/type'
+import type { Nullable, Fn } from '..'
 import { isFunction, isEqual } from 'lodash-es'
 import { ref, unref, reactive, getCurrentInstance, computed, toRaw, watchEffect, nextTick } from 'vue'
 

@@ -1,5 +1,5 @@
 import { unref } from 'vue'
-import type { Recordable } from '../types/type'
+import type { Recordable } from '..'
 import { isObject } from 'lodash-es'
 
 const projectName = 'nanta-ui'
