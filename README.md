@@ -14,12 +14,21 @@ ant-design based ui framework.
 
 ## Usage
 
-add & install
+1. add & install nanta-ui
 
 ```shell
 yarn add @nanta/ui
 yarn install
 ```
+
+2. use antd in *main.ts*
+```js
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+createApp(App).use(Antd).mount('#app')
+```
+
+Full example can ref *playground* !
 
 ## Notice
 
