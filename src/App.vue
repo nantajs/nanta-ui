@@ -2,10 +2,9 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
-import { NantaButton } from '@nanta/ui'
-import NantaForm from '../lib/nanta-ui/NantaForm.vue'
-import { useForm, FormProps } from '../lib/nanta-ui/form'
+import { NantaButton, NantaForm, useForm, FormProps, Recordable } from '@nanta/ui'
 import { schemes } from "./nanta/data";
+import { computed } from "vue";
 
 const [
   registerForm,
@@ -17,6 +16,39 @@ const [
     span: 24,
   },
 });
+
+const customizeResetFn = (): Promise<void> => {
+  console.log("here is a customize resetFn called!");
+  setFieldsValue({
+    age: 0,
+    email: "nanta@sancaiwulian.com",
+    name: "Nanta",
+  });
+  return new Promise((resolve, reject) => {
+    try {
+      resolve();
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+const formProps: FormProps = {
+  resetFn: customizeResetFn,
+  colon: true,
+};
+
+const getFormProps = computed((): Recordable => ({ ...formProps }));
+
+const handleSubmit = (values: any) => {
+  console.log("values", values);
+  console.log("handleSubmit btn clicked!");
+};
+
+const handleReset = () => {
+  console.log("handleReset but click");
+};
+
 </script>
 
 <template>
@@ -30,10 +62,8 @@ const [
   </div>
   <HelloWorld msg="nant-ui: vue3 + antd + vite + ts" />
   <NantaButton>1</NantaButton>
-  <NantaForm
-    :actionColOptions="{ span: 24 }"
-    @register="registerForm"
-  />
+  <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm" @submit="handleSubmit"
+    @reset="handleReset" />
 </template>
 
 <style scoped>

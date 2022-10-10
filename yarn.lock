@@ -347,11 +347,12 @@
     "@jridgewell/sourcemap-codec" "1.4.14"
 
 "@nanta/ui@file:nanta-ui-v0.1.0-alpha.1.tgz":
-  "integrity" "sha512-ZM40Vm1uPwZ7DnfYDuxjJBpl30Bgl9SFJbPZZMaQvn6VsSO4f1CWk5i+jJQX3BKaZ9gUGrxS5FjcFK3EMw7TMg=="
+  "integrity" "sha512-wJyhkJixZYPtOVa6HYz/uc4q0KkZBxMo9+pmjmstScJY/Dh6uAQrxFXSfDAdUK6GYYZJLCpKB9uP6rGijycyqQ=="
   "resolved" "file:nanta-ui-v0.1.0-alpha.1.tgz"
   "version" "0.1.0-alpha.1"
   dependencies:
     "@ant-design/icons-vue" "^6.1.0"
+    "@nanta/ui" "file:nanta-ui-v0.1.0-alpha.1.tgz"
     "ant-design-vue" "^3.3.0-beta.3"
     "vue" "^3.2.37"
 
