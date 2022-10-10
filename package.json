@@ -1,6 +1,5 @@
 {
   "name": "@nanta/ui",
-  "private": true,
   "version": "0.1.0-alpha.1",
   "type": "module",
   "files": [
@@ -25,7 +24,6 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
-    "@nanta/ui": "file:nanta-ui-v0.1.0-alpha.1.tgz",
     "ant-design-vue": "^3.3.0-beta.3",
     "vue": "^3.2.37"
   },
@@ -37,5 +35,25 @@
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "vue-tsc": "^0.40.4"
-  }
+  },
+  "description": "ant-design based ui framework.",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nantajs/nanta-ui.git"
+  },
+  "keywords": [
+    "nanta",
+    "antd",
+    "vue3",
+    "nanta-ui"
+  ],
+  "author": "Aborn Jiang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nantajs/nanta-ui/issues"
+  },
+  "homepage": "https://github.com/nantajs/nanta-ui#readme"
 }
