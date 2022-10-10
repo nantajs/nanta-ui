@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.2.37",
-    "@nanta/ui": "latest"
+    "@nanta/ui": "0.1.0-alpha.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",

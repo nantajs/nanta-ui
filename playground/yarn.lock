@@ -49,10 +49,10 @@
   resolved "https://registry.npmjs.org/@esbuild/linux-loong64/-/linux-loong64-0.15.10.tgz#78a42897c2cf8db9fd5f1811f7590393b77774c7"
   integrity sha512-w0Ou3Z83LOYEkwaui2M8VwIp+nLi/NA60lBLMvaJ+vXVMcsARYdEzLNE7RSm4+lSg4zq4d7fAVuzk7PNQ5JFgg==
 
-"@nanta/ui@latest":
-  version "0.1.0-alpha.3"
-  resolved "https://registry.npmjs.org/@nanta/ui/-/ui-0.1.0-alpha.3.tgz#2e07b5f80a06c03799b5d2035960791c3ab8219f"
-  integrity sha512-LMv9xbBByXGdH6gxISkyigBqzIf2SUTcjrj+oAN8OX9QGtgT7RxjDUZBfCOem38FDvKNGlwh5pOXfRG6ko6P3w==
+"@nanta/ui@0.1.0-alpha.4":
+  version "0.1.0-alpha.4"
+  resolved "https://registry.npmjs.org/@nanta/ui/-/ui-0.1.0-alpha.4.tgz#d0535905526ce58a7296c8aab80b056355cfeac9"
+  integrity sha512-p41CSxWfzlD2c6w1fSQJf1RbT6vKo8cb1uXi7GTtaitZaXWv5yLIcqTaJLIH/pzUMZxk66DNRaBgh+UhPJipTA==
   dependencies:
     "@ant-design/icons-vue" "^6.1.0"
     ant-design-vue "^3.3.0-beta.3"
