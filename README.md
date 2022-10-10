@@ -18,7 +18,7 @@ yarn package
 2. test pkg in local
 ```
 yarn pack  # pack local
-npm install nanta-ui-0.0.1.tgz  # install local
+npm install nanta-ui-v0.1.0-alpha.1.tgz  # install local
 ```
 
 3. publish to npm
