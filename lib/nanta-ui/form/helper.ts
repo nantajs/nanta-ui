@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { isNumber, set, isObject } from 'lodash-es'
 import type { ComponentType, FieldMapToTime } from './index'
-import type { Recordable } from '../types/global'
+import type { Recordable } from '../types/type'
 
 export function handleInputNumberValue (component?: ComponentType, val?: any) {
   if (!component) { return val }

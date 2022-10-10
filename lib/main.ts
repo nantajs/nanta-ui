@@ -5,3 +5,4 @@ import NantaModal from './nanta-ui/NantaModal.vue'
 export { NantaButton, NantaForm, NantaModal }
 export * from './nanta-ui/form'
 export * from './nanta-ui/modal'
+export * from './nanta-ui/types/type.d'
