@@ -28,7 +28,7 @@ const [
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <HelloWorld msg="nant-ui: vue3 + antd + vite + ts" />
   <NantaButton>1</NantaButton>
   <NantaForm
     :actionColOptions="{ span: 24 }"
