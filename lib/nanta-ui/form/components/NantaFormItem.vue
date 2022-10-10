@@ -6,32 +6,13 @@ import type { FormSchema, FormProps } from '../index'
 import { useItemLabelWidth } from '../hooks/useLabelWidth'
 import { componentMap } from './componentMap'
 import type { Nullable, Recordable } from '../../types/global'
+import type { FormItemProps } from '../types/formProps'
+import { formItemPorps } from '../types/formProps'
 import { ref, unref, getCurrentInstance, toRefs, computed, defineComponent } from 'vue'
 
 export default {
-  props: {
-    allDefaultValues: {
-      type: Object as PropType<Recordable>,
-      default: () => ({})
-    },
-    schema: {
-      type: Object as PropType<FormSchema>,
-      default: () => ({})
-    },
-    formProps: {
-      type: Object as PropType<FormProps>,
-      default: () => ({})
-    },
-    formModel: {
-      type: Object as PropType<Recordable>,
-      default: () => ({})
-    },
-    setFormModel: {
-      type: Function as PropType<(key: string, value: any) => void>,
-      default: null
-    }
-  },
-  setup (props, { slots }) {
+  props: formItemPorps,
+  setup(props : FormItemProps) {
     const { schema, formProps } = toRefs(props) as {
       schema: Ref<FormSchema>;
       formProps: Ref<FormProps>;
@@ -44,7 +25,7 @@ export default {
 
     const itemLabelWidthProp = useItemLabelWidth(schema, formProps)
 
-    function renderComponent () {
+    function renderComponent() {
       const { component, field, changeEvent = 'change', placeholder } = props.schema
 
       const { size, disabled } = props.formProps
@@ -101,7 +82,7 @@ export default {
       return (<Comp {...compAttr} />)
     }
 
-    function renderItem () {
+    function renderItem() {
       const { field, component, label, show, required } = props.schema
       const { colon } = props.formProps
       const { labelCol, wrapperCol } = unref(itemLabelWidthProp)

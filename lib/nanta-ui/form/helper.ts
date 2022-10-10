@@ -24,7 +24,7 @@ function genType () {
 export const dateItemType = genType()
 
 export function itemIsDateType (component?: ComponentType) {
-  return dateItemType.includes(component)
+  return component && dateItemType.includes(component)
 }
 
 export const dateUtil = dayjs

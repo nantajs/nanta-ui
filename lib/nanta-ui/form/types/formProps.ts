@@ -69,3 +69,34 @@ export const formPorps = {
   },
   wrapperCol: Object as PropType<Partial<ColEx>>,
 }
+
+export interface FormItemProps {
+  allDefaultValues: Recordable,
+  schema: FormSchema,
+  formProps: FormProps,
+  formModel: Recordable,
+  setFormModel:(key: string, value: any) => void
+}
+
+export const formItemPorps = {
+  allDefaultValues: {
+    type: Object as PropType<Recordable>,
+    default: () => ({})
+  },
+  schema: {
+    type: Object as PropType<FormSchema>,
+    default: () => ({})
+  },
+  formProps: {
+    type: Object as PropType<FormProps>,
+    default: () => ({})
+  },
+  formModel: {
+    type: Object as PropType<Recordable>,
+    default: () => ({})
+  },
+  setFormModel: {
+    type: Function as PropType<(key: string, value: any) => void>,
+    default: null
+  }
+}

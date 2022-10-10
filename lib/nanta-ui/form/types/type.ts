@@ -117,7 +117,7 @@ export interface ColEx {
 }
 
 export const buttonProps = {
-  color: { type: String, validator: (v) => ['error', 'warning', 'success', ''].includes(v) },
+  color: { type: String, validator: (v: string) => ['error', 'warning', 'success', ''].includes(v) },
   loading: { type: Boolean },
   disabled: { type: Boolean },
   /**
@@ -133,7 +133,7 @@ export const buttonProps = {
    * @default: 14
    */
   iconSize: { type: Number, default: 14 },
-  onClick: { type: Function as PropType<(...args) => any>, default: null },
+  onClick: { type: Function as PropType<(...args: any) => any>, default: null },
 };
 
 declare type ButtonProps = Partial<ExtractPropTypes<typeof buttonProps>>;
