@@ -24,12 +24,16 @@
     "pack": "npm pack"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "@nanta/ui": "file:nanta-ui-0.0.1.tgz",
+    "ant-design-vue": "^3.3.0-beta.3",
     "vue": "^3.2.37"
   },
   "devDependencies": {
     "@types/node": "^18.8.3",
     "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "nuxt-lodash": "^2.3.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "vue-tsc": "^0.40.4"

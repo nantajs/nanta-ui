@@ -3,6 +3,20 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
 import { NantaButton } from '@nanta/ui'
+import NantaForm from '../lib/nanta-ui/NantaForm.vue'
+import { useForm, FormProps } from '../lib/nanta-ui/form'
+import { schemes } from "./nanta/data";
+
+const [
+  registerForm,
+  { setFieldsValue, updateSchema, resetFields, getFieldsValue, validateFields },
+] = useForm({
+  labelWidth: 120,
+  schemas: schemes,
+  actionColOptions: {
+    span: 24,
+  },
+});
 </script>
 
 <template>
@@ -16,6 +30,10 @@ import { NantaButton } from '@nanta/ui'
   </div>
   <HelloWorld msg="Vite + Vue" />
   <NantaButton>1</NantaButton>
+  <NantaForm
+    :actionColOptions="{ span: 24 }"
+    @register="registerForm"
+  />
 </template>
 
 <style scoped>
