@@ -1,6 +1,6 @@
 {
   "name": "@nanta/ui",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "type": "module",
   "files": [
     "dist"
@@ -22,7 +22,7 @@
     "package": "vite build && vue-tsc --emitDeclarationOnly",
     "preview": "vite preview",
     "pack": "npm pack",
-    "publish": "npm publish --access public"
+    "pub": "npm publish --access public"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
