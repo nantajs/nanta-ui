@@ -12,7 +12,7 @@ export function error (message: string) {
   throw new Error(`[${projectName} error]:${message}`)
 }
 
-export function getDynamicProps<T, U> (props: T): Partial<U> {
+export function getDynamicProps<T, U> (props: any): Partial<U> {
   const ret: Recordable = {}
 
   Object.keys(props).map((key) => {

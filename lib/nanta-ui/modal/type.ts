@@ -5,7 +5,7 @@ export interface ModalMethods {
   emitVisible?: (visible: boolean, uid: number) => void;
 }
 
-type RegisterFn = (modalMethods: ModalMethods, uuid?: string) => void;
+export type RegisterFn = (modalMethods: ModalMethods, uuid?: string) => void;
 
 export interface ReturnMethods extends ModalMethods {
   openModal: <T = any>(props?: boolean, data?: T, openOnSet?: boolean) => void;

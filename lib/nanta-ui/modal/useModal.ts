@@ -4,6 +4,7 @@ import type {
   ModalMethods,
   ReturnMethods,
   UseModalInnerReturnType,
+  RegisterFn
 } from "./type";
 import type { Nullable, Fn } from '../types/global'
 import { isFunction, isEqual } from 'lodash-es'
@@ -87,8 +88,8 @@ export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
     return instance;
   };
 
-  const register = (modalInstance: ModalMethods, uuid: string) => {
-    uidRef.value = uuid;
+  const register: RegisterFn = (modalInstance: ModalMethods, uuid?: string) => {
+    uidRef.value = uuid || 'unknown';
     modalInstanceRef.value = modalInstance;
     currentInstance?.emit('register', modalInstance, uuid);
   };
