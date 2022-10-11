@@ -5,7 +5,7 @@
      <a href="https://www.npmjs.com/package/@nanta/ui"><img src="https://badgen.net/npm/license/@nanta/ui" alt="License"></a> 
 </p>
 
-ant-design based ui framework.
+Ant-design based UI framework.
 
 ## Deps
 
@@ -22,7 +22,7 @@ yarn install
 ```
 
 2. Configure
-- Vue3 framework   
+- **Vue 3** framework   
   Install Antd plugin in `main.ts`
 ```js
 import Antd from 'ant-design-vue';
@@ -35,7 +35,7 @@ Here is an example in `playground`:
 yarn pg
 ```
 
-- Nuxt3 framework  
+- **Nuxt 3** framework  
   Auto-install Antd plguin, create `nantaui.ts` in `<projectDir>/plugins/` with the following boilerplate:  
 ```js
 // plugins/nantaui.ts
@@ -51,7 +51,7 @@ Here is an exmple [nanta-ui-nuxt](https://github.com/nantajs/nanta-ui-nuxt)
 
 ## Notice
 
-nanta-ui is wip, current alpha stage.
+This project still in alpha stage, you can try it in non-production environment.
 
 ## How to dev
 
