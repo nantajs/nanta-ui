@@ -14,24 +14,40 @@ ant-design based ui framework.
 
 ## Usage
 
-1. add & install nanta-ui
+1. Install **nanta-ui**
 
 ```shell
 yarn add @nanta/ui
 yarn install
 ```
 
-2. use antd in *main.ts*
+2. Configure
+- Vue3 framework   
+  Install Antd plugin in `main.ts`
 ```js
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 createApp(App).use(Antd).mount('#app')
 ```
 
-Full example can ref *playground* ! run playground example:  
+Here is an example in `playground`: 
 ```shell
 yarn pg
 ```
+
+- Nuxt3 framework  
+  Auto-install Antd plguin, create `nantaui.ts` in `<projectDir>/plugins/` with the following boilerplate:  
+```js
+// plugins/nantaui.ts
+import { defineNuxtPlugin } from '#app'
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+
+export default defineNuxtPlugin(nuxtApp => {
+  nuxtApp.vueApp.use(Antd)
+})
+```
+Here is an exmple [nanta-ui-nuxt](https://github.com/nantajs/nanta-ui-nuxt)
 
 ## Notice
 
