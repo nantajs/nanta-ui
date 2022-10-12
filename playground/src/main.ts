@@ -6,7 +6,5 @@ import 'ant-design-vue/dist/antd.css';
 import { setupRouter } from './router';
 
 const app = createApp(App);
-
 setupRouter(app);
-
 app.use(Antd).mount('#app')
