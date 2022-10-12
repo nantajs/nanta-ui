@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { basicRoutes } from './routers';
+import { basicRoutes, asyncRoutes } from './routers';
 
 console.log(basicRoutes)
 // app router
@@ -16,3 +16,11 @@ export const router = createRouter({
 export function setupRouter(app: App<Element>) {
     app.use(router as any);
 }
+
+export async function initRoutes() {
+    try {
+      return asyncRoutes;
+    } catch (err) {
+      console.error(err);
+    }
+  }
