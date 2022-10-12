@@ -8,4 +8,5 @@ import { setupRouter, initRoutes } from './router';
 const app = createApp(App);
 await initRoutes();
 setupRouter(app);
-app.use(Antd).mount('#app')
+app.use(Antd);
+app.mount('#app')

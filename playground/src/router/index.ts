@@ -13,7 +13,7 @@ export const router = createRouter({
 
 // config router
 export function setupRouter(app: App<Element>) {
-    app.use(router);
+    app.use(router as any);
 }
 
 export async function initRoutes() {

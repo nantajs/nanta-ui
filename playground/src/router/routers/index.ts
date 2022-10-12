@@ -2,12 +2,7 @@ import type { AppRouteRecordRaw, AppRouteModule } from '../types';
 
 const modules = import.meta.globEager('./modules/**/*.ts');
 const routeModuleList: AppRouteModule[] = [];
-
-export const LAYOUT = () => import('../../layouts/default.vue');
-export const PARENT_LAYOUT_NAME = 'ParentLayout';
-export const PAGE_NOT_FOUND_NAME = 'PageNotFound';
-export const BASE_HOME = '/';
-export const EXCEPTION_COMPONENT = () => import('../../pages/Exception.vue');
+import { LAYOUT, PARENT_LAYOUT_NAME, PAGE_NOT_FOUND_NAME, BASE_HOME, EXCEPTION_COMPONENT } from '/@/router/constant';
 
 export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
     path: '/:path(.*)*',
