@@ -29,6 +29,7 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
 
 // 加入到路由集合中
 Object.keys(modules).forEach(key => {
+  /*@ts-ignore*/
   const mod = modules[key].default || {};
   console.log('key', key, modules[key])
   const modList = Array.isArray(mod) ? [...mod] : [mod];

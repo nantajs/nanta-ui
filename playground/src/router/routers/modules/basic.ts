@@ -22,6 +22,15 @@ const dashboard: AppRouteModule = {
         title: "首页",
       },
     },
+    {
+      path: 'demo',
+      name: 'Demo',
+      component: () => import('/@/pages/demo.vue'),
+      meta: {
+        // affix: true,
+        title: "示例",
+      },
+    },
   ],
 };
 
