@@ -25,13 +25,13 @@ import Footer from "./default/components/Footer.vue";
 import { makeid } from "./default/index";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { getAsyncMenus } from "./menu";
+import { getMenus } from "./menu";
 
 const selectedKeys = ref<string[]>([]);
 const openKeys = ref<string[]>([]);
 
 const breadcrumbList = ref<string[]>([]);
-const sideMenus = await getAsyncMenus();
+const sideMenus = getMenus();
 const path = useRoute().path;
 console.log(path); // path 路径
 

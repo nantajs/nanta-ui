@@ -51,6 +51,6 @@ const localMenus: Menu[] = [
     }
 ]
 
-export async function getAsyncMenus() {
+export function getMenus() {
     return localMenus;
 }
