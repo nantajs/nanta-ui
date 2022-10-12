@@ -26,18 +26,4 @@ export default defineComponent({
 });
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-app-exception-page';
-
-.@{prefix-cls} {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  .ant-result-icon {
-    img {
-      max-width: 400px;
-      max-height: 300px;
-    }
-  }
-}
 </style>

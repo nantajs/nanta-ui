@@ -10,6 +10,7 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
     children?: AppRouteRecordRaw[];
     props?: Recordable;
     fullPath?: string;
+    redirect?: any;
 }
 
 export type AppRouteModule = AppRouteRecordRaw;
