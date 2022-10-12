@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import { Nav } from "../../types/type";
-import { PropType } from "~~/types/global";
+import { PropType } from "@nanta/ui";
 
 defineProps({
   navItems: Array as PropType<Array<Nav>>,
