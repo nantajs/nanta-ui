@@ -1,7 +1,7 @@
 <template>
     <div>
         <main class="container">
-            Hello, nanta-ui example project.
+            Hello, nanta-ui example project (index pages).
         </main>
     </div>
 </template>

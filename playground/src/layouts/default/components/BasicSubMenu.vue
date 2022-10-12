@@ -5,7 +5,7 @@
         <Icon :name="item.icon" />
       </template>
       <span>
-        <NuxtLink :to="item.path">{{ item.name }}</NuxtLink>
+        <router-link :to="item.path">{{ item.name }}</router-link>
       </span>
     </a-menu-item>
     <SubMenu v-if="menuHasChildren(item) && getShowMenu" :key="item.key" popupClassName="app-top-menu-popup">

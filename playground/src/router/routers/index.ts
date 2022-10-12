@@ -48,4 +48,4 @@ export const RootRoute: AppRouteRecordRaw = {
     },
   };
 
-export const basicRoutes = [PAGE_NOT_FOUND_ROUTE];
+export const basicRoutes = [PAGE_NOT_FOUND_ROUTE, asyncRoutes];

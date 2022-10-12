@@ -1,9 +1,9 @@
 <template>
   <a-layout-header class="header">
     <div class="logo" style="font-size: x-large; color: azure">
-      <NuxtLink to="/" aria-label="Back home">
+      <router-link to="/" aria-label="Back home">
         <img src="/favicon.ico" class="nanta-logo" /> Nanta
-      </NuxtLink>
+      </router-link>
     </div>
     <a-menu
       v-model="selectedKeys"
