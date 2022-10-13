@@ -2,7 +2,9 @@
   <div>
     <ConfigProvider>
       <AppProvider>
-        <RouterView />
+        <DefaultLayout>
+          <RouterView />
+        </DefaultLayout>
       </AppProvider>
     </ConfigProvider>
   </div>

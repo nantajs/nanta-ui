@@ -6,9 +6,9 @@ const dashboard: AppRouteModule = {
   path: '/basic',
   name: 'Dashboard',
   component: LAYOUT,
-  redirect: '/basic/analysis',
+  redirect: '/basic/index',
   meta: {
-    orderNo: 10,
+    orderNo: 1,
     icon: 'ion:grid-outline',
     title: '基础页面',
   },
@@ -35,12 +35,12 @@ const dashboard: AppRouteModule = {
 };
 
 const comp: AppRouteModule = {
-  path: '/componetns/form',
+  path: '/components/form',
   name: 'Components',
   component: LAYOUT,
   redirect: '/componetns/form/basic',
   meta: {
-    orderNo: 10,
+    orderNo: 12,
     icon: 'ion:grid-outline',
     title: '表单页面',
   },
@@ -48,7 +48,7 @@ const comp: AppRouteModule = {
     {
       path: 'basic',
       name: 'Basic',
-      component: () => import('/@/componetns/form/basic.vue'),
+      component: () => import('/@/pages/components/form/basic.vue'),
       meta: {
         // affix: true,
         title: "基础表单",

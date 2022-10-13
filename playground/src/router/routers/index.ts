@@ -7,7 +7,6 @@ import { LAYOUT, PARENT_LAYOUT_NAME, PAGE_NOT_FOUND_NAME, BASE_HOME, EXCEPTION_C
 export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
     path: '/:path(.*)*',
     name: PAGE_NOT_FOUND_NAME,
-    component: LAYOUT,
     meta: {
       title: 'ErrorPage',
       hideBreadcrumb: true,
