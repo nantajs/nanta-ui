@@ -46,6 +46,12 @@ const localMenus: Menu[] = [
                 path: '/components/form/basic',
                 icon: 'quill:creditcard',
                 key: 'basicForm'
+            },
+            {
+                name: 'Basic Table',
+                path: '/components/table/basic',
+                icon: 'quill:creditcard',
+                key: 'basicTable'
             }
         ]
     }
