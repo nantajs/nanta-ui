@@ -6,11 +6,9 @@
 
 <script lang="ts" setup>
 import { ref, computed, unref } from 'vue';
-import { useModalInner } from "/~/modal";
-import { useForm, FormProps } from "/~/form";
-import NantaForm from "/~/NantaForm.vue";
+import { useForm, FormProps, useModalInner } from "/~/main";
+import { NantaForm, NantaModal } from "/~/main";
 import { schemes } from "./data";
-import NantaModal from "/~/NantaModal.vue"
 const emit = defineEmits(["register", "ok", "cancel"]);
 const isUpdate = ref(true);
 const formProps: FormProps = {

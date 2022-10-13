@@ -22,7 +22,7 @@
     "removeComments": true,
     "paths": {
       "/@/*": ["src/*"], 
-      "/~/*": ["../src/nanta-ui/*"],
+      "/~/*": ["../src/*"],
       "/#/*": ["types/*"]
     }
   },

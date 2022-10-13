@@ -53,7 +53,7 @@
 import { ref } from 'vue';
 import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
 import BasicEditModal from "./BasicEditModal.vue";
-import { useModal } from "/~/modal";
+import { useModal } from "/~/main";
 const columns = [
   {
     name: "Name",

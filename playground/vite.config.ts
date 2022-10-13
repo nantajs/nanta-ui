@@ -9,7 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "/@": path.resolve(__dirname, "./src"),
-      "/~": path.resolve(__dirname, "../src/nanta-ui"),
+      "/~": path.resolve(__dirname, "../src"),
     }
   }
 })
