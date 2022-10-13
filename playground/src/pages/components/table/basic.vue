@@ -54,7 +54,7 @@ import { ref } from 'vue';
 import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
 import BasicEditModal from "./BasicEditModal.vue";
 import { useModal, Icon } from "/~/main";
-import IconRiDeleteBin6Line from "~icons/ri/delete-bin6-line"
+import IconRiDeleteBin6Line from "~icons/ri/delete-bin6-line";
 
 const columns = [
   {
