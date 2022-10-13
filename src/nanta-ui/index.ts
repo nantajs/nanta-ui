@@ -19,3 +19,5 @@ export declare interface Fn<T = any, R = T> {
 export type DynamicProps<T> = {
   [P in keyof T]: Ref<T[P]> | T[P] | ComputedRef<T[P]>;
 };
+
+export declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;

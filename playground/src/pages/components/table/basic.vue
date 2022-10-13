@@ -2,10 +2,10 @@
   <div>
     <div style="margin-bottom: 1rem;">
       <a-button type="primary" @click="handleCreateNew" style="margin-right: .5rem;">
-        <Icon name="uil:plus" />Create New
+        <Icon icon="uil:plus" />Create New
       </a-button>
       <a-button color="success" type="primary" @click="handleEdit" style="margin-right: .5rem;">
-        <Icon name="uil:edit" />Edit
+        <Icon icon="uil:edit" />Edit
       </a-button>
     </div>
     <a-table :columns="columns" :data-source="data">
@@ -53,7 +53,7 @@
 import { ref } from 'vue';
 import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
 import BasicEditModal from "./BasicEditModal.vue";
-import { useModal } from "/~/main";
+import { useModal, Icon } from "/~/main";
 const columns = [
   {
     name: "Name",

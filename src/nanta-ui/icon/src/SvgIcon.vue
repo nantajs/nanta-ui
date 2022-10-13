@@ -45,7 +45,7 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@prefix-cls: ~'@{namespace}-svg-icon';
+@prefix-cls: ~'nanta-svg-icon';
 
 .@{prefix-cls} {
   display: inline-block;

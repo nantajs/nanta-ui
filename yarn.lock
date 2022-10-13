@@ -316,6 +316,18 @@
   resolved "https://registry.npmjs.org/@esbuild/linux-loong64/-/linux-loong64-0.15.10.tgz#78a42897c2cf8db9fd5f1811f7590393b77774c7"
   integrity sha512-w0Ou3Z83LOYEkwaui2M8VwIp+nLi/NA60lBLMvaJ+vXVMcsARYdEzLNE7RSm4+lSg4zq4d7fAVuzk7PNQ5JFgg==
 
+"@iconify/iconify@>=2.0.0-rc.6":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@iconify/iconify/-/iconify-3.0.0.tgz#316d60d0e6100dacfc03bd1642c8d0d4d6423642"
+  integrity sha512-wgCSv4GwVLzwGqfUkYEDT9XOfetGZV67D5CmMYp74IdaPMnyOWb/3XxUPvGmuTt8Yw9xekMqzvdQp/p+a/abNw==
+  dependencies:
+    "@iconify/types" "^2.0.0"
+
+"@iconify/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
+  integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
+
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
   resolved "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.1.1.tgz#e5d2e450306a9491e3bd77e323e38d7aff315996"
@@ -417,6 +429,13 @@
     std-env "^3.2.1"
     ufo "^0.8.5"
     unimport "^0.6.7"
+
+"@purge-icons/generated@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.npmjs.org/@purge-icons/generated/-/generated-0.9.0.tgz#f1c4c2e16180e49bfb6b96974bd236c21bff1c5e"
+  integrity sha512-s2t+1oVtGDV6KtqfCXtUOhxfeYvOdDF90IVm+nMs/6bUP0HeGZLslguuL/AibpwtfL4FA/oCsIu/RhwapgAdJw==
+  dependencies:
+    "@iconify/iconify" ">=2.0.0-rc.6"
 
 "@rollup/pluginutils@^4.2.1":
   version "4.2.1"
