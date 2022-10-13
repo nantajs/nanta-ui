@@ -9,6 +9,7 @@ import SvgIcon from './SvgIcon.vue';
 import Iconify from '@purge-icons/generated';
 import { isString } from 'lodash-es'
 import { propTypes } from '../../utils/propTypes';
+import { ElRef } from '../../index'
 
 const SVG_END_WITH_FLAG = '|svg';
 export default defineComponent({
