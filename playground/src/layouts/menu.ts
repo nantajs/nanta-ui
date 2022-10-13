@@ -5,7 +5,7 @@ const localMenus: Menu[] = [
         name: 'Dashboard',
         icon: 'ic:baseline-home',
         key: 'dashboard',
-        path: '/'
+        path: '/index'
     },
     {
         name: 'Pages',
@@ -21,16 +21,16 @@ const localMenus: Menu[] = [
                 children: [
                     {
                         name: 'Demo Page',
-                        path: '/demo',
+                        path: '/index',
                         key: 'dddd',
                         icon: 'ic:baseline-chrome-reader-mode',
                     }
                 ]
             },
             {
-                name: 'Icon Search',
-                path: '/tool/icon',
-                key: 'tool',
+                name: 'Demo',
+                path: '/demo',
+                key: 'demo',
                 icon: 'ic:twotone-local-dining',
             },
         ]

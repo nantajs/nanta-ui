@@ -15,6 +15,9 @@ export const router = createRouter({
 
 const routes2 = [
     { path: '/components/form/basic', name: 'BasicForm', component: () => import('/@/pages/components/form/basic.vue') },
+    { path: '/demo', name: 'Demo', component: ()=> import('/@/pages/demo.vue')},
+    { path: '/', name: 'Index', component: ()=> import('/@/pages/index.vue')},
+    { path: '/index', name: 'Index', component: ()=> import('/@/pages/index.vue')},
     { path: '/404', name: '404Page', component: EXCEPTION_COMPONENT },
     { path: '/:path(.*)*', name: PAGE_NOT_FOUND_NAME, component: EXCEPTION_COMPONENT, }
 ]
