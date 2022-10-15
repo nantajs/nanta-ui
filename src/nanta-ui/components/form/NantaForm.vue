@@ -64,13 +64,13 @@ const getFormActionBindProps = computed((): Recordable => ({ ...getProps.value, 
 
 const getSchema = computed((): FormSchema[] => {
   const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any)
-  console.log('dddd', schemas)
+  // console.log('dddd', schemas)
   for (const schema of schemas) {
     const { defaultValue, component } = schema
     // todo handle date type (make a transfer)
   }
   const res = cloneDeep(schemas as FormSchema[])
-  console.log('res...', res)
+  // console.log('res...', res)
   return res
 })
 
