@@ -1,8 +1,8 @@
 import type { CSSProperties, PropType } from 'vue';
 import { FormSchema, FieldMapToTime, ColEx, FormActionType } from "./type"
-import { propTypes } from "../../utils/propTypes";
+import { propTypes } from "../../../utils/propTypes";
 import type { RowProps } from 'ant-design-vue/lib/grid/Row';
-import type { Fn, Recordable } from '../..'
+import type { Fn, Recordable } from '../../..'
 
 export interface FormProps {
   actionColOptions?: Partial<ColEx>;

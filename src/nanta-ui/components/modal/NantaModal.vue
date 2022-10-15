@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-import { deepMerge } from './utils/util'
-import { ModalMethods, ModalProps } from './modal'
+import { deepMerge } from '../../utils/util'
+import { ModalMethods, ModalProps } from '../../modal'
 import { ref, unref, getCurrentInstance } from 'vue'
 const visibleRef = ref(false)
 const propsRef = ref<Partial<ModalProps> | null>(null)

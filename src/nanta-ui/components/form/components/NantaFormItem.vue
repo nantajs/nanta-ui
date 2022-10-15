@@ -5,13 +5,14 @@ import { isBoolean, upperFirst, isFunction } from 'lodash-es'
 import type { FormSchema, FormProps } from '../index'
 import { useItemLabelWidth } from '../hooks/useLabelWidth'
 import { componentMap } from './componentMap'
-import type { Nullable, Recordable } from '../..'
+import type { Nullable, Recordable } from '../../..'
 import type { FormItemProps } from '../types/formProps'
 import { formItemPorps } from '../types/formProps'
 import { ref, unref, getCurrentInstance, toRefs, computed, defineComponent } from 'vue'
 
 export default {
   props: formItemPorps,
+  // @ts-ignore
   setup(props: FormItemProps) {
     const { schema, formProps } = toRefs(props) as {
       schema: Ref<FormSchema>;

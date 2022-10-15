@@ -17,6 +17,7 @@ import {
 } from 'ant-design-vue'
 import type { ComponentType } from '../index'
 
+import RadioButtonGroup from './RadioButtonGroup.vue';
 /**
  * Component list, register here to setting it in the form
  */
@@ -37,6 +38,7 @@ componentMap.set('RadioGroup', Radio.Group)
 componentMap.set('Checkbox', Checkbox)
 componentMap.set('CheckboxGroup', Checkbox.Group)
 componentMap.set('Cascader', Cascader)
+componentMap.set('RadioButtonGroup', RadioButtonGroup);
 componentMap.set('Slider', Slider)
 componentMap.set('Rate', Rate)
 componentMap.set('DatePicker', DatePicker)
