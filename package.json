@@ -1,6 +1,6 @@
 {
   "name": "@nanta/ui",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-alpha.7",
   "type": "module",
   "files": [
     "dist"
@@ -20,7 +20,7 @@
     "pg": "yarn --cwd ./playground/ dev",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "pack": "npm pack",
+    "packlocal": "npm pack",
     "package": "vite build && vue-tsc --emitDeclarationOnly",
     "pub": "npm publish --access public"
   },
