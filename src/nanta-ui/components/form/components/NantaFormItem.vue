@@ -56,7 +56,7 @@ export default {
     });
 
     function renderComponent() {
-      const { component, field, changeEvent = 'change', placeholder } = props.schema
+      const { component, field, changeEvent = 'change', placeholder, renderComponentContent } = props.schema
 
       const { size, disabled } = props.formProps
       const propsData: Recordable = {
@@ -110,7 +110,17 @@ export default {
         ...on,
         ...bindValue
       }
-      return (<Comp {...compAttr} />)
+
+      if (!renderComponentContent) {
+        return (<Comp {...compAttr} />)
+      } else {
+        const compSlot = isFunction(renderComponentContent)
+          ? { ...renderComponentContent(unref(getValues)) }
+          : {
+            default: () => renderComponentContent,
+          };
+        return <Comp {...compAttr}>{compSlot}</Comp>;
+      }
     }
 
     function renderItem() {

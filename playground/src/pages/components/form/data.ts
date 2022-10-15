@@ -57,7 +57,8 @@ export const schemes: FormSchema[] = [
   {
     field: 'field1',
     component: 'CheckboxGroup',
-    label: 'field1',
+    label: 'CheckboxGroup_1',
+    defaultValue: ['v2', 'v1'],
     componentProps: {
       options: [
         {
@@ -68,13 +69,18 @@ export const schemes: FormSchema[] = [
           label: 'Check_2',
           value: 'v2',
         },
+        {
+          label: 'Check_3',
+          value: 'v3',
+        },
       ],
     },
   },
   {
     field: 'field2',
     component: 'RadioGroup',
-    label: 'field2',
+    label: 'RadioGroup_2',
+    defaultValue: 'v1',
     componentProps: {
       options: [
         {
@@ -91,17 +97,19 @@ export const schemes: FormSchema[] = [
   {
     field: 'field3',
     component: 'Checkbox',
-    label: 'field3',
+    label: 'Checkbox_3',
+    renderComponentContent: 'Check',
   },
   {
     field: 'field4',
     component: 'Switch',
-    label: 'field4',
+    label: 'Switch_4',
   },
   {
     field: 'field5',
     component: 'RadioButtonGroup',
-    label: 'field5',
+    label: 'RadioButtonGroup_5',
+    defaultValue: 'B',
     componentProps: {
       options: [
         {
@@ -118,14 +126,14 @@ export const schemes: FormSchema[] = [
   {
     field: 'field6',
     component: 'DatePicker',
-    label: 'field6',
+    label: 'DatePicker_6',
   },
   {
     field: 'field7',
     component: 'Select',
     label: 'Multi Select',
     slot: 'selectA',
-    defaultValue: [],
+    defaultValue: ['value_1'],
     componentProps: {
       options: [
         {

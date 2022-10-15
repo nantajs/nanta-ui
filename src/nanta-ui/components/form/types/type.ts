@@ -158,6 +158,7 @@ export interface FormSchema {
   labelWidth?: string | number;
   placeholder?: string;
   required?: boolean;
+  renderComponentContent?: string;
   show?: boolean;
   slot?: string;
   suffix?: string | number | ((values: RenderCallbackParams) => string | number);
