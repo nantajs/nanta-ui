@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { Col, Divider, Form } from 'ant-design-vue'
 import type { Ref, PropType } from 'vue'
-import { isBoolean, upperFirst } from 'lodash-es'
+import { isBoolean, upperFirst, isFunction } from 'lodash-es'
 import type { FormSchema, FormProps } from '../index'
 import { useItemLabelWidth } from '../hooks/useLabelWidth'
 import { componentMap } from './componentMap'
@@ -12,7 +12,7 @@ import { ref, unref, getCurrentInstance, toRefs, computed, defineComponent } fro
 
 export default {
   props: formItemPorps,
-  setup(props : FormItemProps) {
+  setup(props: FormItemProps) {
     const { schema, formProps } = toRefs(props) as {
       schema: Ref<FormSchema>;
       formProps: Ref<FormProps>;
@@ -25,6 +25,21 @@ export default {
 
     const itemLabelWidthProp = useItemLabelWidth(schema, formProps)
 
+    const getComponentsProps = computed(() => {
+      const { schema, formModel, formActionType } = props;
+      let { componentProps = {} } = schema;
+      if (isFunction(componentProps)) {
+        componentProps = componentProps({ schema, formActionType, formModel }) ?? {};
+      }
+      if (schema.component === 'Divider') {
+        componentProps = Object.assign({ type: 'horizontal' }, componentProps, {
+          orientation: 'left',
+          plain: true,
+        });
+      }
+      return componentProps as Recordable;
+    });
+
     function renderComponent() {
       const { component, field, changeEvent = 'change', placeholder } = props.schema
 
@@ -32,6 +47,7 @@ export default {
       const propsData: Recordable = {
         allowClear: true,
         size,
+        ...unref(getComponentsProps),
         disabled: !!disabled
       }
 

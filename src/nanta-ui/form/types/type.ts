@@ -142,6 +142,7 @@ export type ButtonOptions = Partial<ButtonProps> & { text: string };
 export interface FormSchema {
   changeEvent?: string;
   component: ComponentType;
+  componentProps?: ((opt: { schema: FormSchema; formActionType: FormActionType; formModel: Recordable }) => Recordable) | object; 
   defaultValue?: any;
   disabledLabelWidth?: boolean;
   field: string;

@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { NantaButton, NantaForm, useForm, FormProps, Recordable } from '@nanta/ui'
+import { NantaButton, NantaForm, useForm, FormProps, Recordable } from '/~/main'
 import { schemes } from "./data";
 import { computed } from "vue";
 const [

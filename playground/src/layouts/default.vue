@@ -32,7 +32,7 @@ const openKeys = ref<string[]>([]);
 
 const breadcrumbList = ref<string[]>([]);
 const sideMenus = getMenus();
-const path = useRoute().path;
+const path = '/components/form/basic';// useRoute().path;
 console.log(path); // path 路径
 
 function iteratorMenu(

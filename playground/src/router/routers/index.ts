@@ -30,12 +30,10 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
 Object.keys(modules).forEach(key => {
   /*@ts-ignore*/
   const mod = modules[key].default || {};
-  console.log('key', key, modules[key])
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   routeModuleList.push(...modList);
 });
 
-console.log(routeModuleList)
 export const asyncRoutes = [...routeModuleList];
 
 export const RootRoute: AppRouteRecordRaw = {

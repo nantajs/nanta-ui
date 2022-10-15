@@ -1,4 +1,4 @@
-import { FormSchema } from "@nanta/ui";
+import { FormSchema } from "/~/main";
 export const schemes: FormSchema[] = [
   {
     field: 'id',
@@ -24,6 +24,25 @@ export const schemes: FormSchema[] = [
     label: "Age",
     component: 'InputNumber',
     defaultValue: 1,
+  },
+  {
+    field: 'type',
+    component: 'Select',
+    label: 'Type',
+    componentProps: {
+      options: [
+        {
+          label: 'Option1',
+          value: 'value_1',
+          key: '1',
+        },
+        {
+          label: 'Option2',
+          value: 'value_2',
+          key: '2',
+        },
+      ],
+    },
   },
   {
     field: 'tags',

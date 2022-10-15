@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue';
-import { FormSchema, FieldMapToTime, ColEx } from "./type"
+import { FormSchema, FieldMapToTime, ColEx, FormActionType } from "./type"
 import { propTypes } from "../../utils/propTypes";
 import type { RowProps } from 'ant-design-vue/lib/grid/Row';
 import type { Fn, Recordable } from '../..'
@@ -75,7 +75,8 @@ export interface FormItemProps {
   schema: FormSchema,
   formProps: FormProps,
   formModel: Recordable,
-  setFormModel:(key: string, value: any) => void
+  setFormModel:(key: string, value: any) => void,
+  formActionType: FormActionType,
 }
 
 export const formItemPorps = {
@@ -98,5 +99,8 @@ export const formItemPorps = {
   setFormModel: {
     type: Function as PropType<(key: string, value: any) => void>,
     default: null
-  }
+  },
+  formActionType: {
+    type: Object as PropType<FormActionType>,
+  },
 }

@@ -4,7 +4,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import { basicRoutes } from './routers';
 import { EXCEPTION_COMPONENT, PAGE_NOT_FOUND_NAME } from '/@/router/constant';
 
-console.log(basicRoutes)
+// console.log(basicRoutes)
 // app router
 export const router = createRouter({
     history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
