@@ -1,7 +1,11 @@
 <template>
   <div>
     <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm" @submit="handleSubmit"
-      @reset="handleReset" />
+      @reset="handleReset">
+      <template #selectA="{ model, field }">
+        <a-select :options="optionsA" mode="multiple" v-model:value="model[field]" allowClear />
+      </template>
+    </NantaForm>
   </div>
 </template>
 
@@ -10,6 +14,24 @@ import { NantaButton, NantaForm, useForm, FormProps, Recordable } from '/~/main'
 import { schemes } from "./data";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
+const optionsA = [
+  {
+    label: 'Option1',
+    value: 'value_1',
+    key: '1',
+  },
+  {
+    label: 'Option2',
+    value: 'value_2',
+    key: '2',
+  },
+  {
+    label: 'Option3',
+    value: 'value_3',
+    key: '3',
+  },
+]
 
 console.log(useRoute().path)
 

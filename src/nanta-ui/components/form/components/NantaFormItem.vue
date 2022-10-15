@@ -9,16 +9,30 @@ import type { Nullable, Recordable } from '../../..'
 import type { FormItemProps } from '../types/formProps'
 import { formItemPorps } from '../types/formProps'
 import { ref, unref, getCurrentInstance, toRefs, computed, defineComponent } from 'vue'
+import { getSlot } from '../helper'
 
 export default {
   props: formItemPorps,
   // @ts-ignore
-  setup(props: FormItemProps) {
+  setup(props: FormItemProps, { slots }) {
     const { schema, formProps } = toRefs(props) as {
       schema: Ref<FormSchema>;
       formProps: Ref<FormProps>;
     }
     const propsRef = ref<Partial<FormProps>>({})
+
+    const getValues = computed(() => {
+      const { allDefaultValues, formModel, schema } = props;
+      return {
+        field: schema.field,
+        model: formModel,
+        values: {
+          ...allDefaultValues,
+          ...formModel,
+        } as Recordable,
+        schema: schema,
+      };
+    });
 
     const getProps = computed((): FormProps => {
       return { ...props, ...unref(propsRef) } as FormProps
@@ -100,22 +114,39 @@ export default {
     }
 
     function renderItem() {
-      const { field, component, label, show, required } = props.schema
+      const { field, component, label, show, required, slot, render, suffix } = props.schema
       const { colon } = props.formProps
       const { labelCol, wrapperCol } = unref(itemLabelWidthProp)
-      return (
-        <Form.Item
-          name={field}
-          colon={colon}
-          label={label}
-          labelCol={labelCol}
-          required={required}
-          wrapperCol={wrapperCol}>
-          <div style="display:flex">
-            <div style="flex:1;">{renderComponent()}</div>
-          </div>
-        </Form.Item>
-      )
+      if (component === 'Divider') {
+        return (
+          <Col span={24}>
+            <Divider {...unref(getComponentsProps)}></Divider>
+          </Col>
+        );
+      } else {
+        const getRenderContent = () => {
+          return slot ? getSlot(slots, slot, unref(getValues)) : render ? render(unref(getValues)) : renderComponent();
+        };
+
+        const showSuffix = !!suffix;
+        const getSuffix = isFunction(suffix) ? suffix(unref(getValues)) : suffix;
+
+        return (
+          <Form.Item
+            name={field}
+            colon={colon}
+            class={{ 'suffix-item': showSuffix }}
+            label={label}
+            labelCol={labelCol}
+            required={required}
+            wrapperCol={wrapperCol}>
+            <div style="display:flex">
+              <div style="flex:1;">{getRenderContent()}</div>
+              {showSuffix && <span class="suffix">{getSuffix}</span>}
+            </div>
+          </Form.Item>
+        )
+      }
     }
     const { show } = props.schema
     // default show:true, otherwise props.shcema.show = false;

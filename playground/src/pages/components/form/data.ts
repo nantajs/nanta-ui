@@ -94,23 +94,54 @@ export const schemes: FormSchema[] = [
     label: 'field3',
   },
   {
-    field: 'field3',
+    field: 'field4',
     component: 'Switch',
     label: 'field4',
   },
   {
-    field: 'field10',
+    field: 'field5',
     component: 'RadioButtonGroup',
-    label: '字段10',
+    label: 'field5',
     componentProps: {
       options: [
         {
-          label: '选项1',
-          value: '1',
+          label: 'Button_A',
+          value: 'A',
         },
         {
-          label: '选项2',
-          value: '2',
+          label: 'Button_B',
+          value: 'B',
+        },
+      ],
+    },
+  },
+  {
+    field: 'field6',
+    component: 'DatePicker',
+    label: 'field6',
+  },
+  {
+    field: 'field7',
+    component: 'Select',
+    label: 'Multi Select',
+    slot: 'selectA',
+    defaultValue: [],
+    componentProps: {
+      options: [
+        {
+          label: 'Option1',
+          value: 'value_1',
+          key: '1',
+        },
+        {
+          label: 'Option2',
+          value: 'value_2',
+          key: '2',
+        },
+        {
+          label: 'Option3',
+          value: 'value_3',
+          key: '3',
         },
       ],
     },

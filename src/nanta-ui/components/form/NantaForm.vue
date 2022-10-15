@@ -1,11 +1,14 @@
 <template>
-  <Form v-bind="getBindValue" ref="formElRef" :model="formModel"
-    @keypress.enter="handleEnterPress">
+  <Form v-bind="getBindValue" ref="formElRef" :model="formModel" @keypress.enter="handleEnterPress">
     <Row v-bind="getRow">
       <slot name="formHeader" />
       <template v-for="schema in getSchema" :key="schema.field">
         <NantaFormItem :schema="schema" :form-props="getProps" :form-model="formModel" :set-form-model="setFormModel"
-          :all-default-values="defaultValueRef" :formActionType="formActionType" />
+          :all-default-values="defaultValueRef" :formActionType="formActionType">
+          <template #[item]="data" v-for="item in Object.keys($slots)">
+            <slot :name="item" v-bind="data || {}"></slot>
+          </template>
+        </NantaFormItem>
       </template>
       <NantaFormAction v-bind="getFormActionBindProps">
         <template v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']" #[item]="data">

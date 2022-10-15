@@ -1,9 +1,10 @@
+import { Slots } from 'vue';
 import dayjs from 'dayjs'
-import { isNumber, set, isObject } from 'lodash-es'
+import { isNumber, set, isObject, isFunction } from 'lodash-es'
 import type { ComponentType, FieldMapToTime } from './index'
 import type { Recordable } from '../..'
 
-export function handleInputNumberValue (component?: ComponentType, val?: any) {
+export function handleInputNumberValue(component?: ComponentType, val?: any) {
   if (!component) { return val }
   if (
     ['Input', 'InputPassword', 'InputSearch', 'InputTextArea'].includes(
@@ -17,13 +18,13 @@ export function handleInputNumberValue (component?: ComponentType, val?: any) {
 
 const DATE_TYPE = ['DatePicker', 'MonthPicker', 'WeekPicker', 'TimePicker']
 
-function genType () {
+function genType() {
   return [...DATE_TYPE, 'RangePicker']
 }
 
 export const dateItemType = genType()
 
-export function itemIsDateType (component?: ComponentType) {
+export function itemIsDateType(component?: ComponentType) {
   return component && dateItemType.includes(component)
 }
 
@@ -32,7 +33,7 @@ export const dateUtil = dayjs
 /**
  * @desription deconstruct array-link key. This method will mutate the target.
  */
-export function tryDeconstructArray (
+export function tryDeconstructArray(
   key: string,
   value: any,
   target: Recordable
@@ -54,7 +55,7 @@ export function tryDeconstructArray (
 /**
  * @desription deconstruct object-link key. This method will mutate the target.
  */
-export function tryDeconstructObject (
+export function tryDeconstructObject(
   key: string,
   value: any,
   target: Recordable
@@ -73,7 +74,7 @@ export function tryDeconstructObject (
   }
 }
 
-export function handleRangeTimeValue (
+export function handleRangeTimeValue(
   values: Recordable,
   fieldMapToTime?: FieldMapToTime
 ) {
@@ -101,3 +102,16 @@ export function handleRangeTimeValue (
 }
 
 export const defaultValueComponents = ['Input', 'InputPassword', 'InputSearch', 'InputTextArea']
+
+export function getSlot(slots: Slots, slot = 'default', data?: any) {
+  if (!slots || !Reflect.has(slots, slot)) {
+    return null;
+  }
+  if (!isFunction(slots[slot])) {
+    console.error(`${slot} is not a function!`);
+    return null;
+  }
+  const slotFn = slots[slot];
+  if (!slotFn) return null;
+  return slotFn(data);
+}

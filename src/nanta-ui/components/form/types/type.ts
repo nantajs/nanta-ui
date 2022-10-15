@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, VNode } from 'vue';
 import type { NamePath, RuleObject } from "ant-design-vue/lib/form/interface";
 import { FormProps } from "./formProps";
 import { FormItem } from "./formItem";
@@ -139,6 +139,13 @@ export const buttonProps = {
 declare type ButtonProps = Partial<ExtractPropTypes<typeof buttonProps>>;
 export type ButtonOptions = Partial<ButtonProps> & { text: string };
 
+export interface RenderCallbackParams {
+  schema: FormSchema;
+  values: Recordable;
+  model: Recordable;
+  field: string;
+}
+
 export interface FormSchema {
   changeEvent?: string;
   component: ComponentType;
@@ -152,6 +159,9 @@ export interface FormSchema {
   placeholder?: string;
   required?: boolean;
   show?: boolean;
+  slot?: string;
+  suffix?: string | number | ((values: RenderCallbackParams) => string | number);
+  render?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string;
 }
 
 export type ComponentType =
