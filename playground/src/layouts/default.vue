@@ -23,8 +23,8 @@ import NavBar from "./default/components/NavBar.vue";
 import SideBar from "./default/components/SideBar.vue";
 import Footer from "./default/components/Footer.vue";
 import { makeid } from "./default/index";
-import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { getMenus } from "./menu";
 
 const selectedKeys = ref<string[]>([]);
@@ -32,8 +32,10 @@ const openKeys = ref<string[]>([]);
 
 const breadcrumbList = ref<string[]>([]);
 const sideMenus = getMenus();
-const path = '/components/form/basic';// useRoute().path;
-console.log(path); // path 路径
+const route = useRoute();
+const path = route.path;
+
+console.log('current path=', path)
 
 function iteratorMenu(
   item: Menu,
@@ -121,7 +123,7 @@ const onMenuSelected = (item) => {
   initBreadcrumbList(item.keyPath);
 };
 
-const navItems : Nav[]= [
+const navItems: Nav[] = [
   {
     name: "Nav-1",
     key: "1",

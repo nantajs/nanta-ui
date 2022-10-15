@@ -9,6 +9,10 @@
 import { NantaButton, NantaForm, useForm, FormProps, Recordable } from '/~/main'
 import { schemes } from "./data";
 import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+console.log(useRoute().path)
+
 const [
   registerForm,
   { setFieldsValue, updateSchema, resetFields, getFieldsValue, validateFields },
