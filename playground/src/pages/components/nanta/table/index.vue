@@ -1,9 +1,9 @@
 <template>
-<NantaTable :columns="columns">
-</NantaTable>
+    <NantaTable :columns="columns" :dataSource="data">
+    </NantaTable>
 </template>
 
 <script lang="ts" setup>
 import { NantaTable } from "/~/main";
-import { columns } from "./data"
+import { columns, data } from "./data"
 </script>
