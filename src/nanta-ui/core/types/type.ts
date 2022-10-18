@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref, PropType as VuePropType } from "vue"
+import type { ComputedRef, Ref, PropType as VuePropType, VNodeChild } from "vue"
 
 export declare type Nullable<T> = T | null;
 
@@ -21,3 +21,5 @@ export declare type DynamicProps<T> = {
 };
 
 export declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
+
+export type VueNode = VNodeChild | JSX.Element;

@@ -11,6 +11,9 @@ import { omit } from 'lodash-es';
 import { Table } from 'ant-design-vue'
 import { tableProps, BasicTableProps } from './props'
 import { Recordable } from '../..'
+import { antdColumns } from './hooks/antdColumns'
+import { usePagination } from './hooks/usePagination'
+
 const props = defineProps(tableProps)
 const attrs = useAttrs()
 const tableElRef = ref(null);
@@ -29,6 +32,9 @@ const getDataSourceRef = computed(() => {
     }
     return unref(dataSourceRef);
 });
+const { getPaginationInfo, getPagination, setPagination, setShowPagination, getShowPagination } = usePagination(getProps);
+
+const { getColumnsRef, getViewColumns } = antdColumns(getProps, getPaginationInfo)
 
 const getBindValues = computed(() => {
     const dataSource = unref(getDataSourceRef);
@@ -36,8 +42,10 @@ const getBindValues = computed(() => {
         ...attrs,
         ...unref(getProps),
         tableLayout: 'fixed',
+        columns: toRaw(unref(getViewColumns)),
+        pagination: toRaw(unref(getPaginationInfo)),
         dataSource,
-    };    
+    };
 
     propsData = omit(propsData, ['class', 'onChange']);
     return propsData;
