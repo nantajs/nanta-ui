@@ -1,8 +1,8 @@
 //package/pig-button/index.vue
 <template>
     <div>
-        <button :onclick="handClick">Button-
-            <slot />-{{count}}
+        <button :onclick="handClick">
+            <slot />
         </button>
     </div>
 </template>

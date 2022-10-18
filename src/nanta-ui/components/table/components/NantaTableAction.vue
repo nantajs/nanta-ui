@@ -2,7 +2,7 @@
   <div @click="onCellClick">
     <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
       <Button v-bind="action">
-        <Icon :icon="action.icon" :class="{ 'mr-1': !!action.label }" v-if="action.icon" />
+        <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName" />
         <template v-if="action.label">{{ action.label }}</template>
       </Button>
       <Divider type="vertical" class="action-divider" v-if="divider && index < getActions.length - 1" />
@@ -14,7 +14,8 @@ import { PropType, computed, toRaw, unref } from 'vue';
 import { Divider, Tooltip, TooltipProps, Button } from 'ant-design-vue';
 import Icon from '../../icon';
 import { ActionItem } from '../types/tableAction';
-import { propTypes } from '../../../utils/propTypes'
+import { propTypes } from '../../../utils/propTypes';
+import { omit } from 'lodash-es';
 
 const props = defineProps(
   {
@@ -37,7 +38,8 @@ const getActions = computed(() => {
       return {
         type: 'link',
         size: 'small',
-        ...action,
+        iconName: action?.icon,
+        ...omit(action, 'icon'),  // 去掉icon属性，否则会和antd原生的icon冲突。
       };
     });
 });
