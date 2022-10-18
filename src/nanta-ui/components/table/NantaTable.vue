@@ -13,14 +13,18 @@ import { tableProps, BasicTableProps } from './props'
 import { Recordable } from '../..'
 import { useColumns } from './hooks/useColumns'
 import { usePagination } from './hooks/usePagination'
+import { useDataSource } from './hooks/useDataSource'
+import { useRowSelection } from './hooks/useRowSelection'
+import { useLoading } from './hooks/useLoading'
 import { useForm } from '../../components/form'
 import type { TableActionType, SizeType } from './types/table'
 
 const props = defineProps(tableProps)
-const emits = defineEmits(['register'])
+const emits = defineEmits(['register', 'fetch-success', 'fetch-error', 'selection-change'])
 
 const attrs = useAttrs()
 const tableElRef = ref(null);
+const tableData = ref<Recordable[]>([]);
 
 const innerPropsRef = ref<Partial<BasicTableProps>>();
 const getProps = computed(() => {
@@ -29,14 +33,20 @@ const getProps = computed(() => {
 const dataSourceRef = ref<Recordable[]>([]);
 dataSourceRef.value = props.dataSource
 
-const getDataSourceRef = computed(() => {
-    const dataSource = unref(dataSourceRef);
-    if (!dataSource || dataSource.length === 0) {
-        return unref(dataSourceRef);
-    }
-    return unref(dataSourceRef);
-});
+const { getLoading, setLoading } = useLoading(getProps);
+
+const [registerForm, formActions] = useForm();
+
 const { getPaginationInfo, getPagination, setPagination, setShowPagination, getShowPagination } = usePagination(getProps);
+
+// @ts-ignore
+const { getRowSelection, getRowSelectionRef, getSelectRows, clearSelectedRowKeys, getSelectRowKeys, deleteSelectRowByKey, setSelectedRowKeys } = useRowSelection(getProps, tableData, emits);
+
+const {
+    handleTableChange: onTableChange, getDataSourceRef, getDataSource, getRawDataSource, setTableData, updateTableDataRecord,
+    deleteTableDataRecord, insertTableDataRecord, findTableDataRecord, fetch, getRowKey, reload, getAutoCreateKey, updateTableData,
+    // @ts-ignore
+} = useDataSource(getProps, { tableData, getPaginationInfo, setLoading, setPagination, getFieldsValue: formActions.getFieldsValue, clearSelectedRowKeys, }, emits);
 
 const { getColumnsRef, getViewColumns } = useColumns(getProps, getPaginationInfo)
 
@@ -57,12 +67,12 @@ const getBindValues = computed(() => {
 
 function setProps(props: Partial<BasicTableProps>) {
     innerPropsRef.value = { ...unref(innerPropsRef), ...props };
-    console.log('****')
-    console.log(unref(innerPropsRef))
 }
 
 const tableAction: TableActionType = {
+    getDataSource,
     getPaginationRef: getPagination,
+    getRawDataSource,
     getShowPagination,
     getSize: () => {
         return unref(getBindValues).size as SizeType;
@@ -71,8 +81,6 @@ const tableAction: TableActionType = {
     setShowPagination,
     setProps,
 };
-
-const [registerForm, formActions] = useForm();
 
 emits('register', tableAction, formActions);
 </script>

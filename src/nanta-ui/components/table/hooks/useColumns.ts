@@ -23,8 +23,6 @@ function handleActionColumn(propsRef: ComputedRef<BasicTableProps>, columns: Bas
 // convert to andt columns config.
 export function useColumns(propsRef: ComputedRef<BasicTableProps>, getPaginationRef: ComputedRef<boolean | PaginationProps>): any {
     const columnsRef = ref(unref(propsRef).columns) as unknown as Ref<BasicColumn[]>;
-    console.log('++++')
-    console.log(columnsRef.value)
     const getColumnsRef = computed(() => {
         const columns = cloneDeep(unref(columnsRef));
 
@@ -37,11 +35,7 @@ export function useColumns(propsRef: ComputedRef<BasicTableProps>, getPagination
 
 
     const getViewColumns = computed(() => {
-        const viewColumns = sortFixedColumn(unref(getColumnsRef));
-
-        console.log('------`')
-        console.log(viewColumns);
-
+        const viewColumns = sortFixedColumn(unref(getColumnsRef));       
         const columns = cloneDeep(viewColumns);
         return columns
             .map((column) => {

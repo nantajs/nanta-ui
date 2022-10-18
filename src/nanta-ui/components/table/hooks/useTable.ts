@@ -60,8 +60,14 @@ export function useTable(tableProps?: Props): [
     }
 
     const methods: TableActionType = {
+        getDataSource: () => {
+            return getTableInstance().getDataSource();
+        },        
         getPaginationRef: () => {
             return getTableInstance().getPaginationRef();
+        },
+        getRawDataSource: () => {
+            return getTableInstance().getRawDataSource();
         },
         getShowPagination: () => {
             return toRaw(getTableInstance().getShowPagination());

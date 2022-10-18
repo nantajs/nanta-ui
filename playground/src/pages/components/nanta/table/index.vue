@@ -24,6 +24,7 @@ import { columns, data } from "./data"
 
 const [registerTable] = useTable({
     columns,
+    dataSource: data,
     actionColumn: {
         width: 80,
         title: '操作',

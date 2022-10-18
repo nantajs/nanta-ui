@@ -6,6 +6,26 @@ import type { TableRowSelection as ITableRowSelection } from 'ant-design-vue/lib
 
 export type CellFormat = string | ((text: string, record: Recordable, index: number) => string | number) | Map<string | number, any>;
 
+export declare type SortOrder = 'ascend' | 'descend';
+
+export interface SorterResult {
+    column: ColumnProps;
+    order: SortOrder;
+    field: string;
+    columnKey: string;
+}
+
+export interface FetchSetting {
+    // 请求接口当前页数
+    pageField: string;
+    // 每页显示多少条
+    sizeField: string;
+    // 请求结果列表字段  支持 a.b.c
+    listField: string;
+    // 请求结果总数字段  支持 a.b.c
+    totalField: string;
+}
+
 export interface BasicColumn extends ColumnProps<Recordable> {
     customTitle?: VueNode;
     edit?: boolean;
@@ -64,7 +84,9 @@ export interface GetColumnsParams {
 export type SizeType = 'default' | 'middle' | 'small' | 'large';
 
 export interface TableActionType {
+    getDataSource: <T = Recordable>() => T[];
     getPaginationRef: () => PaginationProps | boolean;
+    getRawDataSource: <T = Recordable>() => T;
     getSize: () => SizeType;
     getShowPagination: () => boolean;
     setPagination: (info: Partial<PaginationProps>) => void;
