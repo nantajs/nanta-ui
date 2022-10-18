@@ -21,6 +21,7 @@ export interface BasicTableProps<T = any> {
     filterFn?: (data: Partial<Recordable<string[]>>) => any;
     immediateFetchApi?: boolean;
     loading?: boolean;
+    onChange?: (pagination: any, filters: any, sorter: any, extra: any) => void;
     pagination?: PaginationProps | boolean;
     rowKey?: string | ((record: Recordable) => string);
     rowSelection?: TableRowSelection;

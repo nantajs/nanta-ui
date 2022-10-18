@@ -1,13 +1,13 @@
 <template>
     <div>
-        <Table ref="tableElRef" v-bind="getBindValues">
+        <Table ref="tableElRef" v-bind="getBindValues" @change="handleTableChange">
         </Table>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed, unref, useAttrs, toRaw } from 'vue'
-import { omit } from 'lodash-es';
+import { omit, isFunction } from 'lodash-es';
 import { Table } from 'ant-design-vue'
 import { tableProps, BasicTableProps } from './props'
 import { Recordable } from '../..'
@@ -20,7 +20,7 @@ import { useForm } from '../../components/form'
 import type { TableActionType, SizeType } from './types/table'
 
 const props = defineProps(tableProps)
-const emits = defineEmits(['register', 'fetch-success', 'fetch-error', 'selection-change'])
+const emits = defineEmits(['register', 'fetch-success', 'fetch-error', 'selection-change', 'change'])
 
 const attrs = useAttrs()
 const tableElRef = ref(null);
@@ -47,6 +47,16 @@ const {
     deleteTableDataRecord, insertTableDataRecord, findTableDataRecord, fetch, getRowKey, reload, getAutoCreateKey, updateTableData,
     // @ts-ignore
 } = useDataSource(getProps, { tableData, getPaginationInfo, setLoading, setPagination, getFieldsValue: formActions.getFieldsValue, clearSelectedRowKeys, }, emits);
+
+// @ts-ignore
+function handleTableChange(...args) {
+    // @ts-ignore
+    onTableChange.call(undefined, ...args);
+    emits('change', ...args);
+    // 解决通过useTable注册onChange时不起作用的问题
+    const { onChange } = unref(getProps);
+    onChange && isFunction(onChange) && onChange.call(undefined, ...args);
+}
 
 const { getColumnsRef, getViewColumns } = useColumns(getProps, getPaginationInfo)
 
