@@ -1,12 +1,22 @@
 <template>
     <div>
         <Table ref="tableElRef" v-bind="getBindValues" @change="handleTableChange">
+            <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
+                <slot :name="item" v-bind="data || {}"></slot>
+            </template>
+            <template #headerCell="{ column }">
+                <HeaderCell :column="column" />
+            </template>
+            <template #bodyCell="data">
+                <slot name="bodyCell" v-bind="data || {}"></slot>
+            </template>
         </Table>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed, unref, useAttrs, toRaw } from 'vue'
+import HeaderCell from './components/HeaderCell.vue';
 import { omit, isFunction } from 'lodash-es';
 import { Table } from 'ant-design-vue'
 import { tableProps, BasicTableProps } from './props'

@@ -31,3 +31,7 @@ export function deepMerge<T = any> (src: any = {}, target: any = {}): T {
   }
   return src
 }
+
+export function getPopupContainer(node?: HTMLElement): HTMLElement {
+  return (node?.parentNode as HTMLElement) ?? document.body;
+}

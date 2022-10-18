@@ -32,6 +32,7 @@ export interface BasicColumn extends ColumnProps<Recordable> {
     editRow?: boolean;
     flag?: 'INDEX' | 'DEFAULT' | 'CHECKBOX' | 'RADIO' | 'ACTION';
     format?: CellFormat;
+    helpMessage?: string | string[];
     // whether hiddle current column.
     hidden?: boolean;
     slots?: Recordable;
