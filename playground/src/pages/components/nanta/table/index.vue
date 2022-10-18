@@ -28,7 +28,6 @@ const [registerTable] = useTable({
     columns,
     dataSource: data,
     actionColumn: {
-        width: 80,
         title: '操作',
         dataIndex: 'action',
         // slots: { customRender: 'action' },

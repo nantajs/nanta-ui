@@ -42,10 +42,13 @@ export const columns: BasicColumn[] = [
       }
     }
   },
+  /**
   {
     title: "Action",
     key: "action",
-  },
+    dataIndex: 'action',
+    flag: 'ACTION'
+  }, */
 ];
 
 export const data = [

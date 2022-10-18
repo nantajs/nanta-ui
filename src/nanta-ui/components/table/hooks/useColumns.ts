@@ -8,7 +8,6 @@ import { formatToDate, Recordable, VueNode } from "../../.."
 function handleActionColumn(propsRef: ComputedRef<BasicTableProps>, columns: BasicColumn[]) {
     const { actionColumn } = unref(propsRef);
     if (!actionColumn) return;
-
     const hasIndex = columns.findIndex(column => column.flag === ACTION_COLUMN_FLAG);
     if (hasIndex === -1) {
         columns.push({
@@ -17,7 +16,7 @@ function handleActionColumn(propsRef: ComputedRef<BasicTableProps>, columns: Bas
             ...actionColumn,
             flag: ACTION_COLUMN_FLAG,
         });
-    }
+    }    
 }
 
 // convert to andt columns config.

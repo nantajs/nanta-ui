@@ -1,4 +1,3 @@
-
 import type { TableActionType, BasicColumn, FetchParams } from '../types/table';
 import type { PaginationProps } from '../types/pagination';
 import type { DynamicProps, Nullable, Recordable } from '../../..'
@@ -7,6 +6,7 @@ import type { BasicTableProps } from '../props'
 import type { WatchStopHandle } from 'vue';
 import { ref, onUnmounted, unref, watch, toRaw } from 'vue';
 import { getDynamicProps, error } from '../../../utils/util'
+import { ACTION_COLUMN_FLAG, INDEX_COLUMN_FLAG } from "../const";
 
 type Props = Partial<DynamicProps<BasicTableProps>>;
 
@@ -21,6 +21,20 @@ export function useTable(tableProps?: Props): [
     const tableRef = ref<Nullable<TableActionType>>(null);
     const loadedRef = ref<Nullable<boolean>>(false);
     const formRef = ref<Nullable<UseTableMethod>>(null);
+    const { columns, actionColumn } = tableProps as BasicTableProps;
+
+    // deal with actionColumn
+    if (actionColumn) {
+        const hasIndex = columns.findIndex(column => column.flag === ACTION_COLUMN_FLAG);
+        if (hasIndex === -1) {
+            columns.push({
+                key: 'action',
+                fixed: 'right',
+                ...actionColumn,
+                flag: ACTION_COLUMN_FLAG,
+            });
+        }
+    }
 
     let stopWatch: WatchStopHandle;
 
@@ -62,7 +76,7 @@ export function useTable(tableProps?: Props): [
     const methods: TableActionType = {
         getDataSource: () => {
             return getTableInstance().getDataSource();
-        },        
+        },
         getPaginationRef: () => {
             return getTableInstance().getPaginationRef();
         },
