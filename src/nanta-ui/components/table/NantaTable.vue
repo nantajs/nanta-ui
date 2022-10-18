@@ -13,8 +13,12 @@ import { tableProps, BasicTableProps } from './props'
 import { Recordable } from '../..'
 import { antdColumns } from './hooks/antdColumns'
 import { usePagination } from './hooks/usePagination'
+import { useForm } from '../../components/form'
+import type { TableActionType, SizeType } from './types/table'
 
 const props = defineProps(tableProps)
+const emits = defineEmits(['register'])
+
 const attrs = useAttrs()
 const tableElRef = ref(null);
 
@@ -51,4 +55,22 @@ const getBindValues = computed(() => {
     return propsData;
 });
 
+function setProps(props: Partial<BasicTableProps>) {
+    innerPropsRef.value = { ...unref(innerPropsRef), ...props };
+}
+
+const tableAction: TableActionType = {
+    getPaginationRef: getPagination,
+    getShowPagination,
+    getSize: () => {
+        return unref(getBindValues).size as SizeType;
+    },
+    setPagination,
+    setShowPagination,
+    setProps,
+};
+
+const [registerForm, formActions] = useForm();
+
+emits('register', tableAction, formActions);
 </script>

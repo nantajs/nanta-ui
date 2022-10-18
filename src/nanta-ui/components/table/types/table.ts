@@ -1,5 +1,8 @@
 import type { ColumnProps } from 'ant-design-vue/lib/table';
-import type { Recordable, VueNode } from '../../..';
+import type { Recordable, VueNode, EmitType } from '../../..';
+import type { PaginationProps } from './pagination';
+import type { BasicTableProps } from '../props'
+import type { TableRowSelection as ITableRowSelection } from 'ant-design-vue/lib/table/interface';
 
 export type CellFormat = string | ((text: string, record: Recordable, index: number) => string | number) | Map<string | number, any>;
 
@@ -12,4 +15,59 @@ export interface BasicColumn extends ColumnProps<Recordable> {
     // whether hiddle current column.
     hidden?: boolean;
     slots?: Recordable;
+}
+
+export interface TableCurrentDataSource<T = Recordable> {
+    currentDataSource: T[];
+}
+
+export declare type Key = string | number;
+
+export interface TableRowSelection<T = any> extends ITableRowSelection {
+    /**
+     * Callback executed when selected rows change
+     * @type Function
+     */
+    onChange?: (selectedRowKeys: Key[], selectedRows: T[]) => void;
+    /**
+     * Callback executed when select/deselect one row
+     * @type Function
+     */
+    onSelect?: (record: T, selected: boolean, selectedRows: Object[], nativeEvent: Event) => any;
+
+    /**
+     * Callback executed when select/deselect all rows
+     * @type Function
+     */
+    onSelectAll?: (selected: boolean, selectedRows: T[], changeRows: T[]) => any;
+
+    /**
+     * Callback executed when row selection is inverted
+     * @type Function
+     */
+    onSelectInvert?: (selectedRows: Key[]) => any;
+}
+
+export interface FetchParams {
+    searchInfo?: Recordable;
+    page?: number;
+    sortInfo?: Recordable;
+    filterInfo?: Recordable;
+}
+
+export interface GetColumnsParams {
+    ignoreIndex?: boolean;
+    ignoreAction?: boolean;
+    sort?: boolean;
+}
+
+export type SizeType = 'default' | 'middle' | 'small' | 'large';
+
+export interface TableActionType {
+    getPaginationRef: () => PaginationProps | boolean;
+    getSize: () => SizeType;
+    getShowPagination: () => boolean;
+    setPagination: (info: Partial<PaginationProps>) => void;
+    setShowPagination: (show: boolean) => Promise<void>;
+    setProps: (props: Partial<BasicTableProps>) => void;
 }
