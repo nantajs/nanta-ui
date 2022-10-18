@@ -1,4 +1,4 @@
-import { computed, unref, ref, reactive } from 'vue';
+import { computed, unref, ref, reactive, watch } from 'vue';
 import type { ComputedRef, Ref } from 'vue';
 import type { BasicColumn, BasicTableProps, PaginationProps, CellFormat } from '..';
 import { cloneDeep, isFunction, isString, isMap } from 'lodash-es';
@@ -21,9 +21,10 @@ function handleActionColumn(propsRef: ComputedRef<BasicTableProps>, columns: Bas
 }
 
 // convert to andt columns config.
-export function antdColumns(propsRef: ComputedRef<BasicTableProps>, getPaginationRef: ComputedRef<boolean | PaginationProps>) : any {
+export function useColumns(propsRef: ComputedRef<BasicTableProps>, getPaginationRef: ComputedRef<boolean | PaginationProps>): any {
     const columnsRef = ref(unref(propsRef).columns) as unknown as Ref<BasicColumn[]>;
-
+    console.log('++++')
+    console.log(columnsRef.value)
     const getColumnsRef = computed(() => {
         const columns = cloneDeep(unref(columnsRef));
 
@@ -37,6 +38,9 @@ export function antdColumns(propsRef: ComputedRef<BasicTableProps>, getPaginatio
 
     const getViewColumns = computed(() => {
         const viewColumns = sortFixedColumn(unref(getColumnsRef));
+
+        console.log('------`')
+        console.log(viewColumns);
 
         const columns = cloneDeep(viewColumns);
         return columns
@@ -57,8 +61,14 @@ export function antdColumns(propsRef: ComputedRef<BasicTableProps>, getPaginatio
             });
     });
 
-    return { getColumnsRef, getViewColumns }
+    watch(
+        () => unref(propsRef).columns,
+        columns => {
+            columnsRef.value = columns;
+        }
+    );
 
+    return { getColumnsRef, getViewColumns }
 }
 
 function sortFixedColumn(columns: BasicColumn[]) {

@@ -11,7 +11,7 @@ import { omit } from 'lodash-es';
 import { Table } from 'ant-design-vue'
 import { tableProps, BasicTableProps } from './props'
 import { Recordable } from '../..'
-import { antdColumns } from './hooks/antdColumns'
+import { useColumns } from './hooks/useColumns'
 import { usePagination } from './hooks/usePagination'
 import { useForm } from '../../components/form'
 import type { TableActionType, SizeType } from './types/table'
@@ -38,7 +38,7 @@ const getDataSourceRef = computed(() => {
 });
 const { getPaginationInfo, getPagination, setPagination, setShowPagination, getShowPagination } = usePagination(getProps);
 
-const { getColumnsRef, getViewColumns } = antdColumns(getProps, getPaginationInfo)
+const { getColumnsRef, getViewColumns } = useColumns(getProps, getPaginationInfo)
 
 const getBindValues = computed(() => {
     const dataSource = unref(getDataSourceRef);
@@ -57,6 +57,8 @@ const getBindValues = computed(() => {
 
 function setProps(props: Partial<BasicTableProps>) {
     innerPropsRef.value = { ...unref(innerPropsRef), ...props };
+    console.log('****')
+    console.log(unref(innerPropsRef))
 }
 
 const tableAction: TableActionType = {
