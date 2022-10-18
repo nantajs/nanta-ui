@@ -32,7 +32,7 @@ export const columns: BasicColumn[] = [
     dataIndex: "gender",
     format: (text: string, record: Recordable, index: number) => {
       if (!record.gender) {
-        return "unknown"
+        return ""
       } else if (record.gender === 1) {
         return "male"
       } else if (record.gender === 2) {

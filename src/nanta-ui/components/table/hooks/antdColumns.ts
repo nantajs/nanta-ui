@@ -43,8 +43,8 @@ export function antdColumns(propsRef: ComputedRef<BasicTableProps>, getPaginatio
             .map((column) => {
                 const { slots, customRender, format, edit, editRow, flag } = column;
                 if (!slots || !slots?.title) {
-                    column.customTitle = column.title as VueNode;
-                    Reflect.deleteProperty(column, 'title');
+                    // column.customTitle = column.title as VueNode;
+                    // Reflect.deleteProperty(column, 'title');
                 }
                 const isDefaultAction = [INDEX_COLUMN_FLAG, ACTION_COLUMN_FLAG].includes(flag!);
                 if (!customRender && format && !edit && !isDefaultAction) {
