@@ -1,6 +1,10 @@
 <template>
   <SvgIcon :size="size" :name="getSvgIcon" v-if="isSvgIcon" :class="[$attrs.class, 'anticon']" :spin="spin" />
-  <span v-else ref="elRef" :class="[$attrs.class, 'app-iconify anticon', spin && 'app-iconify-spin']" :style="getWrapStyle"></span>
+  <span v-else ref="elRef" :class="[$attrs.class, 'app-iconify anticon', spin && 'app-iconify-spin']"
+    :style="getWrapStyle"></span>
+  <span>
+    <slot />
+  </span>
 </template>
 <script lang="ts">
 import type { PropType } from 'vue';
@@ -58,16 +62,21 @@ export default defineComponent({
       }
     };
 
+    const colorMap = new Map(Object.entries({
+      'success': '#55D187',
+      'error': '#ED6F6F',
+      'warning': '#EFBD47'
+    }));
+
     const getWrapStyle = computed((): CSSProperties => {
       const { size, color } = props;
       let fs = size;
       if (isString(size)) {
         fs = parseInt(size, 10);
       }
-
       return {
         fontSize: `${fs}px`,
-        color: color,
+        color: colorMap.get(color) || color,
         display: 'inline-flex',
       };
     });
