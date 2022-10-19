@@ -2,7 +2,7 @@
   <div @click="onCellClick">
     <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
       <Button v-bind="action">
-        <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName" />
+        <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName" :color="action.color"/>
         <template v-if="action.label">{{ action.label }}</template>
       </Button>
       <Divider type="vertical" class="action-divider" v-if="divider && index < getActions.length - 1" />
