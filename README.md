@@ -1,6 +1,7 @@
 # nanta-ui
 
  <p>
+     <a href="https://www.npmjs.com/package/@nanta/ui"><img src="https://badgen.net/npm/dm/@nanta/ui" alt="Download"></a>
      <a href="https://www.npmjs.com/package/@nanta/ui"><img src="https://badgen.net/npm/v/@nanta/ui" alt="Version"></a>
      <a href="https://www.npmjs.com/package/@nanta/ui"><img src="https://badgen.net/npm/license/@nanta/ui" alt="License"></a> 
 </p>
