@@ -1,4 +1,9 @@
-import { BasicColumn } from "/~/main";
+import { BasicColumn, CellFormat } from "/~/main";
+
+const GENDER = {
+  1: 'male',
+  2: 'female'
+};
 
 export const columns: BasicColumn[] = [
   {
@@ -30,17 +35,7 @@ export const columns: BasicColumn[] = [
     title: "Gender",
     key: "gender",
     dataIndex: "gender",
-    format: (text: string, record: Recordable, index: number) => {
-      if (!record.gender) {
-        return ""
-      } else if (record.gender === 1) {
-        return "male"
-      } else if (record.gender === 2) {
-        return "female"
-      } else {
-        return "unknown"
-      }
-    }
+    format: GENDER,
   },
   /**
   {

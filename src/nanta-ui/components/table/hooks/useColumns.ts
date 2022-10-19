@@ -1,7 +1,7 @@
 import { computed, unref, ref, reactive, watch } from 'vue';
 import type { ComputedRef, Ref } from 'vue';
 import type { BasicColumn, BasicTableProps, PaginationProps, CellFormat } from '..';
-import { cloneDeep, isFunction, isString, isMap } from 'lodash-es';
+import { cloneDeep, isFunction, isString, isMap, isObject } from 'lodash-es';
 import { ACTION_COLUMN_FLAG, INDEX_COLUMN_FLAG } from "../const";
 import { formatToDate, Recordable, VueNode } from "../../.."
 
@@ -16,7 +16,7 @@ function handleActionColumn(propsRef: ComputedRef<BasicTableProps>, columns: Bas
             ...actionColumn,
             flag: ACTION_COLUMN_FLAG,
         });
-    }    
+    }
 }
 
 // convert to andt columns config.
@@ -34,7 +34,7 @@ export function useColumns(propsRef: ComputedRef<BasicTableProps>, getPagination
 
 
     const getViewColumns = computed(() => {
-        const viewColumns = sortFixedColumn(unref(getColumnsRef));       
+        const viewColumns = sortFixedColumn(unref(getColumnsRef));
         const columns = cloneDeep(viewColumns);
         return columns
             .map((column) => {
@@ -107,6 +107,12 @@ export function formatCell(text: string, format: CellFormat, record: Recordable,
         // Map
         if (isMap(format)) {
             return format.get(text);
+        }
+
+        // Object
+        if (!isString(format) && isObject(format)) {
+            const map = new Map(Object.entries(format));
+            return map.get('' + text) || text
         }
     } catch (error) {
         return text;
