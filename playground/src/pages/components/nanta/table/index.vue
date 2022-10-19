@@ -2,30 +2,45 @@
     <NantaTable @register="registerTable">
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'action'">
-                <NantaTableAction :actions="[
-                  {
-                    icon: 'clarity:note-edit-line',
-                    label: '编辑',
-                    onClick: handleEdit.bind(null, record),
-                  },
-                  {
-                    icon: 'ant-design:delete-outlined',
-                    color: 'error',
-                    label: '删除',
-                    onClick: handleDelete.bind(null, record),
-                  },
-                ]" />
+                <NantaTableAction :actions="getAction(record)" />
             </template>
         </template>
     </NantaTable>
 </template>
 
 <script lang="ts" setup>
-import { NantaTable, NantaTableAction, useTable } from "/~/main";
+import { NantaTable, NantaTableAction, useTable, ActionItem, ActionType } from "/~/main";
 import { columns, data } from "./data"
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 // import { url } from '/@/settings/localSetting';
 const url = 'https://mock.data/api/mock/meta';
+
+function getAction(record: Recordable): ActionItem[] {
+    const ifShow = (action: ActionItem) => {
+        const value = (record.gender && (record.gender === 1 || record.gender === 2));
+        if (!value && action.label === '删除') {
+            return false;
+        }
+        return true;
+    };
+
+    const actions: ActionItem[] = [
+        {
+            icon: 'clarity:note-edit-line',
+            label: '编辑',
+            onClick: handleEdit.bind(null, record),
+        },
+        {
+            icon: 'ant-design:delete-outlined',
+            color: 'error',
+            label: '删除',
+            onClick: handleDelete.bind(null, record),
+        },
+    ]
+    actions.forEach(item => { item.ifShow = ifShow })
+
+    return actions;
+}
 
 interface DemoResult {
     createBy?: string;

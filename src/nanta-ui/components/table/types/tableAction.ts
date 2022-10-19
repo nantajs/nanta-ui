@@ -1,6 +1,11 @@
 import { ButtonProps } from 'ant-design-vue/es/button/buttonTypes';
 import { TooltipProps } from 'ant-design-vue/es/tooltip/Tooltip';
-import { Fn } from '../../../../main';
+import { Fn, Recordable } from '../../../../main';
+
+export interface ActionType {
+  actions: ActionItem[],
+  ifShow?: boolean | ((action: ActionItem, record: Recordable) => boolean);
+}
 
 export interface ActionItem extends ButtonProps {
   onClick?: Fn;

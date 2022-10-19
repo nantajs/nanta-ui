@@ -2,7 +2,8 @@
   <div @click="onCellClick">
     <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
       <Button v-bind="action">
-        <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName" :color="action.color"/>
+        <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName"
+          :color="action.color" />
         <template v-if="action.label">{{ action.label }}</template>
       </Button>
       <Divider type="vertical" class="action-divider" v-if="divider && index < getActions.length - 1" />
@@ -13,9 +14,10 @@
 import { PropType, computed, toRaw, unref } from 'vue';
 import { Divider, Tooltip, TooltipProps, Button } from 'ant-design-vue';
 import Icon from '../../icon';
-import { ActionItem } from '../types/tableAction';
+import { ActionItem, ActionType } from '../types/tableAction';
 import { propTypes } from '../../../utils/propTypes';
-import { omit } from 'lodash-es';
+import { omit, isBoolean, isFunction } from 'lodash-es';
+import { Recordable } from '../../..'
 
 type ButtonType = 'link' | 'default' | 'primary' | 'ghost' | 'dashed' | 'text';
 type SizeType = 'small' | 'middle' | 'large' | undefined;
@@ -35,8 +37,25 @@ const props = defineProps(
     stopButtonPropagation: propTypes.bool.def(false),
   })
 
+function isIfShow(action: ActionItem): boolean {
+  const ifShow = action.ifShow;
+
+  let isIfShow = true;
+
+  if (isBoolean(ifShow)) {
+    isIfShow = ifShow;
+  }
+  if (isFunction(ifShow)) {
+    isIfShow = ifShow(action);
+  }
+  return isIfShow;
+}
+
 const getActions = computed(() => {
   return (toRaw(props.actions) || [])
+    .filter(action => {
+      return isIfShow(action);
+    })
     .map((action) => {
       return {
         type: 'link' as ButtonType,
