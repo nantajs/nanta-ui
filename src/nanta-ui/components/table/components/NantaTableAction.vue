@@ -17,6 +17,9 @@ import { ActionItem } from '../types/tableAction';
 import { propTypes } from '../../../utils/propTypes';
 import { omit } from 'lodash-es';
 
+type ButtonType = 'link' | 'default' | 'primary' | 'ghost' | 'dashed' | 'text';
+type SizeType = 'small' | 'middle' | 'large' | undefined;
+
 const props = defineProps(
   {
     actions: {
@@ -36,8 +39,8 @@ const getActions = computed(() => {
   return (toRaw(props.actions) || [])
     .map((action) => {
       return {
-        type: 'link',
-        size: 'small',
+        type: 'link' as ButtonType,
+        size: 'small' as SizeType,
         iconName: action?.icon,
         ...omit(action, 'icon'),  // 去掉icon属性，否则会和antd原生的icon冲突。
       };
