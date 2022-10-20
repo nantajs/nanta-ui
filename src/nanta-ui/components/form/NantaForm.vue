@@ -302,11 +302,14 @@ const formActionType: Partial<FormActionType> = {
   resetFields,
   updateSchema,
   resetSchema,
+  removeSchemaByFiled,
+  appendSchemaByField,
   setProps,
   clearValidate,
   validateFields,
   validate,
   submit: handleSubmit,
+  scrollToField: scrollToField,
 };
 
 onMounted(() => {
