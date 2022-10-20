@@ -18,7 +18,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['register', 'ok', 'cancel'])
-function setModalProps (props: Partial<ModalProps>): void {
+function setModalProps(props: Partial<ModalProps>): void {
   // Keep the last setModalProps
   propsRef.value = deepMerge(unref(propsRef) || ({} as any), props)
   if (Reflect.has(props, 'visible')) {
@@ -34,20 +34,16 @@ const modalMethods: ModalMethods = {
 // 初始化
 const instance = getCurrentInstance()
 if (instance) {
-  console.log('basic modal registed!!!')
   emit('register', modalMethods, instance.uid)
 }
 
 // 确认的Button
 const handleOk = (e: MouseEvent) => {
-  console.log('handleOK')
-  visibleRef.value = false
   emit('ok', e)
 }
 
 // 取消的Button
 const handleCancel = (e: any) => {
-  console.log('handleCancel')
   visibleRef.value = false
   emit('cancel', e)
 }

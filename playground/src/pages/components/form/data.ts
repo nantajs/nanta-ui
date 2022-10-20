@@ -80,7 +80,7 @@ export const schemes: FormSchema[] = [
     field: 'field2',
     component: 'RadioGroup',
     label: 'RadioGroup_2',
-    defaultValue: 'v1',
+    required: true,
     componentProps: {
       options: [
         {
