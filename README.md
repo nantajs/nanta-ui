@@ -10,12 +10,19 @@ Ant-design based UI framework.
 
 ![index](docs/nantaui.png)
 
+## Features
+- Schema-style form/table design.  
+- Light-weighted.  
+- Type-scipt support.  
+- Support vue 3 and nuxt 3.  
+
 ## Deps
 
 - Vue 3.0
-- [ant-design-vue](https://github.com/vueComponent/ant-design-vue)
+- [ant-design-vue](https://github.com/vueComponent/ant-design-vue)  
+- Lodash
 
-## Usage
+## Setup
 
 1. Install **nanta-ui**
 
