@@ -12,6 +12,7 @@ import { formItemPorps } from "../types/formProps";
 import { createPlaceholderMessage, setComponentRuleType } from "../help";
 import { ref, unref, getCurrentInstance, toRefs, computed, defineComponent } from "vue";
 import { getSlot } from "../helper";
+import BasicHelp from "../../help/BasicHelp.vue"
 
 export default {
   props: formItemPorps,
@@ -253,6 +254,27 @@ export default {
       }
     }
 
+    function renderLabelHelpMessage() {
+      const { label, helpMessage, helpComponentProps, subLabel } = props.schema;
+      const renderLabel = subLabel ? (
+        <span>
+          {label} <span class="text-secondary">{subLabel}</span>
+        </span>
+      ) : (
+        label
+      );
+      const getHelpMessage = isFunction(helpMessage) ? helpMessage(unref(getValues)) : helpMessage;
+      if (!getHelpMessage || (Array.isArray(getHelpMessage) && getHelpMessage.length === 0)) {
+        return renderLabel;
+      }
+      return (
+        <span>
+          {renderLabel}
+          <BasicHelp placement="top" class="mx-1" text={getHelpMessage} {...helpComponentProps} />
+        </span>
+      );
+    }
+
     function renderItem() {
       const {
         field,
@@ -269,7 +291,7 @@ export default {
       if (component === "Divider") {
         return (
           <Col span={24}>
-            <Divider {...unref(getComponentsProps)}></Divider>
+            <Divider {...unref(getComponentsProps)}>{renderLabelHelpMessage()}</Divider>
           </Col>
         );
       } else {
@@ -289,7 +311,7 @@ export default {
             name={field}
             colon={colon}
             class={{ "suffix-item": showSuffix }}
-            label={label}
+            label={renderLabelHelpMessage()}
             rules={handleRules()}
             labelCol={labelCol}
             required={required}

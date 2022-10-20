@@ -150,6 +150,22 @@ export type Rule = RuleObject & {
   trigger?: 'blur' | 'change' | ['change', 'blur'];
 };
 
+export interface HelpComponentProps {
+  maxWidth: string;
+  // Whether to display the serial number
+  showIndex: boolean;
+  // Text list
+  text: any;
+  // colour
+  color: string;
+  // font size
+  fontSize: string;
+  icon: string;
+  absolute: boolean;
+  // Positioning
+  position: any;
+}
+
 export interface FormSchema {
   changeEvent?: string;
   component: ComponentType;
@@ -159,6 +175,7 @@ export interface FormSchema {
   dynamicRules?: (renderCallbackParams: RenderCallbackParams) => Rule[];
   field: string;
   helpMessage?: string | string[] | ((renderCallbackParams: RenderCallbackParams) => string | string[]);
+  helpComponentProps?: Partial<HelpComponentProps>;
   itemProps?: Partial<FormItem>;
   ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
   label: string;
@@ -170,6 +187,7 @@ export interface FormSchema {
   show?: boolean;
   slot?: string;
   suffix?: string | number | ((values: RenderCallbackParams) => string | number);
+  subLabel?: string;
   render?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string;
 }
 
