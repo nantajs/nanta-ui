@@ -4,6 +4,14 @@
             <template v-if="column.key === 'action'">
                 <NantaTableAction :actions="getAction(record)" />
             </template>
+            <template v-else-if="column.key === 'tags'">
+                <span>
+                    <a-tag v-for="tag in record.tags" :key="tag"
+                        :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'">
+                        {{ tag.toUpperCase() }}
+                    </a-tag>
+                </span>
+            </template>
         </template>
     </NantaTable>
 </template>
