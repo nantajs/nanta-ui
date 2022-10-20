@@ -158,6 +158,7 @@ export interface FormSchema {
   disabledLabelWidth?: boolean;
   dynamicRules?: (renderCallbackParams: RenderCallbackParams) => Rule[];
   field: string;
+  helpMessage?: string | string[] | ((renderCallbackParams: RenderCallbackParams) => string | string[]);
   itemProps?: Partial<FormItem>;
   ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
   label: string;

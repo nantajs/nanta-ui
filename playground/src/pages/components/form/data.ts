@@ -12,7 +12,31 @@ export const schemes: FormSchema[] = [
     component: 'Input',
     defaultValue: 'nanta',
     required: true,
+    helpMessage: 'User name.',
     placeholder: 'Please input user name.',
+    componentProps: ({ formActionType }) => {
+      return {
+        onChange: (value: any) => {
+          const name = value.currentTarget.value;
+          console.log('----value==', name);
+          const { setFieldsValue, getFieldsValue, updateSchema } = formActionType;
+          updateSchema({
+            field: 'address',            
+            rules: [
+              {
+                required: name === '#',
+                validator: async (rule, value) => {
+                  if (!value) {
+                    /* eslint-disable-next-line */
+                    return Promise.reject('Address not empty');
+                  }
+                }
+              }
+            ]                        
+          });
+        }
+      }
+    }
   },
   {
     field: 'email',
