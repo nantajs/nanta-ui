@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { Col, Divider, Form } from "ant-design-vue";
 import type { Ref, PropType } from "vue";
-import type { ValidationRule } from "ant-design-vue/lib/form/Form";
+import type { Rule } from "ant-design-vue/lib/form"
 import { isBoolean, upperFirst, isFunction, cloneDeep, isNull } from "lodash-es";
 import type { FormSchema, FormProps } from "../index";
 import { useItemLabelWidth } from "../hooks/useLabelWidth";
@@ -81,7 +81,7 @@ export default {
       return { isShow, isIfShow };
     }
 
-    function handleRules(): ValidationRule[] {
+    function handleRules(): Rule[] {
       const {
         rules: defRules = [],
         component,
@@ -91,10 +91,10 @@ export default {
       } = props.schema;
 
       if (isFunction(dynamicRules)) {
-        return dynamicRules(unref(getValues)) as ValidationRule[];
+        return dynamicRules(unref(getValues)) as Rule[];
       }
 
-      let rules: ValidationRule[] = cloneDeep(defRules) as ValidationRule[];
+      let rules: Rule[] = cloneDeep(defRules) as Rule[];
       const defaultMsg = createPlaceholderMessage(component);
 
       function validator(rule: any, value: any) {

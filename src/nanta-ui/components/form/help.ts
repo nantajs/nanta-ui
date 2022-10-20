@@ -1,5 +1,5 @@
 import type { ComponentType } from './index'
-import type { ValidationRule } from 'ant-design-vue/lib/form/Form';
+import type { Rule } from "ant-design-vue/lib/form"
 
 export function createPlaceholderMessage(component: ComponentType) {
   if (component.includes('Input') || component.includes('Complete')) {
@@ -22,7 +22,7 @@ export function createPlaceholderMessage(component: ComponentType) {
 }
 
 export function setComponentRuleType(
-  rule: ValidationRule,
+  rule: Rule,
   component: ComponentType,
   valueFormat: string,
 ) {
