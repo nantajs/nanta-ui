@@ -20,6 +20,7 @@ export const columns: BasicColumn[] = [
     title: "Email",
     dataIndex: "email",
     key: "email",
+    helpMessage: "use email address.",
   },
   {
     title: "Address",
