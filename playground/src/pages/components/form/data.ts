@@ -18,6 +18,24 @@ export const schemes: FormSchema[] = [
     field: 'email',
     label: "Email",
     component: 'Input',
+    rules: [
+      {
+        required: true,
+        // @ts-ignore
+        validator: async (rule, value) => {
+          if (!value) {
+            /* eslint-disable-next-line */
+            return Promise.reject('值不能为空');
+          }
+          if (value === '1') {
+            /* eslint-disable-next-line */
+            return Promise.reject('值不能为1');
+          }
+          return Promise.resolve();
+        },
+        trigger: 'change',
+      },
+    ],
   },
   {
     field: 'age',

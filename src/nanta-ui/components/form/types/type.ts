@@ -146,19 +146,26 @@ export interface RenderCallbackParams {
   field: string;
 }
 
+export type Rule = RuleObject & {
+  trigger?: 'blur' | 'change' | ['change', 'blur'];
+};
+
 export interface FormSchema {
   changeEvent?: string;
   component: ComponentType;
   componentProps?: ((opt: { schema: FormSchema; formActionType: FormActionType; formModel: Recordable }) => Recordable) | object; 
   defaultValue?: any;
   disabledLabelWidth?: boolean;
+  dynamicRules?: (renderCallbackParams: RenderCallbackParams) => Rule[];
   field: string;
   itemProps?: Partial<FormItem>;
+  ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
   label: string;
   labelWidth?: string | number;
   placeholder?: string;
   required?: boolean;
   renderComponentContent?: string;
+  rules?: Rule[];
   show?: boolean;
   slot?: string;
   suffix?: string | number | ((values: RenderCallbackParams) => string | number);
