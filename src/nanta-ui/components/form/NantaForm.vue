@@ -314,7 +314,7 @@ const formActionType: Partial<FormActionType> = {
 
 onMounted(() => {
   const instance = getCurrentInstance();
-  console.log("NantaForm inited, id", instance?.uid);
+  // console.log("NantaForm inited, id", instance?.uid);
   initDefault();
   emits("register", formActionType);
 });

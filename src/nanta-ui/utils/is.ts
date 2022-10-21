@@ -23,3 +23,15 @@ export function is (val: unknown, type: string) {
 export function isNumber (val: unknown): val is number {
   return is(val, 'Number')
 }
+
+/**
+ * current isObject is different with lodash-es's `isObject`
+ * _.isObject([1, 2, 3]); // ==> false   (lodash-es => true)
+ * _.isObject({}); // ==> true (lodash-es => true)
+ * 
+ * @param val 
+ * @returns 
+ */
+export function isObject(val: any): val is Record<any, any> {
+  return val !== null && is(val, 'Object');
+}

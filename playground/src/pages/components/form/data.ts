@@ -20,180 +20,189 @@ export const schemes: FormSchema[] = [
           const name = value.currentTarget.value;
           console.log('----value==', name);
           const { setFieldsValue, getFieldsValue, updateSchema } = formActionType;
-          updateSchema({
-            field: 'address',            
-            rules: [
-              {
-                required: name === '#',
-                validator: async (rule, value) => {
-                  if (!value) {
-                    /* eslint-disable-next-line */
-                    return Promise.reject('Address not empty');
-                  }
+          const ruleValue = [
+            {
+              required: true,
+              validator: async (rule, value) => {
+                if (!value) {
+                  /* eslint-disable-next-line */
+                  return Promise.reject('Address cannot be empty');
                 }
               }
-            ]                        
-          });
+            }
+          ];
+          if (name === '#') {
+            updateSchema({
+              field: 'address',
+              rules: ruleValue
+            });
+          } else {
+            updateSchema({
+              field: 'address',
+              required: false,
+              rules: []
+            });
+          }
         }
       }
     }
   },
-  {
-    field: 'email',
+{
+  field: 'email',
     label: "Email",
-    component: 'Input',
-    rules: [
+      component: 'Input',
+        rules: [
+          {
+            required: true,
+            // @ts-ignore
+            validator: async (rule, value) => {
+              if (!value) {
+                /* eslint-disable-next-line */
+                return Promise.reject('值不能为空');
+              }
+              if (value === '1') {
+                /* eslint-disable-next-line */
+                return Promise.reject('值不能为1');
+              }
+              return Promise.resolve();
+            },
+            trigger: 'change',
+          },
+        ],
+  },
+{
+  field: 'age',
+    label: "Age",
+      component: 'InputNumber',
+        defaultValue: 1,
+  },
+{
+  field: 'type',
+    component: 'Select',
+      label: 'Type',
+        componentProps: {
+    options: [
       {
-        required: true,
-        // @ts-ignore
-        validator: async (rule, value) => {
-          if (!value) {
-            /* eslint-disable-next-line */
-            return Promise.reject('值不能为空');
-          }
-          if (value === '1') {
-            /* eslint-disable-next-line */
-            return Promise.reject('值不能为1');
-          }
-          return Promise.resolve();
-        },
-        trigger: 'change',
+        label: 'Option1',
+        value: 'value_1',
+        key: '1',
+      },
+      {
+        label: 'Option2',
+        value: 'value_2',
+        key: '2',
       },
     ],
-  },
-  {
-    field: 'age',
-    label: "Age",
-    component: 'InputNumber',
-    defaultValue: 1,
-  },
-  {
-    field: 'type',
-    component: 'Select',
-    label: 'Type',
-    componentProps: {
-      options: [
-        {
-          label: 'Option1',
-          value: 'value_1',
-          key: '1',
-        },
-        {
-          label: 'Option2',
-          value: 'value_2',
-          key: '2',
-        },
-      ],
     },
-  },
-  {
-    field: 'tags',
+},
+{
+  field: 'tags',
     label: "Tags",
-    component: 'Input',
+      component: 'Input',
   },
-  {
-    field: 'address',
+{
+  field: 'address',
     label: "Address",
-    component: 'InputTextArea',
+      component: 'InputTextArea',
   },
-  {
-    field: 'field1',
+{
+  field: 'field1',
     component: 'CheckboxGroup',
-    label: 'CheckboxGroup_1',
-    defaultValue: ['v2', 'v1'],
-    componentProps: {
-      options: [
-        {
-          label: 'Check_1',
-          value: 'v1',
-        },
-        {
-          label: 'Check_2',
-          value: 'v2',
-        },
-        {
-          label: 'Check_3',
-          value: 'v3',
-        },
-      ],
+      label: 'CheckboxGroup_1',
+        defaultValue: ['v2', 'v1'],
+          componentProps: {
+    options: [
+      {
+        label: 'Check_1',
+        value: 'v1',
+      },
+      {
+        label: 'Check_2',
+        value: 'v2',
+      },
+      {
+        label: 'Check_3',
+        value: 'v3',
+      },
+    ],
     },
-  },
-  {
-    field: 'field2',
+},
+{
+  field: 'field2',
     component: 'RadioGroup',
-    label: 'RadioGroup_2',
-    required: true,
-    componentProps: {
-      options: [
-        {
-          label: 'Check_1',
-          value: 'v1',
-        },
-        {
-          label: 'Check_2',
-          value: 'v2',
-        },
-      ],
+      label: 'RadioGroup_2',
+        required: true,
+          componentProps: {
+    options: [
+      {
+        label: 'Check_1',
+        value: 'v1',
+      },
+      {
+        label: 'Check_2',
+        value: 'v2',
+      },
+    ],
     },
-  },
-  {
-    field: 'field3',
+},
+{
+  field: 'field3',
     component: 'Checkbox',
-    label: 'Checkbox_3',
-    renderComponentContent: 'Check',
+      label: 'Checkbox_3',
+        renderComponentContent: 'Check',
   },
-  {
-    field: 'field4',
+{
+  field: 'field4',
     component: 'Switch',
-    label: 'Switch_4',
+      label: 'Switch_4',
   },
-  {
-    field: 'field5',
+{
+  field: 'field5',
     component: 'RadioButtonGroup',
-    label: 'RadioButtonGroup_5',
-    defaultValue: 'B',
-    componentProps: {
-      options: [
-        {
-          label: 'Button_A',
-          value: 'A',
-        },
-        {
-          label: 'Button_B',
-          value: 'B',
-        },
-      ],
+      label: 'RadioButtonGroup_5',
+        defaultValue: 'B',
+          componentProps: {
+    options: [
+      {
+        label: 'Button_A',
+        value: 'A',
+      },
+      {
+        label: 'Button_B',
+        value: 'B',
+      },
+    ],
     },
-  },
-  {
-    field: 'field6',
+},
+{
+  field: 'field6',
     component: 'DatePicker',
-    label: 'DatePicker_6',
+      label: 'DatePicker_6',
   },
-  {
-    field: 'field7',
+{
+  field: 'field7',
     component: 'Select',
-    label: 'Multi Select',
-    slot: 'selectA',
-    defaultValue: ['value_1'],
-    componentProps: {
-      options: [
-        {
-          label: 'Option1',
-          value: 'value_1',
-          key: '1',
-        },
-        {
-          label: 'Option2',
-          value: 'value_2',
-          key: '2',
-        },
-        {
-          label: 'Option3',
-          value: 'value_3',
-          key: '3',
-        },
-      ],
+      label: 'Multi Select',
+        slot: 'selectA',
+          defaultValue: ['value_1'],
+            componentProps: {
+    options: [
+      {
+        label: 'Option1',
+        value: 'value_1',
+        key: '1',
+      },
+      {
+        label: 'Option2',
+        value: 'value_2',
+        key: '2',
+      },
+      {
+        label: 'Option3',
+        value: 'value_3',
+        key: '3',
+      },
+    ],
     },
-  },
+},
 ]
