@@ -1,0 +1,1 @@
+import{_ as e,a as n,o as a,i as o}from"./index.8c004d74.js";const t={},c=o("main",{class:"container"}," Hello, nanta-ui example project (index pages). ",-1),s=[c];function r(_,i){return a(),n("div",null,s)}const d=e(t,[["render",r]]);export{d as default};
