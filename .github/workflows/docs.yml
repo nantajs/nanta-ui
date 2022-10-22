@@ -35,7 +35,7 @@ jobs:
         working-directory: ./docs
 
       - name: Generate
-        run: yarn build
+        run: yarn b
         working-directory: ./docs
 
       - name: Deploy
