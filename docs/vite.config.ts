@@ -6,6 +6,7 @@ import Icons from 'unplugin-icons/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // @ts-ignore
   plugins: [vue(), vueJsx(), Icons({ /* options */ }),],
   resolve: {
     alias: {
