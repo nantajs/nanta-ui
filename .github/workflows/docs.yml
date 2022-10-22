@@ -1,6 +1,18 @@
-name: auto build & deploy
+name: docs
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - "docs/**"
+      - ".github/workflows/docs.yml"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "docs/**"
+      - ".github/workflows/docs.yml"
+    branches:
+      - main
 
 jobs:
   cd:
@@ -21,7 +33,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
       - name: Generate
         run: yarn build
