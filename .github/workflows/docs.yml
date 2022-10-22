@@ -35,7 +35,7 @@ jobs:
         working-directory: ./docs
 
       - name: Generate
-        run: yarn b
+        run: yarn build
         working-directory: ./docs
 
       - name: Move dist folder
