@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { Menu } from '../../types/type';
 import BasicSubMenu from './BasicSubMenu.vue';
-import { PropType } from "~~/types/global";
+import { PropType } from "@nanta/ui";
 defineProps({
     sideMenus: Array as PropType<Array<Menu>>,
     selectedKeys: Array as PropType<Array<string>>,
