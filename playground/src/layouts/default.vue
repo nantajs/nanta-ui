@@ -6,7 +6,9 @@
         :openKeys="openKeys" />
       <a-layout style="padding: 0 24px 24px">
         <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item v-for="item in breadcrumbList" :key="item">{{ item }}</a-breadcrumb-item>
+          <a-breadcrumb-item v-for="item in breadcrumbList" :key="item">{{
+          item
+          }}</a-breadcrumb-item>
         </a-breadcrumb>
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
           <slot />
@@ -35,7 +37,7 @@ const sideMenus = getMenus();
 const route = useRoute();
 const path = route.path;
 
-console.log('current path=', path)
+console.log("current path=", path);
 
 function iteratorMenu(
   item: Menu,
@@ -54,7 +56,7 @@ const getKeyAttributeMenuMap = (() => {
   const res = {};
 
   // make sure each menu has key attribute else random makeid!
-  sideMenus.forEach((item) => {
+  sideMenus.forEach((item: Menu) => {
     iteratorMenu(
       item,
       (item, keyPath) => {
@@ -64,7 +66,7 @@ const getKeyAttributeMenuMap = (() => {
         item.keyPath = [];
         if (keyPath && keyPath.length > 0) {
           keyPath.forEach((i) => {
-            item.keyPath.push(i);
+            item.keyPath && item.keyPath.push(i);
           });
         }
         item.keyPath.push(item.key);
@@ -75,10 +77,12 @@ const getKeyAttributeMenuMap = (() => {
 
   console.log(sideMenus);
 
-  sideMenus.forEach((item) => {
+  sideMenus.forEach((item: Menu) => {
     iteratorMenu(item, (item) => {
       const { name, path } = item;
-      res[item.key] = { name, path };
+      if (item.key) {
+        res[item.key] = { name, path };
+      }
     });
   });
 
@@ -86,7 +90,7 @@ const getKeyAttributeMenuMap = (() => {
 })();
 
 function findKeyPath(path: string) {
-  let res = null;
+  let res: string[] | undefined;
   sideMenus.forEach((item) => {
     iteratorMenu(item, (item) => {
       if (item.path === path) {
@@ -105,7 +109,10 @@ if (keyPath && keyPath.length > 0) {
   openKeys.value = keyPath.slice(0, leng - 1);
 }
 
-function initBreadcrumbList(keyPath: string[]) {
+function initBreadcrumbList(keyPath: string[] | undefined) {
+  if (!keyPath) {
+    return;
+  }
   // init it!
   breadcrumbList.value = [];
   if (keyPath && keyPath.length > 0) {
