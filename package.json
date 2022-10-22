@@ -16,8 +16,8 @@
     "./dist/style.css": "./dist/style.css"
   },
   "scripts": {
-    "dev": "yarn --cwd ./playground/ dev",
-    "pg": "yarn --cwd ./playground/ dev",
+    "dev": "yarn --cwd ./docs/ dev",
+    "pg": "yarn --cwd ./docs/ dev",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "packlocal": "npm pack",
