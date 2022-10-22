@@ -27,13 +27,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Install dependencies
+      - name: Install @root dependencies.
         run: yarn install
-        working-directory: docs
+
+      - name: Install @docs dependencies
+        run: yarn install
+        working-directory: ./docs
 
       - name: Generate
         run: yarn build
-        working-directory: docs
+        working-directory: ./docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
