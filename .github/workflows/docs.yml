@@ -36,11 +36,7 @@ jobs:
 
       - name: Generate
         run: yarn b
-        working-directory: ./docs
-
-      - name: Move dist folder
-        run: mv ./dist ..
-        working-directory: ./docs
+        working-directory: ./docs    
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
