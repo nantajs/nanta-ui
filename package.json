@@ -18,6 +18,7 @@
   "scripts": {
     "dev": "yarn --cwd ./docs/ dev",
     "pg": "yarn --cwd ./docs/ dev",
+    "docs": "yarn --cwd ./docs/ dev",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "packlocal": "npm pack",
