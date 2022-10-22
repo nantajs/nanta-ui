@@ -325,9 +325,9 @@
   integrity sha512-tZEowDjvU7O7I04GYvWQOS4yyP9E/7YlsB0jjw1Ycukgr2ycEzKyIk5tms5WnLBymaewc6VmRKnn5IJWgK4eFw==
 
 "@iconify/json@^2.1.121":
-  version "2.1.125"
-  resolved "https://registry.npmjs.org/@iconify/json/-/json-2.1.125.tgz#cb7a4852339732ebc57eef3d35f388cead588931"
-  integrity sha512-szN6ws5FkP7oZnqkBXD+qfKbIEnNn8ubnYABtPMh9CyUVCnmCsD9s1iPlhqN1Do5Ykr9rlJYfwUd2uQFT7HlPw==
+  version "2.1.126"
+  resolved "https://registry.npmjs.org/@iconify/json/-/json-2.1.126.tgz#87fbea5091b0288057642ee41e370e9c8689cc0c"
+  integrity sha512-qT5BbEcX8vbsdlzizukGH2lm4fRJ+jNZ7qeZT1W4X9zs2ZKMBXXg1vcrhtM5UC9U1HRr45fa9TXcUnb4oIlpCQ==
   dependencies:
     "@iconify/types" "*"
     pathe "^0.3.0"
