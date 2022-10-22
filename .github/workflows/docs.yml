@@ -34,9 +34,11 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
+        working-directory: docs
 
       - name: Generate
         run: yarn build
+        working-directory: docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
