@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { NantaTable, NantaTableAction, useTable, ActionItem, ActionType } from "/~/main";
-import { columns, data } from "./data"
+import { columns, data, searchFormSchema } from "./data"
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 // import { url } from '/@/settings/localSetting';
 const url = 'https://mock.data/api/mock/meta';
@@ -99,6 +99,12 @@ const [registerTable] = useTable({
         dataIndex: 'action',
         // slots: { customRender: 'action' },
         fixed: undefined,
+    },
+    useSearchForm: true,
+    searchFormConfig: {
+        labelWidth: 120,
+        schemas: searchFormSchema,
+        autoSubmitOnEnter: true,
     },
 })
 

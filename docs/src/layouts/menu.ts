@@ -42,22 +42,22 @@ const localMenus: Menu[] = [
         path: '/components/table',
         children: [           
             {
-                name: 'Basic Form',
+                name: 'Nanta Form',
                 path: '/components/form/basic',
                 icon: 'quill:creditcard',
                 key: 'basicForm'
-            },
-            {
-                name: 'Basic Table',
-                path: '/components/table/basic',
-                icon: 'quill:creditcard',
-                key: 'basicTable'
             },
             {
                 name: 'Nanta Table',
                 path: '/components/table/nantaTable',
                 icon: 'quill:creditcard',
                 key: 'nantaTable'
+            },
+            {
+                name: 'Basic Table',
+                path: '/components/table/basic',
+                icon: 'quill:creditcard',
+                key: 'basicTable'
             },
             {
                 name: 'Icon',

@@ -146,6 +146,7 @@ export interface HelpComponentProps {
 
 export interface FormSchema {
   changeEvent?: string;
+  colProps?: Partial<ColEx>;
   component: ComponentType;
   componentProps?: ((opt: { schema: FormSchema; formActionType: FormActionType; formModel: Recordable }) => Recordable) | object; 
   defaultValue?: any;

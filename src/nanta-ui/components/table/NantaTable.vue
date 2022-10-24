@@ -1,7 +1,8 @@
 <template>
     <div ref="wrapRef">
         <NantaForm ref="formRef" submitOnReset v-bind="getFormProps" v-if="getBindValues.useSearchForm"
-            :tableAction="tableAction" @register="registerForm" @submit="handleSearchInfoChange">
+            :tableAction="tableAction" @register="registerForm" @submit="handleSearchInfoChange"
+            style="margin-bottom: 16px;padding:12px 10px 6px">
             <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
                 <slot :name="item" v-bind="data || {}"></slot>
             </template>

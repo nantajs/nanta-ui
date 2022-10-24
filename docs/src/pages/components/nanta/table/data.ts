@@ -1,9 +1,30 @@
-import { BasicColumn, CellFormat } from "/~/main";
+import { BasicColumn, CellFormat, FormSchema } from "/~/main";
 
 const GENDER = {
   1: 'male',
   2: 'female'
 };
+
+export const searchFormSchema: FormSchema[] = [
+  {
+    field: 'name',
+    label: 'Name',
+    component: 'Input',
+    colProps: { span: 8 },
+  },
+  {
+    field: 'gender',
+    label: 'Gender',
+    component: 'Select',
+    componentProps: {
+      options: [
+        { label: 'male', value: 1 },
+        { label: 'female', value: 2 },
+      ],
+    },
+    colProps: { span: 8 },
+  },
+];
 
 export const columns: BasicColumn[] = [
   {
@@ -88,7 +109,7 @@ export const data = [
     name: "Jack Gre",
     age: 32,
     email: "jack.gre@gmail.com",
-    address: "Shanghai China",
+    address: "Hangzhou China",
     tags: ["coder", "engineer"],
   },
   {
@@ -96,7 +117,7 @@ export const data = [
     name: "Kitty Hello",
     age: 32,
     email: "he@gmail.com",
-    address: "Paris No. 1 Lake Park",
+    address: "Berlin No. 991 Geek Park",
     tags: ["coder", "engineer"],
     gender: 3,
   },
@@ -113,7 +134,7 @@ export const data = [
     name: "Cook",
     age: 67,
     email: "cook@gmail.com",
-    address: "Paris No. 1 Lake Park",
+    address: "Taipei No. 101 Tower",
     tags: ["coder", "engineer"],
   },
   {
@@ -129,7 +150,7 @@ export const data = [
     name: "Xu",
     age: 10,
     email: "xu@gmail.com",
-    address: "Paris No. 1 Lake Park",
+    address: "Nanjing No. 1 Golden Park",
     tags: ["coder", "engineer"],
   },
   {
@@ -137,7 +158,7 @@ export const data = [
     name: "Google",
     age: 33,
     email: "google@gmail.com",
-    address: "Paris No. 1 Lake Park",
+    address: "Osaka No. 1 Lake Park",
     tags: ["coder", "engineer"],
   },
   {
@@ -145,7 +166,7 @@ export const data = [
     name: "Orode100",
     age: 100,
     email: "100@gmail.com",
-    address: "Paris No. 1 Lake Park",
+    address: "London No. 1 Center Park",
     tags: ["coder", "engineer"],
   },
 ];
