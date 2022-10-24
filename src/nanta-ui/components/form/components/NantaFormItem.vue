@@ -61,7 +61,7 @@ export default {
     });
     function getShow(): { isShow: boolean; isIfShow: boolean } {
       const { show, ifShow } = props.schema;
-      const itemIsAdvanced = false;
+      const itemIsAdvanced = true;
 
       let isShow = true;
       let isIfShow = true;
@@ -346,10 +346,10 @@ export default {
             : renderItem();
       };
 
-      console.log(isIfShow, isShow, ifShow)
+      // console.log(isIfShow, isShow, ifShow)
       return (
         isIfShow && (
-          <Col {...realColProps}>
+          <Col {...realColProps} v-show={isShow}>
             {getContent()}
           </Col>
         ));
