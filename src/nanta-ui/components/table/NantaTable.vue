@@ -1,8 +1,7 @@
 <template>
-    <div ref="wrapRef">
+    <div ref="wrapRef" :class="getWrapperClass">
         <NantaForm ref="formRef" submitOnReset v-bind="getFormProps" v-if="getBindValues.useSearchForm"
-            :tableAction="tableAction" @register="registerForm" @submit="handleSearchInfoChange"
-            style="margin-bottom: 16px;padding:12px 10px 6px">
+            :tableAction="tableAction" @register="registerForm" @submit="handleSearchInfoChange">
             <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
                 <slot :name="item" v-bind="data || {}"></slot>
             </template>
@@ -47,6 +46,7 @@ const attrs = useAttrs();
 const slots = useSlots()
 const tableElRef = ref(null);
 const tableData = ref<Recordable[]>([]);
+const prefixCls = 'nanta-basic-table';
 
 const innerPropsRef = ref<Partial<BasicTableProps>>();
 const getProps = computed(() => {
@@ -105,6 +105,18 @@ const getBindValues = computed(() => {
     return propsData;
 });
 
+const getWrapperClass = computed(() => {
+    const values = unref(getBindValues);
+    return [
+        prefixCls,
+        attrs.class,
+        {
+            [`${prefixCls}-form-container`]: values.useSearchForm,
+            [`${prefixCls}--inset`]: values.inset,
+        },
+    ];
+});
+
 function setProps(props: Partial<BasicTableProps>) {
     innerPropsRef.value = { ...unref(innerPropsRef), ...props };
 }
@@ -124,3 +136,101 @@ const tableAction: TableActionType = {
 
 emits("register", tableAction, formActions);
 </script>
+
+<style lang="less">
+@border-color: #cecece4d;
+
+@prefix-cls: ~'nanta-basic-table';
+@component-background: '#151515';
+
+[data-theme='dark'] {
+    .ant-table-tbody>tr:hover.ant-table-row-selected>td,
+    .ant-table-tbody>tr.ant-table-row-selected td {
+        background-color: #262626;
+    }
+}
+
+.@{prefix-cls} {
+    max-width: 100%;
+    height: 100%;
+
+    &-row__striped {
+        td {
+            background-color: @component-background;
+        }
+    }
+
+    &-form-container {
+        padding: 16px;
+
+        .ant-form {
+            padding: 12px 10px 6px;
+            margin-bottom: 16px;
+            background-color: @component-background;
+            border-radius: 2px;
+        }
+    }
+
+    .ant-tag {
+        margin-right: 0;
+    }
+
+    .ant-table-wrapper {
+        padding: 6px;
+        background-color: @component-background;
+        border-radius: 2px;
+
+        .ant-table-title {
+            min-height: 40px;
+            padding: 0 0 8px !important;
+        }
+
+        .ant-table.ant-table-bordered .ant-table-title {
+            border: none !important;
+        }
+    }
+
+    .ant-table {
+        width: 100%;
+        overflow-x: hidden;
+
+        &-title {
+            display: flex;
+            padding: 8px 6px;
+            border-bottom: none;
+            justify-content: space-between;
+            align-items: center;
+        }        
+    }
+
+    .ant-pagination {
+        margin: 10px 0 0;
+    }
+
+    .ant-table-footer {
+        padding: 0;
+
+        .ant-table-wrapper {
+            padding: 0;
+        }
+
+        table {
+            border: none !important;
+        }
+
+        .ant-table-body {
+            overflow-x: hidden !important;
+        }
+
+        td {
+            padding: 12px 8px;
+        }
+    }
+
+    &--inset {
+        .ant-table-wrapper {
+            padding: 0;
+        }
+    }
+}
+</style>
