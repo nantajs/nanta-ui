@@ -324,13 +324,35 @@ export default {
           </Form.Item>
         );
       }
-    }
-    const { show } = props.schema;
-    // default show:true, otherwise props.shcema.show = false;
-    const ifShow = !(isBoolean(show) && show === false);
+    }    
 
     return () => {
-      return ifShow && <Col class="ant-col-24">{renderItem()}</Col>;
+      const { colProps = {}, colSlot, renderColContent, component, show } = props.schema;
+      // default show:true, otherwise props.shcema.show = false;
+      const ifShow = !(isBoolean(show) && show === false);
+      if (!componentMap.has(component)) {
+        return null;
+      }
+      const { baseColProps = {} } = props.formProps;
+      const realColProps = { ...baseColProps, ...colProps };
+      const { isIfShow, isShow } = getShow();
+      const values = unref(getValues);
+
+      const getContent = () => {
+        return colSlot
+          ? getSlot(slots, colSlot, values)
+          : renderColContent
+            ? renderColContent(values)
+            : renderItem();
+      };
+
+      console.log(isIfShow, isShow, ifShow)
+      return (
+        isIfShow && (
+          <Col {...realColProps}>
+            {getContent()}
+          </Col>
+        ));
     };
   },
 };

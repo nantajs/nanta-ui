@@ -8,6 +8,7 @@ import type { ButtonOptions } from '../../button'
 export interface FormProps {
   actionColOptions?: Partial<ColEx>;
   autoSubmitOnEnter?: boolean;
+  baseColProps?: Partial<ColEx>;
   baseRowStyle?: CSSProperties;
   colon?: boolean;
   compact?: boolean;
@@ -32,11 +33,14 @@ export interface FormProps {
   wrapperCol?: Partial<ColEx>;
 }
 
-export const formPorps = {
+export const formProps = {
   actionColOptions: Object as PropType<Partial<ColEx>>,
   autoSubmitOnEnter: propTypes.bool.def(false),
   baseRowStyle: {
     type: Object as PropType<CSSProperties>,
+  },
+  baseColProps: {
+    type: Object as PropType<Partial<ColEx>>,
   },
   colon: propTypes.bool,
   compact: propTypes.bool,
@@ -82,7 +86,7 @@ export interface FormItemProps {
   schema: FormSchema,
   formProps: FormProps,
   formModel: Recordable,
-  setFormModel:(key: string, value: any) => void,
+  setFormModel: (key: string, value: any) => void,
   formActionType: FormActionType,
 }
 

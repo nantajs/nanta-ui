@@ -24,7 +24,7 @@
 import { Form, Row } from "ant-design-vue";
 import type { NamePath } from "ant-design-vue/lib/form/interface";
 import { cloneDeep, set, isFunction, isObject, isArray, isString } from "lodash-es";
-import { FormSchema, formPorps, FormProps, FormActionType } from ".";
+import { FormSchema, formProps, FormProps, FormActionType } from ".";
 import { useFormSchema } from "./hooks/useFormSchema";
 import NantaFormItem from "./components/NantaFormItem.vue";
 import NantaFormAction from "./components/NantaFormAction.vue";
@@ -35,7 +35,7 @@ import { deepMerge } from "../../utils/util";
 import type { Nullable, Recordable } from "../..";
 import { ref, unref, getCurrentInstance, reactive, computed, toRaw, watch, onMounted, nextTick, useAttrs} from "vue";
 
-const props = defineProps(formPorps);
+const props = defineProps(formProps);
 const emits = defineEmits(["register", "field-value-change", "reset", "submit"]);
 const attrs = useAttrs();
 const propsRef = ref<Partial<FormProps>>({});

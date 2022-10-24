@@ -147,6 +147,7 @@ export interface HelpComponentProps {
 export interface FormSchema {
   changeEvent?: string;
   colProps?: Partial<ColEx>;
+  colSlot?: string;
   component: ComponentType;
   componentProps?: ((opt: { schema: FormSchema; formActionType: FormActionType; formModel: Recordable }) => Recordable) | object; 
   defaultValue?: any;
@@ -161,6 +162,7 @@ export interface FormSchema {
   labelWidth?: string | number;
   placeholder?: string;
   required?: boolean;
+  renderColContent?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string;
   renderComponentContent?: string;
   rules?: Rule[];
   show?: boolean;
