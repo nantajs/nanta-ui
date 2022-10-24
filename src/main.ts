@@ -7,6 +7,7 @@ import { Icon, SvgIcon } from './nanta-ui/components/icon/index'
 import type { VueNode } from './nanta-ui/core/types/type'
 
 export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, VueNode, NantaTableAction }
+export * from './nanta-ui/components/button'
 export * from './nanta-ui/components/form'
 export * from './nanta-ui/components/modal'
 export * from './nanta-ui/components/table'

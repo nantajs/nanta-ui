@@ -29,7 +29,8 @@
 <script lang="ts" setup>
 import { propTypes } from '../../../utils/propTypes'
 import type { PropType } from '../../..'
-import type { ColEx, ButtonOptions } from '../types/type'
+import type { ColEx } from '../types/type'
+import type { ButtonOptions } from '../../button'
 import { computed } from 'vue'
 const props = defineProps({
   actionColOptions: {

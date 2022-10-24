@@ -3,6 +3,7 @@ import type { NamePath, RuleObject } from "ant-design-vue/lib/form/interface";
 import { FormProps } from "./formProps";
 import { FormItem } from "./formItem";
 import type { Recordable, PropType } from '../../..'
+import type { ButtonProps } from '../../button'
 
 export type FieldMapToTime = [string, [string, string], string?][];
 
@@ -115,29 +116,6 @@ export interface ColEx {
    */
   xxl?: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
 }
-
-export const buttonProps = {
-  color: { type: String, validator: (v: string) => ['error', 'warning', 'success', ''].includes(v) },
-  loading: { type: Boolean },
-  disabled: { type: Boolean },
-  /**
-   * Text before icon.
-   */
-  preIcon: { type: String },
-  /**
-   * Text after icon.
-   */
-  postIcon: { type: String },
-  /**
-   * preIcon and postIcon icon size.
-   * @default: 14
-   */
-  iconSize: { type: Number, default: 14 },
-  onClick: { type: Function as PropType<(...args: any) => any>, default: null },
-};
-
-declare type ButtonProps = Partial<ExtractPropTypes<typeof buttonProps>>;
-export type ButtonOptions = Partial<ButtonProps> & { text: string };
 
 export interface RenderCallbackParams {
   schema: FormSchema;

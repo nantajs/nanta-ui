@@ -2,6 +2,7 @@ import type { PropType } from 'vue';
 import type { BasicColumn } from './types/table';
 import type { PaginationProps } from './types/pagination';
 import type { Recordable, Fn } from '../..'
+import type { FormProps } from '../form'
 import { propTypes } from '../../utils/propTypes'
 import type { SorterResult, FetchSetting, TableRowSelection } from './types/table'
 import { DEFAULT_FILTER_FN, DEFAULT_SORT_FN, FETCH_SETTING, DEFAULT_SIZE } from './const';
@@ -19,6 +20,7 @@ export interface BasicTableProps<T = any> {
     defSort?: Recordable;
     fetchSetting?: Partial<FetchSetting>;
     filterFn?: (data: Partial<Recordable<string[]>>) => any;
+    handleSearchInfoFn?: Fn;
     immediateFetchApi?: boolean;
     loading?: boolean;
     onChange?: (pagination: any, filters: any, sorter: any, extra: any) => void;
@@ -26,6 +28,7 @@ export interface BasicTableProps<T = any> {
     rowKey?: string | ((record: Recordable) => string);
     rowSelection?: TableRowSelection;
     searchInfo?: Recordable;
+    searchFormConfig?: Partial<FormProps>;
     sortFn?: (sortInfo: SorterResult) => any;
     useSearchForm?: boolean;
 }
@@ -72,6 +75,10 @@ export const tableProps = {
         type: Function as PropType<(data: Partial<Recordable<string[]>>) => any>,
         default: DEFAULT_FILTER_FN,
     },
+    handleSearchInfoFn: {
+        type: Function as PropType<Fn>,
+        default: null,
+    },
     immediateFetchApi: { type: Boolean, default: true },
     loading: propTypes.bool,
     pagination: {
@@ -84,6 +91,10 @@ export const tableProps = {
     },
     rowSelection: {
         type: Object as PropType<TableRowSelection | null>,
+        default: null,
+    },
+    searchFormConfig: {
+        type: Object as PropType<Partial<FormProps>>,
         default: null,
     },
     searchInfo: {

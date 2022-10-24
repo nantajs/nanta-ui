@@ -1,14 +1,16 @@
 import type { CSSProperties, PropType } from 'vue';
-import { FormSchema, FieldMapToTime, ColEx, FormActionType } from "./type"
-import { propTypes } from "../../../utils/propTypes";
+import { FormSchema, FieldMapToTime, ColEx, FormActionType } from './type';
+import { propTypes } from '../../../utils/propTypes';
 import type { RowProps } from 'ant-design-vue/lib/grid/Row';
 import type { Fn, Recordable } from '../../..'
+import type { ButtonOptions } from '../../button'
 
 export interface FormProps {
   actionColOptions?: Partial<ColEx>;
   autoSubmitOnEnter?: boolean;
   baseRowStyle?: CSSProperties;
   colon?: boolean;
+  compact?: boolean;
   disabled?: boolean;
   fieldMapToTime?: FieldMapToTime;
   layout?: 'vertical' | 'inline' | 'horizontal';
@@ -18,10 +20,12 @@ export interface FormProps {
   labelWidth?: number | string;
   model?: Recordable;
   rowProps?: RowProps;
+  resetButtonOptions?: Partial<ButtonOptions>;
   resetFn?: () => Promise<void>;
   schemas?: FormSchema[];
   showActionButtons?: boolean;
   size?: 'default' | 'small' | 'large';
+  submitButtonOptions?: Partial<ButtonOptions>;
   submitFn?: () => Promise<void>;
   transformDateFunc?: (date: any) => string;
   // Col configuration for the entire form
@@ -35,6 +39,7 @@ export const formPorps = {
     type: Object as PropType<CSSProperties>,
   },
   colon: propTypes.bool,
+  compact: propTypes.bool,
   disabled: propTypes.bool,
   fieldMapToTime: {
     type: Array as PropType<FieldMapToTime>,
@@ -52,6 +57,7 @@ export const formPorps = {
     default: {},
   },
   rowProps: Object as PropType<RowProps>,
+  resetButtonOptions: Object as PropType<Partial<ButtonProps>>,
   resetFn: Function as PropType<() => Promise<void>>,
   // 表单配置规则
   schemas: {
@@ -60,6 +66,7 @@ export const formPorps = {
   },
   showActionButtons: propTypes.bool.def(true),
   size: propTypes.oneOf(['default', 'small', 'large']).def('default'),
+  submitButtonOptions: Object as PropType<Partial<ButtonProps>>,
   submitFn: Function as PropType<() => Promise<void>>,
   transformDateFunc: {
     type: Function as PropType<Fn>,
