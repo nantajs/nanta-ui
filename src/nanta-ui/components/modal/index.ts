@@ -1,2 +1,3 @@
-export { useModal, useModalInner } from './useModal'
-export * from './type'
+export { useModal, useModalInner } from './hooks/useModal'
+export * from './types/type'
+export * from './types/nantaFormModal'

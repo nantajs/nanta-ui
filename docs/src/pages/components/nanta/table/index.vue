@@ -14,19 +14,22 @@
             </template>
         </template>
     </NantaTable>
+
+    <NantaFormModal @register="registerModal" :schemas="editModalSchema" @ok="handleOK" @cancel="handleCancel" />
 </template>
 
 <script lang="ts" setup>
-import { NantaTable, NantaTableAction, useTable, ActionItem, ActionType } from "/~/main";
-import { columns, data, searchFormSchema } from "./data"
+import { NantaTable, NantaTableAction, useTable, ActionItem, ActionType, NantaFormModal, ModalInnerRecord } from "/~/main";
+import { columns, data, searchFormSchema, editModalSchema } from "./data"
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
+import { useModal } from "/~/main";
 // import { url } from '/@/settings/localSetting';
 const url = 'https://mock.data/api/mock/meta';
 
 function getAction(record: Recordable): ActionItem[] {
     const ifShow = (action: ActionItem) => {
         const value = (record.gender && (record.gender === 1 || record.gender === 2));
-        if (!value && action.label === '删除') {
+        if (!value && action.label === 'Delete') {
             return false;
         }
         return true;
@@ -35,13 +38,13 @@ function getAction(record: Recordable): ActionItem[] {
     const actions: ActionItem[] = [
         {
             icon: 'clarity:note-edit-line',
-            label: '编辑',
+            label: 'Edit',
             onClick: handleEdit.bind(null, record),
         },
         {
             icon: 'ant-design:delete-outlined',
             color: 'error',
-            label: '删除',
+            label: 'Delete',
             onClick: handleDelete.bind(null, record),
         },
     ]
@@ -109,9 +112,25 @@ const [registerTable] = useTable({
     },
 })
 
+const [registerModal, { openModal }] = useModal();
+
+const handleOK = (record: Recordable) => {
+    console.log('handle ok in outer event callback', record)
+}
+
+const handleCancel = (record: Recordable) => {
+    console.log('handle cancel in outer evnet callback', record);
+}
+
 function handleEdit(record: Recordable) {
     console.log('edit clicked!');
     console.log(record);
+    const innerRecord : ModalInnerRecord = {
+        title: "Edit",
+        record
+    }
+
+    openModal(true, innerRecord)
 }
 
 function handleDelete(record: Recordable) {
