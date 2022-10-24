@@ -41,7 +41,7 @@ import 'ant-design-vue/dist/antd.css';
 createApp(App).use(Antd).mount('#app')
 ```
 
-Here is an example in `docs`, and another exmaple [nanta-ui-vue](https://github.com/nantajs/nanta-ui-vue):   
+Here is an example in `docs`, and another example [nanta-ui-vue](https://github.com/nantajs/nanta-ui-vue):   
 ```shell
 yarn docs
 ```
