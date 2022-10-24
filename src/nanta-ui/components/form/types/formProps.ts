@@ -57,7 +57,7 @@ export const formPorps = {
     default: {},
   },
   rowProps: Object as PropType<RowProps>,
-  resetButtonOptions: Object as PropType<Partial<ButtonProps>>,
+  resetButtonOptions: Object as PropType<ButtonOptions>,
   resetFn: Function as PropType<() => Promise<void>>,
   // 表单配置规则
   schemas: {
@@ -66,7 +66,7 @@ export const formPorps = {
   },
   showActionButtons: propTypes.bool.def(true),
   size: propTypes.oneOf(['default', 'small', 'large']).def('default'),
-  submitButtonOptions: Object as PropType<Partial<ButtonProps>>,
+  submitButtonOptions: Object as PropType<ButtonOptions>,
   submitFn: Function as PropType<() => Promise<void>>,
   transformDateFunc: {
     type: Function as PropType<Fn>,
