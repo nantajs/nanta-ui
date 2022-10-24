@@ -85,12 +85,23 @@ export interface GetColumnsParams {
 export type SizeType = 'default' | 'middle' | 'small' | 'large';
 
 export interface TableActionType {
+    clearSelectedRowKeys: () => void;
+    deleteSelectRowByKey: (key: string) => void;
+    deleteTableDataRecord: (rowKey: string | number | string[] | number[]) => void;    
+    findTableDataRecord: (rowKey: string | number) => Recordable | void;
     getDataSource: <T = Recordable>() => T[];
     getPaginationRef: () => PaginationProps | boolean;
     getRawDataSource: <T = Recordable>() => T;
+    getSelectRows: <T = Recordable>() => T[];
+    getSelectRowKeys: () => string[] | number[];
     getSize: () => SizeType;
     getShowPagination: () => boolean;
-    setPagination: (info: Partial<PaginationProps>) => void;
+    insertTableDataRecord: (record: Recordable, index?: number) => Recordable | void;
+    setLoading: (loading: boolean) => void;
+    setSelectedRowKeys: (rowKeys: string[] | number[]) => void;
     setShowPagination: (show: boolean) => Promise<void>;
+    setPagination: (info: Partial<PaginationProps>) => void;
     setProps: (props: Partial<BasicTableProps>) => void;
+    setTableData: <T = Recordable>(values: T[]) => void;
+    updateTableDataRecord: (rowKey: string | number, record: Recordable) => Recordable | void;
 }

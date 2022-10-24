@@ -72,8 +72,19 @@ export function useTable(tableProps?: Props): [
         }
         return table as TableActionType;
     }
-
     const methods: TableActionType = {
+        clearSelectedRowKeys: () => {
+            getTableInstance().clearSelectedRowKeys();
+        },
+        deleteSelectRowByKey: (key: string) => {
+            getTableInstance().deleteSelectRowByKey(key);
+        },
+        deleteTableDataRecord: (rowKey: string | number | string[] | number[]) => {
+            return getTableInstance().deleteTableDataRecord(rowKey);
+        },
+        findTableDataRecord: (rowKey: string | number) => {
+            return getTableInstance().findTableDataRecord(rowKey);
+        },
         getDataSource: () => {
             return getTableInstance().getDataSource();
         },
@@ -83,20 +94,41 @@ export function useTable(tableProps?: Props): [
         getRawDataSource: () => {
             return getTableInstance().getRawDataSource();
         },
-        getShowPagination: () => {
-            return toRaw(getTableInstance().getShowPagination());
+        getSelectRows: () => {
+            return toRaw(getTableInstance().getSelectRows());
+        },
+        getSelectRowKeys: () => {
+            return toRaw(getTableInstance().getSelectRowKeys());
         },
         getSize: () => {
             return toRaw(getTableInstance().getSize());
         },
-        setPagination: (info: Partial<PaginationProps>) => {
-            return getTableInstance().setPagination(info);
+        getShowPagination: () => {
+            return toRaw(getTableInstance().getShowPagination());
+        },
+        insertTableDataRecord: (record: Recordable | Recordable[], index?: number) => {
+            return getTableInstance().insertTableDataRecord(record, index);
+        },
+        setLoading: (loading: boolean) => {
+            getTableInstance().setLoading(loading);
+        },
+        setSelectedRowKeys: (keys: string[] | number[]) => {
+            getTableInstance().setSelectedRowKeys(keys);
         },
         setShowPagination: async (show: boolean) => {
             getTableInstance().setShowPagination(show);
         },
+        setPagination: (info: Partial<PaginationProps>) => {
+            return getTableInstance().setPagination(info);
+        },
         setProps: (props: Partial<BasicTableProps>) => {
             getTableInstance().setProps(props);
+        },
+        setTableData: (values: any[]) => {
+            return getTableInstance().setTableData(values);
+        },
+        updateTableDataRecord: (rowKey: string | number, record: Recordable) => {
+            return getTableInstance().updateTableDataRecord(rowKey, record);
         },
     };
 

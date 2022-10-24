@@ -91,7 +91,7 @@ const fetchSetting = {
     totalField: 'totalElements',
 };
 
-const [registerTable] = useTable({
+const [registerTable, { updateTableDataRecord }] = useTable({
     columns,
     dataSource: data,
     // api: createAxiosFetch(url),
@@ -112,10 +112,12 @@ const [registerTable] = useTable({
     },
 })
 
-const [registerModal, { openModal }] = useModal();
+const [registerModal, { openModal, closeModal }] = useModal();
 
-const handleOK = (record: Recordable) => {
-    console.log('handle ok in outer event callback', record)
+const handleOK = (newRecord: Recordable, oldRecord: Recordable) => {
+    console.log('handle ok in outer event callback', newRecord, oldRecord)
+    updateTableDataRecord(oldRecord.key, newRecord)
+    closeModal()
 }
 
 const handleCancel = (record: Recordable) => {
@@ -125,7 +127,7 @@ const handleCancel = (record: Recordable) => {
 function handleEdit(record: Recordable) {
     console.log('edit clicked!');
     console.log(record);
-    const innerRecord : ModalInnerRecord = {
+    const innerRecord: ModalInnerRecord = {
         title: "Edit",
         record
     }

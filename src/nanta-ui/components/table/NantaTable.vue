@@ -125,16 +125,27 @@ function setProps(props: Partial<BasicTableProps>) {
 }
 
 const tableAction: TableActionType = {
+    clearSelectedRowKeys,
+    deleteSelectRowByKey,
+    deleteTableDataRecord,
+    findTableDataRecord,
     getDataSource,
     getPaginationRef: getPagination,
     getRawDataSource,
+    getSelectRows,
+    getSelectRowKeys,
     getShowPagination,
     getSize: () => {
         return unref(getBindValues).size as SizeType;
     },
-    setPagination,
+    insertTableDataRecord,
+    setLoading,
+    setSelectedRowKeys,
     setShowPagination,
+    setPagination,
     setProps,
+    setTableData,
+    updateTableDataRecord,
 };
 
 emits("register", tableAction, formActions);
@@ -147,6 +158,7 @@ emits("register", tableAction, formActions);
 @component-background: '#151515';
 
 [data-theme='dark'] {
+
     .ant-table-tbody>tr:hover.ant-table-row-selected>td,
     .ant-table-tbody>tr.ant-table-row-selected td {
         background-color: #262626;
@@ -203,7 +215,7 @@ emits("register", tableAction, formActions);
             border-bottom: none;
             justify-content: space-between;
             align-items: center;
-        }        
+        }
     }
 
     .ant-pagination {

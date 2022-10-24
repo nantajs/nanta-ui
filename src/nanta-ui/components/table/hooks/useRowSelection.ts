@@ -12,7 +12,7 @@ export function useRowSelection(
   tableData: Ref<Recordable[]>,
   emit: EmitType,
 ) {
-  const selectedRowKeysRef = ref<string[]>([]);
+  const selectedRowKeysRef = ref<string[] | number[]>([]);
   const selectedRowRef = ref<Recordable[]>([]);
 
   const getRowSelectionRef = computed((): TableRowSelection | null => {
@@ -64,17 +64,18 @@ export function useRowSelection(
     return unref(getAutoCreateKey) ? ROW_KEY : rowKey;
   });
 
-  function setSelectedRowKeys(rowKeys: string[]) {
+  type SN = string | number
+  function setSelectedRowKeys(rowKeys: string[] | number[]) {
     selectedRowKeysRef.value = rowKeys;
     const allSelectedRows = findNodeAll(
       toRaw(unref(tableData)).concat(toRaw(unref(selectedRowRef))),
-      (item) => rowKeys.includes(item[unref(getRowKey) as string]),
+      (item: SN) => rowKeys.includes(item[unref(getRowKey) as never]),
       {
         children: propsRef.value.childrenColumnName ?? 'children',
       },
     );
     const trueSelectedRows: any[] = [];
-    rowKeys.forEach((key: string) => {
+    rowKeys.forEach((key: SN) => {
       const found = allSelectedRows.find((item) => item[unref(getRowKey) as string] === key);
       found && trueSelectedRows.push(found);
     });

@@ -17,6 +17,7 @@ import { nantaFormModalProps } from './types/nantaFormModal'
 const props = defineProps(nantaFormModalProps);
 const getSchemas = computed(() => props.schemas)
 const getTitle = ref<string>('')
+const recordRef = ref<Recordable>()
 const emit = defineEmits(["register", "ok", "cancel"]);
 const isUpdate = ref(true);
 const formProps: FormProps = {
@@ -34,6 +35,7 @@ const [registerForm, { setFieldsValue, updateSchema, resetFields, getFieldsValue
 const [register] = useModalInner(async (data : ModalInnerRecord) => {
   resetFields();
   getTitle.value = data.title;
+  recordRef.value = data.record;
   if (data.record) {
     setFieldsValue(data.record);
   }
@@ -43,14 +45,14 @@ const handleOk = async () => {
   console.log('ok clicked....')
   const values = await validateFields();
   console.log(values);
-  emit("ok", values);
+  emit("ok", values, recordRef.value);
 }
 
 const handleCancel = async () => {
   console.log('cancel clicked....')
   const values = await validateFields();
   console.log(values);
-  emit("cancel", values);
+  emit("cancel", values, recordRef.value);
 }
 
 </script>

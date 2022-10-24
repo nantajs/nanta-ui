@@ -25,7 +25,7 @@ export interface BasicTableProps<T = any> {
     loading?: boolean;
     onChange?: (pagination: any, filters: any, sorter: any, extra: any) => void;
     pagination?: PaginationProps | boolean;
-    rowKey?: string | ((record: Recordable) => string);
+    rowKey?: number | string | ((record: Recordable) => string);
     rowSelection?: TableRowSelection;
     searchInfo?: Recordable;
     searchFormConfig?: Partial<FormProps>;
