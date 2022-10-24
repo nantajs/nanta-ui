@@ -96,8 +96,11 @@ const getBindValues = computed(() => {
         ...attrs,
         ...unref(getProps),
         tableLayout: "fixed",
+        loading: unref(getLoading),
         columns: toRaw(unref(getViewColumns)),
         pagination: toRaw(unref(getPaginationInfo)),
+        rowSelection: unref(getRowSelectionRef),
+        rowKey: unref(getRowKey),
         dataSource,
     };
 
