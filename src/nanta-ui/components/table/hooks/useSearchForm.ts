@@ -50,6 +50,7 @@ export function useSearchForm(
       const infoFilter = asObject(info);
       const dataSourceCache = unref(dataSourceCacheRef);
       let datas;
+      // keep local cache.
       if (!dataSourceCache) {
         dataSourceCacheRef.value = cloneDeep(getDataSource());
       }

@@ -7,6 +7,24 @@ export const schemes: FormSchema[] = [
     show: false,
   },
   {
+    field: 'info',
+    label: "Info",
+    component: "Label",
+    componentProps: {
+      label: 'Here is an label show.'
+    }
+  },
+  {
+    field: 'name2',
+    label: "Info",
+    component: "Label",    
+  },
+  {
+    field: 'name',
+    label: "Info",
+    component: "Label",   
+  },
+  {
     field: 'name',
     label: "Name",
     component: 'Input',

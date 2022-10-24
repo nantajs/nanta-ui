@@ -91,7 +91,7 @@ const fetchSetting = {
 const [registerTable] = useTable({
     columns,
     dataSource: data,
-    api: createAxiosFetch(url),
+    // api: createAxiosFetch(url),
     afterFetch: transfer,
     fetchSetting,
     actionColumn: {

@@ -60,7 +60,7 @@ export default {
       return componentProps as Recordable;
     });
     function getShow(): { isShow: boolean; isIfShow: boolean } {
-      const { show, ifShow } = props.schema;
+      const { show, ifShow, component } = props.schema;
       const itemIsAdvanced = true;
 
       let isShow = true;
@@ -78,7 +78,17 @@ export default {
       if (isFunction(ifShow)) {
         isIfShow = ifShow(unref(getValues));
       }
+
+      let isShowComp = true;
+      if (component === 'Label') {
+        const values = unref(getValues);
+        const field = values.field;
+        const value = unref(getComponentsProps)?.label || values.values[field];
+        isShowComp = value && value.length > 0
+      }      
+
       isShow = isShow && itemIsAdvanced;
+      isIfShow = isIfShow && isShowComp;
       return { isShow, isIfShow };
     }
 
@@ -324,7 +334,7 @@ export default {
           </Form.Item>
         );
       }
-    }    
+    }
 
     return () => {
       const { colProps = {}, colSlot, renderColContent, component, show } = props.schema;

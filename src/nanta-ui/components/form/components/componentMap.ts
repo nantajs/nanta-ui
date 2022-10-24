@@ -18,12 +18,14 @@ import {
 import type { ComponentType } from '../index'
 
 import RadioButtonGroup from './RadioButtonGroup.vue';
+import NantaLabel from './NantaLabel.vue';
 /**
  * Component list, register here to setting it in the form
  */
 
 const componentMap = new Map<ComponentType, Component>()
 
+// @ts-ignore
 componentMap.set('Input', Input)
 componentMap.set('InputGroup', Input.Group)
 componentMap.set('InputPassword', Input.Password)
@@ -47,6 +49,7 @@ componentMap.set('RangePicker', DatePicker.RangePicker)
 componentMap.set('WeekPicker', DatePicker.WeekPicker)
 componentMap.set('TimePicker', TimePicker)
 componentMap.set('Divider', Divider)
+componentMap.set('Label', NantaLabel)
 
 export function add (compName: ComponentType, component: Component) {
   componentMap.set(compName, component)
