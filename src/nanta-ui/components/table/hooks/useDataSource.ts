@@ -7,6 +7,7 @@ import { buildUUID } from '../../../utils/uuid';
 import { get, cloneDeep, merge, isFunction, isBoolean } from 'lodash-es';
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
 import { Recordable, EmitType } from "../../.."
+import { treeMap } from '../../../core/hooks/treeHelper';
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
@@ -217,6 +218,15 @@ export function useDataSource(
     return findRow(dataSourceRef.value);
   }
 
+  function isFetchRemote(): boolean {
+    const { api } = unref(propsRef);
+    if (!api || !isFunction(api)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   async function fetch(opt?: FetchParams): Promise<any> {
     const {
       api,
@@ -228,7 +238,8 @@ export function useDataSource(
       useSearchForm,
       pagination,
     } = unref(propsRef);
-    if (!api || !isFunction(api)) return;
+    if (!api) return;
+    if (!isFetchRemote()) return;
     try {
       setLoading(true);
       const { pageField, sizeField, listField, totalField } = Object.assign(
@@ -348,5 +359,6 @@ export function useDataSource(
     insertTableDataRecord,
     findTableDataRecord,
     handleTableChange,
+    isFetchRemote,
   };
 }

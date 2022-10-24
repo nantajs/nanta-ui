@@ -102,7 +102,7 @@ function getFieldsValue(): Recordable {
 }
 
 async function resetFields(): Promise<void> {
-  const { resetFn } = unref(getProps);
+  const { resetFn, submitOnReset } = unref(getProps);
   if (resetFn && isFunction(resetFn)) {
     await resetFn();
     return;
@@ -123,6 +123,7 @@ async function resetFields(): Promise<void> {
   });
 
   emits("reset", toRaw(formModel));
+  submitOnReset && handleSubmit();
 }
 
 async function setFieldsValue(values: Recordable): Promise<void> {

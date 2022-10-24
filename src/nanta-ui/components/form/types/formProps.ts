@@ -26,6 +26,7 @@ export interface FormProps {
   schemas?: FormSchema[];
   showActionButtons?: boolean;
   size?: 'default' | 'small' | 'large';
+  submitOnReset?: boolean;
   submitButtonOptions?: Partial<ButtonOptions>;
   submitFn?: () => Promise<void>;
   transformDateFunc?: (date: any) => string;
@@ -72,6 +73,7 @@ export const formProps = {
   size: propTypes.oneOf(['default', 'small', 'large']).def('default'),
   submitButtonOptions: Object as PropType<ButtonOptions>,
   submitFn: Function as PropType<() => Promise<void>>,
+  submitOnReset: propTypes.bool,
   transformDateFunc: {
     type: Function as PropType<Fn>,
     default: (date: any) => {

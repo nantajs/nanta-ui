@@ -66,7 +66,7 @@ const { getRowSelection, getRowSelectionRef, getSelectRows, clearSelectedRowKeys
 } = useRowSelection(getProps, tableData, emits);
 
 const { handleTableChange: onTableChange, getDataSourceRef, getDataSource, getRawDataSource, setTableData, updateTableDataRecord, deleteTableDataRecord,
-    insertTableDataRecord, findTableDataRecord, fetch, getRowKey, reload, getAutoCreateKey, updateTableData,
+    insertTableDataRecord, findTableDataRecord, fetch, getRowKey, reload, getAutoCreateKey, updateTableData, isFetchRemote
 } = useDataSource(
     getProps,
     {
@@ -76,7 +76,7 @@ const { handleTableChange: onTableChange, getDataSourceRef, getDataSource, getRa
     emits
 );
 
-const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } = useSearchForm(getProps, slots, fetch, getLoading);
+const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } = useSearchForm(getProps, slots, fetch, getLoading, getDataSource, setTableData, isFetchRemote);
 
 // @ts-ignore
 function handleTableChange(...args) {
