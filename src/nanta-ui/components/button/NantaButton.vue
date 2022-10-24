@@ -1,29 +1,34 @@
-//package/pig-button/index.vue
+
 <template>
-    <div>
-        <button :onclick="handClick">
-            <slot />
-        </button>
-    </div>
+    <Button v-bind="getBindValue" :class="getButtonClass" @click="onClick">
+        <template #default="data">
+            <Icon :icon="preIcon" v-if="preIcon" :size="iconSize" />
+            <slot v-bind="data || {}"></slot>
+            <Icon :icon="postIcon" v-if="postIcon" :size="iconSize" />
+        </template>
+    </Button>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-const count = ref(0)
-const handClick = () => {
-    console.log("clicked!")
-    count.value++
-}
+import { computed, unref, useAttrs } from 'vue';
+import { Button } from 'ant-design-vue';
+import Icon from '../icon';
+import { buttonProps } from './types/buttonProps';
+import { omit } from "lodash-es";
+
+const props = defineProps(buttonProps);
+// get component class
+const attrs = omit(useAttrs(), ['class', 'style']);
+const getButtonClass = computed(() => {
+    const { color, disabled } = props;
+    return [
+        {
+            [`ant-btn-${color}`]: !!color,
+            [`is-disabled`]: disabled,
+        },
+    ];
+});
+
+// get inherit binding value
+const getBindValue = computed(() => ({ ...unref(attrs), ...props }));
 </script>
-<style scoped>
-button {
-    width: 100px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-</style>
