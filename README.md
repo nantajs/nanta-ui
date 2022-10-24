@@ -13,9 +13,10 @@ Ant-design based UI framework.
 
 ## Features
 - Schema-style form/table design.  
-- Light-weighted.  
+- Light-weight ui component library.  
 - Type-scipt support.  
 - Support vue 3 and nuxt 3.  
+- Vite support.  
 
 ## Deps
 
