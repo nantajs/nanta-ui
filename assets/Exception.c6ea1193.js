@@ -1,0 +1,1 @@
+import{d as r,b as a,aa as o}from"./index.6c48fa98.js";const s=r({name:"ErrorPage",props:{title:{type:String,default:""}},setup(t){return()=>{const e="Good";return a(o,{title:t.title||e},{})}}});export{s as default};
