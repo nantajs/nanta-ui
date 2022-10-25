@@ -97,6 +97,7 @@ const fetchSetting = {
 };
 
 const [registerTable, { updateTableDataRecord }] = useTable({
+    title: 'NantaTable Usage Example.',
     columns,
     dataSource: data,
     // api: createAxiosFetch(url),

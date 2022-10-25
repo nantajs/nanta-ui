@@ -3,8 +3,8 @@
     <Row v-bind="getRow">
       <slot name="formHeader" />
       <template v-for="schema in getSchema" :key="schema.field">
-        <NantaFormItem :schema="schema" :form-props="getProps" :form-model="formModel" :set-form-model="setFormModel" 
-        :all-default-values="defaultValueRef" :formActionType="formActionType">
+        <NantaFormItem :schema="schema" :form-props="getProps" :form-model="formModel" :set-form-model="setFormModel"
+          :all-default-values="defaultValueRef" :formActionType="formActionType">
           <template #[item]="data" v-for="item in Object.keys($slots)">
             <slot :name="item" v-bind="data || {}"></slot>
           </template>
@@ -29,11 +29,12 @@ import { useFormSchema } from "./hooks/useFormSchema";
 import NantaFormItem from "./components/NantaFormItem.vue";
 import NantaFormAction from "./components/NantaFormAction.vue";
 import type { Ref } from "vue";
-import { handleInputNumberValue, itemIsDateType, dateUtil, tryDeconstructArray, tryDeconstructObject, handleRangeTimeValue, defaultValueComponents,} from "./helper";
+import { itemIsDateType, dateUtil, tryDeconstructArray, tryDeconstructObject, handleRangeTimeValue, defaultValueComponents } from "../../utils/helper/helper";
+import { handleInputNumberValue } from "./help"
 import { isNullOrUnDef } from "../../utils/is";
 import { deepMerge } from "../../utils/util";
 import type { Nullable, Recordable } from "../..";
-import { ref, unref, getCurrentInstance, reactive, computed, toRaw, watch, onMounted, nextTick, useAttrs} from "vue";
+import { ref, unref, getCurrentInstance, reactive, computed, toRaw, watch, onMounted, nextTick, useAttrs } from "vue";
 
 const props = defineProps(formProps);
 const emits = defineEmits(["register", "field-value-change", "reset", "submit"]);
@@ -46,18 +47,18 @@ const defaultValueRef = ref<Recordable>({});
 const isInitedDefaultRef = ref(false);
 
 const getProps = computed((): FormProps => {
-    /* @ts-ignore */
-    return { ...props, ...unref(propsRef) } as FormProps;
-  }
+  /* @ts-ignore */
+  return { ...props, ...unref(propsRef) } as FormProps;
+}
 );
 
 const getRow = computed((): Recordable => {
-    const { baseRowStyle = {}, rowProps } = unref(getProps);
-    return {
-      style: baseRowStyle,
-      ...rowProps,
-    };
-  }
+  const { baseRowStyle = {}, rowProps } = unref(getProps);
+  return {
+    style: baseRowStyle,
+    ...rowProps,
+  };
+}
 );
 
 const actionProps = {
@@ -88,9 +89,10 @@ async function setProps(formProps: Partial<FormProps>): Promise<void> {
   propsRef.value = deepMerge(unref(propsRef) || {}, formProps);
 }
 
-const { updateSchema, resetSchema, appendSchemaByField, removeSchemaByFiled, scrollToField,} = useFormSchema({getProps, formModel, getSchema, 
-  defaultValueRef, formElRef: formElRef as Ref<FormActionType>, schemaRef: schemaRef as Ref<FormSchema[]>, 
-    handleFormValues, getFieldsValue, setFieldsValue,
+const { updateSchema, resetSchema, appendSchemaByField, removeSchemaByFiled, scrollToField, } = useFormSchema({
+  getProps, formModel, getSchema,
+  defaultValueRef, formElRef: formElRef as Ref<FormActionType>, schemaRef: schemaRef as Ref<FormSchema[]>,
+  handleFormValues, getFieldsValue, setFieldsValue,
 });
 
 function getFieldsValue(): Recordable {
@@ -163,7 +165,7 @@ async function setFieldsValue(values: Recordable): Promise<void> {
       validKeys.push(key);
     }
   });
-  validateFields(validKeys).catch((_) => {});
+  validateFields(validKeys).catch((_) => { });
 }
 
 async function validateFields(nameList?: NamePath[] | undefined) {
@@ -270,7 +272,7 @@ watch(
 watch(
   () => getSchema.value,
   (schema) => {
-    nextTick(() => {});
+    nextTick(() => { });
     if (unref(isInitedDefaultRef)) {
       return;
     }

@@ -1,20 +1,8 @@
 import { Slots } from 'vue';
 import dayjs from 'dayjs'
-import { isNumber, set, isObject, isFunction } from 'lodash-es'
-import type { ComponentType, FieldMapToTime } from './index'
+import { set, isObject, isFunction } from 'lodash-es'
+import type { ComponentType, FieldMapToTime } from '../../components/form/index'
 import type { Recordable } from '../..'
-
-export function handleInputNumberValue(component?: ComponentType, val?: any) {
-  if (!component) { return val }
-  if (
-    ['Input', 'InputPassword', 'InputSearch', 'InputTextArea'].includes(
-      component
-    )
-  ) {
-    return val && isNumber(val) ? `${val}` : val
-  }
-  return val
-}
 
 const DATE_TYPE = ['DatePicker', 'MonthPicker', 'WeekPicker', 'TimePicker']
 

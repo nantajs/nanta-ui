@@ -1,4 +1,4 @@
-import type { PropType } from 'vue';
+import type { PropType, VNodeChild } from 'vue';
 import type { BasicColumn } from './types/table';
 import type { PaginationProps } from './types/pagination';
 import type { Recordable, Fn } from '../..'
@@ -9,9 +9,9 @@ import { DEFAULT_FILTER_FN, DEFAULT_SORT_FN, FETCH_SETTING, DEFAULT_SIZE } from 
 
 export interface BasicTableProps<T = any> {
     actionColumn?: BasicColumn;
+    afterFetch?: Fn;
     api?: (...arg: any) => Promise<any>;
     autoCreateKey?: boolean;
-    afterFetch?: Fn;
     beforeFetch?: Fn;
     childrenColumnName?: string;
     clearSelectOnPageChange?: boolean;
@@ -30,6 +30,8 @@ export interface BasicTableProps<T = any> {
     searchInfo?: Recordable;
     searchFormConfig?: Partial<FormProps>;
     sortFn?: (sortInfo: SorterResult) => any;
+    title?: VNodeChild | JSX.Element | string | ((data: Recordable) => string);
+    titleHelpMessage?: string | string[];
     useSearchForm?: boolean;
 }
 
@@ -38,12 +40,12 @@ export const tableProps = {
         type: Object as PropType<BasicColumn>,
         default: null,
     },
-    api: {
-        type: Function as PropType<(...arg: any[]) => Promise<any>>,
-        default: null,
-    },
     afterFetch: {
         type: Function as PropType<Fn>,
+        default: null,
+    },
+    api: {
+        type: Function as PropType<(...arg: any[]) => Promise<any>>,
         default: null,
     },
     autoCreateKey: { type: Boolean, default: true },
@@ -104,6 +106,13 @@ export const tableProps = {
     sortFn: {
         type: Function as PropType<(sortInfo: SorterResult) => any>,
         default: DEFAULT_SORT_FN,
+    },
+    title: {
+        type: [String, Function] as PropType<string | ((data: Recordable) => string)>,
+        default: null,
+    },
+    titleHelpMessage: {
+        type: [String, Array] as PropType<string | string[]>,
     },
     useSearchForm: propTypes.bool,
 }

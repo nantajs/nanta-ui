@@ -1,5 +1,6 @@
 import type { ComponentType } from './index'
 import type { Rule } from "ant-design-vue/lib/form"
+import { isNumber } from "lodash-es"
 
 export function createPlaceholderMessage(component: ComponentType) {
   if (component.includes('Input') || component.includes('Complete')) {
@@ -33,4 +34,16 @@ export function setComponentRuleType(
   } else if (['InputNumber'].includes(component)) {
     rule.type = 'number';
   }
+}
+
+export function handleInputNumberValue(component?: ComponentType, val?: any) {
+  if (!component) { return val }
+  if (
+    ['Input', 'InputPassword', 'InputSearch', 'InputTextArea'].includes(
+      component
+    )
+  ) {
+    return val && isNumber(val) ? `${val}` : val
+  }
+  return val
 }

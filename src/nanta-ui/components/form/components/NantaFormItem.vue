@@ -11,7 +11,7 @@ import type { FormItemProps } from "../types/formProps";
 import { formItemPorps } from "../types/formProps";
 import { createPlaceholderMessage, setComponentRuleType } from "../help";
 import { ref, unref, getCurrentInstance, toRefs, computed, defineComponent } from "vue";
-import { getSlot } from "../helper";
+import { getSlot } from "../../../utils/helper/helper";
 import BasicHelp from "../../help/BasicHelp.vue"
 
 export default {

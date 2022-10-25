@@ -33,6 +33,7 @@ import { useDataSource } from "./hooks/useDataSource";
 import { useSearchForm } from "./hooks/useSearchForm";
 import { useRowSelection } from "./hooks/useRowSelection";
 import { useLoading } from "./hooks/useLoading";
+import { useTableHeader } from "./hooks/useTableHeader";
 import { useForm } from "../../components/form";
 import NantaForm from "../../components/form/NantaForm.vue"
 import type { TableActionType, SizeType } from "./types/table";
@@ -76,6 +77,8 @@ const { handleTableChange: onTableChange, getDataSourceRef, getDataSource, getRa
     emits
 );
 
+const { getHeaderProps } = useTableHeader(getProps, slots);
+
 const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } = useSearchForm(getProps, slots, fetch, getLoading, getDataSource, setTableData, isFetchRemote);
 
 // @ts-ignore
@@ -95,6 +98,7 @@ const getBindValues = computed(() => {
     let propsData: Recordable = {
         ...attrs,
         ...unref(getProps),
+        ...unref(getHeaderProps),
         tableLayout: "fixed",
         loading: unref(getLoading),
         columns: toRaw(unref(getViewColumns)),
