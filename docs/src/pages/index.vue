@@ -14,25 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import { getMenus } from "/@/layouts/menu"
+import { getMenus, getMenuList } from "/@/layouts/menu"
 import { Menu } from '/@/layouts/types/type'
 import { Icon, NantaButton } from "/~/main";
-
-function getMenuList(rootMenus: Menu[]): Menu[] {
-    const menuList = [] as Menu[];
-    rootMenus.forEach((item: Menu) => {
-        if (!item.children || item.children.length == 0) {
-            menuList.push(item)
-        } else {
-            const childMenuList = getMenuList(item.children);
-            childMenuList.forEach((item: Menu) => {
-                menuList.push(item);
-            })
-        }
-
-    })
-    return menuList;
-}
 
 const menus = getMenuList(getMenus());
 </script>

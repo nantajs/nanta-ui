@@ -27,7 +27,7 @@ import Footer from "./default/components/Footer.vue";
 import { makeid } from "./default/index";
 import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getMenus } from "./menu";
+import { getMenus, iteratorMenu, getMenuNode } from "./menu";
 
 const selectedKeys = ref<string[]>([]);
 const openKeys = ref<string[]>([]);
@@ -39,18 +39,10 @@ const path = route.path;
 
 console.log("current path=", path);
 
-function iteratorMenu(
-  item: Menu,
-  fn: (item: Menu, keyPath?: string[]) => void,
-  keyPath?: string[]
-) {
-  fn(item, keyPath);
-  if (item.children && item.children.length > 0) {
-    item.children.forEach((i) => {
-      iteratorMenu(i, fn, item.keyPath);
-    });
-  }
-}
+const menuNodes = getMenuNode(getMenus());
+menuNodes.forEach((item: Menu) => {
+  item.key && openKeys.value.push(item.key);
+})
 
 const getKeyAttributeMenuMap = (() => {
   const res = {};
