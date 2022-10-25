@@ -1,4 +1,5 @@
 import type { PropType } from 'vue';
+import type { ButtonType } from './button'
 
 export const buttonProps = {
     // color: { type: String, validator: (v: string) => ['error', 'warning', 'success', ''].includes(v) },
@@ -14,7 +15,7 @@ export const buttonProps = {
      */
     postIcon: { type: String },
     icon: { type: String },
-    type: { type: String },
+    type: { type: String as PropType<ButtonType>},
     /**
      * preIcon and postIcon icon size.
      * @default: 14

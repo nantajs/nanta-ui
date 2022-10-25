@@ -18,9 +18,7 @@ import { ActionItem, ActionType } from '../types/tableAction';
 import { propTypes } from '../../../utils/propTypes';
 import { omit, isBoolean, isFunction } from 'lodash-es';
 import { Recordable } from '../../..'
-
-type ButtonType = 'link' | 'default' | 'primary' | 'ghost' | 'dashed' | 'text';
-type SizeType = 'small' | 'middle' | 'large' | undefined;
+import type { ButtonType, SizeType } from '../../button/types/button'
 
 const props = defineProps(
   {

@@ -1,5 +1,5 @@
 import { Menu } from './types/type'
-// mock data
+// menu datas
 const localMenus: Menu[] = [
     {
         name: 'Dashboard',
