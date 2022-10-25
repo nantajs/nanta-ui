@@ -60,17 +60,17 @@ const localMenus: Menu[] = [
                 key: 'nantaTable'
             },
             {
+                name: 'Nanta Icon',
+                path: '/components/icon/index',
+                icon: 'quill:creditcard',
+                key: 'icon'
+            },
+            {
                 name: 'Basic Table',
                 path: '/components/table/basic',
                 icon: 'quill:creditcard',
                 key: 'basicTable'
-            },
-            {
-                name: 'Icon',
-                path: '/components/icon/index',
-                icon: 'quill:creditcard',
-                key: 'icon'
-            }
+            },            
         ]
     }
 ]
