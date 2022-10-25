@@ -4,8 +4,8 @@
         :clickToRowSelect="false">
         <template #headerTop>
             <div style="margin-bottom: 10px;">
-                <NantaButton type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled" class="button-s"
-                    preIcon="ic:baseline-content-copy">Copy create</NantaButton>
+                <NantaButton type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled"
+                    class="button-s" preIcon="ic:baseline-content-copy">Copy create</NantaButton>
                 <NantaButton type="primary" @click="handleCreate" :disabled="!operation.createEnabled" class="button-s"
                     preIcon="ic:baseline-plus">Create new</NantaButton>
                 <NantaButton color="success" type="primary" @click="handleModify" :disabled="!operation.modifyEnabled"
@@ -126,7 +126,7 @@ const fetchSetting = {
     totalField: 'totalElements',
 };
 
-const [registerTable, { updateTableDataRecord }] = useTable({
+const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableDataRecord }] = useTable({
     title: 'NantaTable Usage Example.',
     columns,
     dataSource: data,
@@ -134,7 +134,7 @@ const [registerTable, { updateTableDataRecord }] = useTable({
     afterFetch: transfer,
     fetchSetting,
     actionColumn: {
-        title: '操作',
+        title: 'Actions',
         dataIndex: 'action',
         // slots: { customRender: 'action' },
         fixed: undefined,
@@ -179,9 +179,9 @@ function handleDelete(record: Recordable) {
 function handleCopyCreate() {
     console.log('copycreate');
     if (checkedKeys.value.length > 0) {
-        doModifyAction(checkedKeys.value[0], ActionType.COPY_CREATE);
-    } else {
-        console.log('选中后才能修改');
+        const key = checkedKeys.value[0];
+        const record = findTableDataRecord(key)
+        doModifyAction(key, ActionType.COPY_CREATE, record as Recordable);
     }
 }
 
@@ -192,9 +192,9 @@ function handleCreate() {
 function handleModify() {
     console.log('modify');
     if (checkedKeys.value.length > 0) {
-        doModifyAction(checkedKeys.value[0], ActionType.MODIFY);
-    } else {
-        console.log('选中后才能修改');
+        const key = checkedKeys.value[0];
+        const record = findTableDataRecord(key)
+        doModifyAction(key, ActionType.MODIFY, record as Recordable);
     }
 }
 
@@ -202,7 +202,7 @@ function handleMultiDelete() {
     console.log('delete', checkedKeys);
 }
 
-const doModifyAction = (id: string | number, type: ActionType) => {
+const doModifyAction = (id: string | number, type: ActionType, record?: Recordable) => {
     console.log('id', id, 'type', type);
     let title: string = "Create"
     if (type == ActionType.CREATE) {
@@ -216,8 +216,8 @@ const doModifyAction = (id: string | number, type: ActionType) => {
     }
 
     const innerRecord: ModalInnerRecord = {
-        title: "Edit",
-        record: {}
+        title,
+        record: record || {}
     }
 
     openModal(true, innerRecord)
