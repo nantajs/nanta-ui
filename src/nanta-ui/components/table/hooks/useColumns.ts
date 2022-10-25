@@ -1,9 +1,10 @@
 import { computed, unref, ref, reactive, watch } from 'vue';
 import type { ComputedRef, Ref } from 'vue';
 import type { BasicColumn, BasicTableProps, PaginationProps, CellFormat } from '..';
-import { cloneDeep, isFunction, isString, isMap, isObject } from 'lodash-es';
+import { cloneDeep, isFunction, isString, isMap } from 'lodash-es';
 import { ACTION_COLUMN_FLAG, INDEX_COLUMN_FLAG } from "../const";
-import { formatToDate, Recordable, VueNode } from "../../.."
+import { formatToDate, Recordable } from "../../.."
+import { isObject } from "../../../utils/is";
 
 function handleActionColumn(propsRef: ComputedRef<BasicTableProps>, columns: BasicColumn[]) {
     const { actionColumn } = unref(propsRef);

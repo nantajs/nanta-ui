@@ -1,8 +1,9 @@
 import { Slots } from 'vue';
 import dayjs from 'dayjs'
-import { set, isObject, isFunction } from 'lodash-es'
+import { set, isFunction } from 'lodash-es'
 import type { ComponentType, FieldMapToTime } from '../../components/form/index'
 import type { Recordable } from '../..'
+import { isObject } from '../is'
 
 const DATE_TYPE = ['DatePicker', 'MonthPicker', 'WeekPicker', 'TimePicker']
 
