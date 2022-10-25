@@ -36,9 +36,9 @@ const colorMap = new Map(Object.entries({
 }));
 
 const getWrapStyle = computed((): CSSProperties => {
-    const { color } = props;
-    const colorValue = color && colorMap.get(color)
-    return colorValue ? {
+    const { color, type } = props;
+    const colorValue = color && (colorMap.get(color) || color)
+    return (colorValue && type === 'primary') ? {
         'background': colorValue,
         'border-color': colorValue,
     } : {};
@@ -46,5 +46,4 @@ const getWrapStyle = computed((): CSSProperties => {
 
 // get inherit binding value
 const getBindValue = computed(() => (omit({ ...unref(attrs), ...props }, ['icon'])));
-console.log(getBindValue.value)
 </script>

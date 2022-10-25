@@ -2,9 +2,6 @@
   <SvgIcon :size="size" :name="getSvgIcon" v-if="isSvgIcon" :class="[$attrs.class, 'anticon']" :spin="spin" />
   <span v-else ref="elRef" :class="[$attrs.class, 'app-iconify anticon', spin && 'app-iconify-spin']"
     :style="getWrapStyle"></span>
-  <span>
-    <slot />
-  </span>
 </template>
 <script lang="ts">
 import type { PropType } from 'vue';
@@ -32,8 +29,10 @@ export default defineComponent({
     spin: propTypes.bool.def(false),
     prefix: propTypes.string.def(''),
   },
-  setup(props) {
+  setup(props, { slots }) {
     const elRef = ref<ElRef>(null);
+    const ifShowSlot = ref<boolean>(true)
+    ifShowSlot.value = !!slots
 
     const isSvgIcon = computed(() => props.icon?.endsWith(SVG_END_WITH_FLAG));
     const getSvgIcon = computed(() => props.icon.replace(SVG_END_WITH_FLAG, ''));
@@ -85,7 +84,7 @@ export default defineComponent({
 
     onMounted(update);
 
-    return { elRef, getWrapStyle, isSvgIcon, getSvgIcon };
+    return { elRef, getWrapStyle, isSvgIcon, getSvgIcon, ifShowSlot };
   },
 });
 </script>

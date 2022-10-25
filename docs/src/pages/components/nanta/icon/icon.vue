@@ -1,11 +1,20 @@
 <template>
-    <div>
-        <Icon icon="ant-design:delete-outlined" color="error">error</Icon>
-        <Icon icon="ant-design:delete-outlined" color="success">success</Icon>
-        <Icon icon="ant-design:delete-outlined" color="warning">warning</Icon>
-        <Icon icon="mdi:post-outline" color="red">red</Icon>
-        <Icon icon="mdi:post-outline" color="#39a4fd">#39a4fd</Icon>
-        <Icon icon="mdi:post-outline" color="#39a4fd">#39a4fd</Icon>
+    <div class="fbox-line">
+        <div>
+            <Icon icon="ant-design:delete-outlined" color="error" size="large" /><span>error</span>
+        </div>
+        <div>
+            <Icon icon="ant-design:delete-outlined" color="success" /><span>success</span>
+        </div>
+        <div>
+            <Icon icon="ant-design:delete-outlined" color="warning" /><span>warning</span>
+        </div>
+        <div>
+            <Icon icon="ant-design:delete-outlined" color="red" /><span>red</span>
+        </div>
+        <div>
+            <Icon icon="ant-design:delete-outlined" color="#39a4fd" /><span>#39a4fd</span>
+        </div>
     </div>
 </template>
 
@@ -13,3 +22,21 @@
 import { Icon } from "/~/main";
 
 </script>
+
+<style scoped>
+.fbox {
+    display: grid;
+    grid-gap: 1rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.fbox-line {
+    display: flex;
+    margin-right: 1rem;
+}
+
+.fbox-line div {
+    margin-right: .5rem;
+}
+</style>
