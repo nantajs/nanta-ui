@@ -45,16 +45,21 @@
     </a-table>
 
     <a-button type="primary" @click="showModal">Open Modal</a-button>
-    <BasicEditModal @register="registerModal" @ok="handleOK" @cancel="handleCancel" />
+    <NantaFormModal @register="registerModal" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
-import BasicEditModal from "./BasicEditModal.vue";
-import { useModal, Icon } from "/~/main";
+import { useModal, Icon, NantaFormModal, NantaFormModalProps } from "/~/main";
 import IconRiDeleteBin6Line from "~icons/ri/delete-bin6-line";
+import { schemes } from "./data";
+
+const mProps : NantaFormModalProps = {
+    schemas: schemes,
+    colon: true
+}
 
 const columns = [
   {
@@ -116,22 +121,23 @@ const data = [
 ];
 
 // Basic Model的示例
-const [registerModal, { openModal }] = useModal();
+const [registerModal, { openModal, closeModal }] = useModal();
 
 const handleCreateNew = () => {
   console.log('basic modal show')
   openModal(true, {
-    isUpdate: false,
+    title: 'Create new',
     record: null,
   })
 }
 
-const handleOK = () => {
-  console.log('handle ok in outer event callback')
+const handleOK = (newRecord: Recordable, oldRecord: Recordable) => {
+  console.log('basic table: handle ok in outer event callback', newRecord, oldRecord)
+  closeModal()
 }
 
-const handleCancel = () => {
-  console.log('handle cancel in outer evnet callback');
+const handleCancel = (newRecord: Recordable, oldRecord: Recordable) => {
+  console.log('basic table: handle cancel in outer evnet callback', newRecord, oldRecord);
 }
 
 // end
@@ -145,7 +151,6 @@ const mdata = {
 };
 
 const visible = ref<boolean>(false);
-const title = "Edit";
 
 const showModal = () => {
   console.log("showModal");
@@ -159,10 +164,10 @@ const handleChange = (status) => {
   }
 };
 
-const handleEdit = (record) => {
+const handleEdit = (record: Recordable) => {
   console.log(record);
   openModal(true, {
-    isUpdate: true,
+    title: "Edit",
     record
   })
 };

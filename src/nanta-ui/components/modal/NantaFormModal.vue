@@ -19,13 +19,11 @@ const getSchemas = computed(() => props.schemas)
 const getTitle = ref<string>('')
 const recordRef = ref<Recordable>()
 const emit = defineEmits(["register", "ok", "cancel"]);
-const isUpdate = ref(true);
 const formProps: FormProps = {
   showActionButtons: false,
-  colon: true,
 }
 
-const getFormProps = computed((): Recordable => ({ ...formProps }));
+const getFormProps = computed((): Recordable => ({ ...formProps, ...props }));
 
 const [registerForm, { setFieldsValue, updateSchema, resetFields, getFieldsValue, validateFields }] = useForm({
   labelWidth: 100,
@@ -42,16 +40,13 @@ const [register] = useModalInner(async (data : ModalInnerRecord) => {
 })
 
 const handleOk = async () => {
-  console.log('ok clicked....')
   const values = await validateFields();
   console.log(values);
   emit("ok", values, recordRef.value);
 }
 
-const handleCancel = async () => {
-  console.log('cancel clicked....')
-  const values = await validateFields();
-  console.log(values);
+const handleCancel = () => {
+  const values = getFieldsValue();
   emit("cancel", values, recordRef.value);
 }
 

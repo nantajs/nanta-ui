@@ -15,16 +15,21 @@
         </template>
     </NantaTable>
 
-    <NantaFormModal @register="registerModal" :schemas="editModalSchema" @ok="handleOK" @cancel="handleCancel" />
+    <NantaFormModal @register="registerModal" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
 </template>
 
 <script lang="ts" setup>
-import { NantaTable, NantaTableAction, useTable, ActionItem, ActionType, NantaFormModal, ModalInnerRecord } from "/~/main";
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema } from "./data"
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 import { useModal } from "/~/main";
 // import { url } from '/@/settings/localSetting';
 const url = 'https://mock.data/api/mock/meta';
+
+const mProps : NantaFormModalProps = {
+    schemas: editModalSchema,
+    colon: true
+}
 
 function getAction(record: Recordable): ActionItem[] {
     const ifShow = (action: ActionItem) => {
@@ -120,8 +125,8 @@ const handleOK = (newRecord: Recordable, oldRecord: Recordable) => {
     closeModal()
 }
 
-const handleCancel = (record: Recordable) => {
-    console.log('handle cancel in outer evnet callback', record);
+const handleCancel = (newRecord: Recordable, oldRecord: Recordable) => {
+    console.log('handle cancel in outer event callback', newRecord, oldRecord);
 }
 
 function handleEdit(record: Recordable) {
