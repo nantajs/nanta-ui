@@ -1,5 +1,28 @@
 <template>
     <NantaTable @register="registerTable">
+        <template #headerTop>
+            <div style="margin-bottom: 10px;">
+                <a-button type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled" class="button-s"
+                    preIcon="ic:baseline-content-copy">Copy Create</a-button>
+                <a-button type="primary" @click="handleCreate" :disabled="!operation.createEnabled" class="button-s"
+                    preIcon="ic:baseline-plus">New</a-button>
+                <a-button color="success" type="primary" @click="handleModify" :disabled="!operation.modifyEnabled"
+                    class="button-s" preIcon="ic:baseline-edit">Modify</a-button>
+                <a-button type="primary" danger @click="handleMultiDelete" :disabled="!operation.deleteEnabled"
+                    class="button-s" preIcon="ic:baseline-delete">Delete</a-button>
+            </div>
+            <a-alert type="info" show-icon>
+                <template #message>
+                    <template v-if="checkedKeys.length > 0">
+                        <span>已选中{{ checkedKeys.length }}条记录(可跨页)</span>
+                        <a-button type="link" @click="checkedKeys = []" size="small">清空</a-button>
+                    </template>
+                    <template v-else>
+                        <span>未选中任何项目</span>
+                    </template>
+                </template>
+            </a-alert>
+        </template>
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'action'">
                 <NantaTableAction :actions="getAction(record)" />
@@ -19,14 +42,19 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue"
 import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema } from "./data"
+import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 import { useModal } from "/~/main";
 // import { url } from '/@/settings/localSetting';
 const url = 'https://mock.data/api/mock/meta';
 
-const mProps : NantaFormModalProps = {
+const checkedKeys = ref<Array<string | number>>([]);
+const operation = ref({ copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: false });
+
+const mProps: NantaFormModalProps = {
     schemas: editModalSchema,
     colon: true
 }
@@ -145,4 +173,57 @@ function handleDelete(record: Recordable) {
     console.log('delete action clicked!');
     console.log(record);
 }
+
+function handleCopyCreate() {
+    console.log('copycreate');
+    if (checkedKeys.value.length > 0) {
+        doModifyAction(checkedKeys.value[0], ActionType.COPY_CREATE);
+    } else {
+        console.log('选中后才能修改');
+    }
+}
+
+function handleCreate() {
+    doModifyAction(0, ActionType.CREATE);
+}
+
+function handleModify() {
+    console.log('modify');
+    if (checkedKeys.value.length > 0) {
+        doModifyAction(checkedKeys.value[0], ActionType.MODIFY);
+    } else {
+        console.log('选中后才能修改');
+    }
+}
+
+function handleMultiDelete() {
+    console.log('delete', checkedKeys);
+}
+
+const doModifyAction = (id: string | number, type: ActionType) => {
+    console.log('id', id, 'type', type);
+    let title: string = "Create"
+    if (type == ActionType.CREATE) {
+        title = "Create"
+    } else if (type == ActionType.COPY_CREATE) {
+        title = "Copy create"
+    } else if (type == ActionType.MODIFY) {
+        title = "Modify"
+    } else {
+        throw new Error('illegal type.');
+    }
+
+    const innerRecord: ModalInnerRecord = {
+        title: "Edit",
+        record: {}
+    }
+
+    openModal(true, innerRecord)
+};
 </script>
+
+<style scoped>
+.button-s {
+    margin-right: 4px;
+}
+</style>
