@@ -1,24 +1,26 @@
 <template>
-    <NantaTable @register="registerTable">
+    <NantaTable @register="registerTable"
+        :rowSelection="{ type: 'checkbox', selectedRowKeys: checkedKeys, onChange: onSelectChange }"
+        :clickToRowSelect="false">
         <template #headerTop>
             <div style="margin-bottom: 10px;">
-                <a-button type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled" class="button-s"
-                    preIcon="ic:baseline-content-copy">Copy Create</a-button>
-                <a-button type="primary" @click="handleCreate" :disabled="!operation.createEnabled" class="button-s"
-                    preIcon="ic:baseline-plus">New</a-button>
-                <a-button color="success" type="primary" @click="handleModify" :disabled="!operation.modifyEnabled"
-                    class="button-s" preIcon="ic:baseline-edit">Modify</a-button>
-                <a-button type="primary" danger @click="handleMultiDelete" :disabled="!operation.deleteEnabled"
-                    class="button-s" preIcon="ic:baseline-delete">Delete</a-button>
+                <NantaButton type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled" class="button-s"
+                    preIcon="ic:baseline-content-copy">Copy create</NantaButton>
+                <NantaButton type="primary" @click="handleCreate" :disabled="!operation.createEnabled" class="button-s"
+                    preIcon="ic:baseline-plus">Create new</NantaButton>
+                <NantaButton color="success" type="primary" @click="handleModify" :disabled="!operation.modifyEnabled"
+                    class="button-s" preIcon="ic:baseline-edit">Modify</NantaButton>
+                <NantaButton type="primary" danger @click="handleMultiDelete" :disabled="!operation.deleteEnabled"
+                    class="button-s" preIcon="ic:baseline-delete">Delete</NantaButton>
             </div>
             <a-alert type="info" show-icon>
                 <template #message>
                     <template v-if="checkedKeys.length > 0">
-                        <span>已选中{{ checkedKeys.length }}条记录(可跨页)</span>
+                        <span>Selected {{ checkedKeys.length }} items (pagination support.)</span>
                         <a-button type="link" @click="checkedKeys = []" size="small">清空</a-button>
                     </template>
                     <template v-else>
-                        <span>未选中任何项目</span>
+                        <span>No items selected.</span>
                     </template>
                 </template>
             </a-alert>
@@ -43,7 +45,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue"
-import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps } from "/~/main";
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema } from "./data"
 import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
@@ -220,6 +222,19 @@ const doModifyAction = (id: string | number, type: ActionType) => {
 
     openModal(true, innerRecord)
 };
+
+function onSelectChange(selectedRowKeys: (string | number)[]) {
+    console.log(selectedRowKeys);
+    checkedKeys.value = selectedRowKeys;
+    const size = selectedRowKeys.length;
+    if (size <= 0) {
+        operation.value = { copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: false };
+    } else if (size == 1) {
+        operation.value = { copyEnabled: true, createEnabled: true, modifyEnabled: true, deleteEnabled: true };
+    } else {
+        operation.value = { copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: true };
+    }
+}
 </script>
 
 <style scoped>
