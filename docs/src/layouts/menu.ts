@@ -40,7 +40,13 @@ const localMenus: Menu[] = [
         icon: 'ic:outline-featured-video',
         key: 's',
         path: '/components/table',
-        children: [           
+        children: [       
+            {
+                name: 'Nanta Button',
+                path: '/components/nanta/button/index',
+                icon: 'quill:creditcard',
+                key: 'nantaButton'
+            },    
             {
                 name: 'Nanta Form',
                 path: '/components/form/basic',

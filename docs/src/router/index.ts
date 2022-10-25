@@ -14,6 +14,7 @@ export const router = createRouter({
 });
 
 const routes2 = [
+    { path: '/components/nanta/button/index', name: 'NantaButton', component: () => import('/@/pages/components/nanta/button/button.vue') },
     { path: '/components/form/basic', name: 'BasicForm', component: () => import('/@/pages/components/form/basic.vue') },
     { path: '/components/table/basic', name: 'BasicTable', component: () => import('/@/pages/components/table/basic.vue') },
     { path: '/components/table/nantaTable', name: 'NantaTable', component: () => import('/@/pages/components/nanta/table/index.vue') },
