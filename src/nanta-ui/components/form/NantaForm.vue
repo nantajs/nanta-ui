@@ -23,7 +23,7 @@
 <script lang="ts" setup>
 import { Form, Row } from "ant-design-vue";
 import type { NamePath } from "ant-design-vue/lib/form/interface";
-import { cloneDeep, set, isFunction, , isArray, isString } from "lodash-es";
+import { cloneDeep, set, isFunction, isArray, isString } from "lodash-es";
 import { FormSchema, formProps, FormProps, FormActionType } from ".";
 import { useFormSchema } from "./hooks/useFormSchema";
 import NantaFormItem from "./components/NantaFormItem.vue";
