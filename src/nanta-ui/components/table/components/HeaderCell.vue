@@ -1,9 +1,11 @@
 <template>
-  <EditTableHeaderCell v-if="getIsEdit">
-    {{ getTitle }}
-  </EditTableHeaderCell>
-  <span v-else>{{ getTitle }}</span>
-  <BasicHelp v-if="getHelpMessage" :text="getHelpMessage" :class="`${prefixCls}__help`" />
+  <div>
+    <EditTableHeaderCell v-if="getIsEdit">
+      {{ getTitle }}
+    </EditTableHeaderCell>
+    <span v-else>{{ getTitle }}</span>
+    <BasicHelp v-if="getHelpMessage" :text="getHelpMessage" :class="`${prefixCls}__help`" />
+  </div>
 </template>
 
 <script lang="ts" setup>
