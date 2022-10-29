@@ -124,15 +124,15 @@ const onMenuSelected = (item) => {
 
 const navItems: Nav[] = [
   {
-    name: "Nav-1",
+    name: "Get Started",
     key: "1",
   },
   {
-    name: "Nav-2",
+    name: "Guide",
     key: "2",
   },
   {
-    name: "Nav-3",
+    name: "API",
     key: "3",
   },
 ];
