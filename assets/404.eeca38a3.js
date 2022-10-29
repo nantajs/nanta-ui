@@ -1,1 +1,0 @@
-import{d as r,h as a,ae as n}from"./index.69092c48.js";const s=r({name:"ErrorPage",props:{title:{type:String,default:""}},setup(t){return()=>{const e="404: PAGE NOT FOUND!";return a(n,{title:t.title||e},{})}}});export{s as default};
