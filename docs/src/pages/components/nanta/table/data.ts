@@ -1,4 +1,4 @@
-import { BasicColumn, CellFormat, FormSchema } from "/~/main";
+import { BasicColumn, CellFormat, FormSchema } from "@nanta/ui";
 
 const GENDER = {
   1: 'male',
@@ -36,6 +36,21 @@ export const editModalSchema: FormSchema[] = [
   {
     field: 'age',
     label: 'Age',
+    component: 'InputNumber', 
+    colProps: { span: 24 },
+  }
+]
+
+export const editModalSchema2: FormSchema[] = [
+  {
+    field: 'name2',
+    label: 'Name2',
+    component: 'Input',
+    colProps: { span: 24 },
+  }, 
+  {
+    field: 'age2',
+    label: 'Age2',
     component: 'InputNumber', 
     colProps: { span: 24 },
   }

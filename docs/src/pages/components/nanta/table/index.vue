@@ -39,14 +39,14 @@
             </template>
         </template>
     </NantaTable>
-
     <NantaFormModal @register="registerModal" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
+    <NantaFormModal @register="registerModal2" v-bind="mProps2" @ok="handleOK2" @cancel="handleCancel2" />
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue"
-import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "/~/main";
-import { columns, data, searchFormSchema, editModalSchema } from "./data"
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "@nanta/ui";
+import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 import { useModal } from "/~/main";
@@ -55,11 +55,6 @@ const url = 'https://mock.data/api/mock/meta';
 
 const checkedKeys = ref<Array<string | number>>([]);
 const operation = ref({ copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: false });
-
-const mProps: NantaFormModalProps = {
-    schemas: editModalSchema,
-    colon: true
-}
 
 function getAction(record: Recordable): ActionItem[] {
     const ifShow = (action: ActionItem) => {
@@ -139,7 +134,7 @@ const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableD
         // slots: { customRender: 'action' },
         fixed: undefined,
     },
-    useSearchForm: true,
+    useSearchForm: false,
     searchFormConfig: {
         labelWidth: 120,
         schemas: searchFormSchema,
@@ -148,7 +143,20 @@ const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableD
     },
 })
 
+const mProps: NantaFormModalProps = {
+    schemas: editModalSchema,
+    colon: true
+}
+
 const [registerModal, { openModal, closeModal }] = useModal();
+
+
+const mProps2: NantaFormModalProps = {
+    schemas: editModalSchema2,
+    colon: true
+}
+
+const [registerModal2, { openModal: openModal2, closeModal: closeModal2 }] = useModal();
 
 const handleOK = (newRecord: Recordable, oldRecord: Recordable) => {
     console.log('handle ok in outer event callback', newRecord, oldRecord)
@@ -160,6 +168,16 @@ const handleCancel = (newRecord: Recordable, oldRecord: Recordable) => {
     console.log('handle cancel in outer event callback', newRecord, oldRecord);
 }
 
+const handleOK2 = (newRecord: Recordable, oldRecord: Recordable) => {
+    console.log('handle ok in outer event callback', newRecord, oldRecord)
+    updateTableDataRecord(oldRecord.key, newRecord)
+    closeModal()
+}
+
+const handleCancel2 = (newRecord: Recordable, oldRecord: Recordable) => {
+    console.log('handle cancel in outer event callback', newRecord, oldRecord);
+}
+
 function handleEdit(record: Recordable) {
     console.log('edit clicked!');
     console.log(record);
@@ -168,7 +186,7 @@ function handleEdit(record: Recordable) {
         record
     }
 
-    openModal(true, innerRecord)
+    openModal2(true, innerRecord)
 }
 
 function handleDelete(record: Recordable) {

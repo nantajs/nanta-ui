@@ -1,7 +1,8 @@
 <template>
+    
     <div class="fbox-line">
         <div>
-            <Icon icon="ant-design:delete-outlined" color="error" size="large" /><span>error</span>
+            <Icon icon="ant-design:delete-outlined" color="error" size="25" /><span style="font-size:25px">error</span>
         </div>
         <div>
             <Icon icon="ant-design:delete-outlined" color="success" /><span>success</span>
