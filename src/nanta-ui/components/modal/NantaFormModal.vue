@@ -1,11 +1,11 @@
 <template>
-  <NantaModal @register="register" @ok="handleOk" @cancel="handleCancel" :title="getTitle">
+  <NantaModal @register="register" @ok="handleOk" @cancel="handleCancel" v-bind="getBindValue">
     <NantaForm @register="registerForm" @submit="handleOk" v-bind="getFormProps" />
   </NantaModal>
 </template>
   
 <script lang="ts" setup>
-import { ref, computed, unref } from 'vue';
+import { ref, computed, unref, useAttrs } from 'vue';
 import { useForm, FormProps, } from "../form";
 import { useModalInner } from '.'
 import { Recordable } from '../..'
@@ -24,13 +24,23 @@ const formProps: FormProps = {
 }
 
 const getFormProps = computed((): Recordable => ({ ...formProps, ...props }));
+const attrs = useAttrs()
+const getBindValue = computed((): Recordable => {
+  const attr = {
+    ...attrs,
+    ...unref(props),
+    ...unref(props).modalProps,
+    title: unref(getTitle)
+  };
+  return attr;
+});
 
 const [registerForm, { setFieldsValue, updateSchema, resetFields, getFieldsValue, validateFields }] = useForm({
   labelWidth: 100,
   schemas: getSchemas,
 })
 
-const [register] = useModalInner(async (data : ModalInnerRecord) => {
+const [register] = useModalInner(async (data: ModalInnerRecord) => {
   resetFields();
   getTitle.value = data.title;
   recordRef.value = data.record;

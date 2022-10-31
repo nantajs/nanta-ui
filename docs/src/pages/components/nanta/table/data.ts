@@ -1,4 +1,4 @@
-import { BasicColumn, CellFormat, FormSchema } from "@nanta/ui";
+import { BasicColumn, CellFormat, FormSchema } from "/~/main";
 
 const GENDER = {
   1: 'male',

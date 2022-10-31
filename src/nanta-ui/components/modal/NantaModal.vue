@@ -1,5 +1,5 @@
 <template>
-  <a-modal :visible="visibleRef" :title="title" @ok="handleOk" @cancel="handleCancel">
+  <a-modal v-bind="getBindValue" @ok="handleOk" @cancel="handleCancel">
     <slot />
   </a-modal>
 </template>
@@ -7,15 +7,19 @@
 <script lang="ts" setup>
 import { deepMerge } from '../../utils/util'
 import { ModalMethods, ModalProps } from './types/type'
-import { ref, unref, getCurrentInstance } from 'vue'
+import type { Nullable, Recordable } from "../..";
+import { omit } from 'lodash-es'
+import { ref, unref, getCurrentInstance, computed, useAttrs, } from 'vue'
 const visibleRef = ref(false)
 const propsRef = ref<Partial<ModalProps> | null>(null)
 const modalWrapperRef = ref<any>(null)
 
 const props = defineProps({
   visible: { type: Boolean, default: false },
-  title: { type: String, default: 'Edit' }
+  title: { type: String, default: '' }
 })
+
+const attrs = useAttrs()
 
 const emit = defineEmits(['register', 'ok', 'cancel'])
 function setModalProps(props: Partial<ModalProps>): void {
@@ -30,6 +34,22 @@ const modalMethods: ModalMethods = {
   setModalProps,
   emitVisible: undefined
 }
+
+const getMergeProps = computed((): Recordable => {
+  return {
+    ...props,
+    ...(unref(propsRef) as any),
+  };
+});
+
+const getBindValue = computed((): Recordable => {
+  const attr = {
+    ...attrs,
+    ...unref(getMergeProps),
+    visible: unref(visibleRef),
+  };
+  return attr;
+});
 
 // 初始化
 const instance = getCurrentInstance()

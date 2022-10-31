@@ -44,8 +44,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
-import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "@nanta/ui";
+import { ref } from "vue";
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton, ModalProps } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
@@ -145,11 +145,14 @@ const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableD
 
 const mProps: NantaFormModalProps = {
     schemas: editModalSchema,
-    colon: true
+    colon: true,
+    modalProps: {
+        okText: "I'm sure.",
+        cancelText: 'Reject',
+    }
 }
 
-const [registerModal, { openModal, closeModal }] = useModal();
-
+const [registerModal, { openModal, closeModal, setModalProps }] = useModal();
 
 const mProps2: NantaFormModalProps = {
     schemas: editModalSchema2,
@@ -186,7 +189,7 @@ function handleEdit(record: Recordable) {
         record
     }
 
-    openModal2(true, innerRecord)
+    openModal(true, innerRecord)
 }
 
 function handleDelete(record: Recordable) {
@@ -238,7 +241,11 @@ const doModifyAction = (id: string | number, type: ActionType, record?: Recordab
         record: record || {}
     }
 
-    openModal(true, innerRecord)
+    if (type == ActionType.CREATE) {
+        openModal2(true, innerRecord);
+    } else {
+        openModal(true, innerRecord)
+    }
 };
 
 function onSelectChange(selectedRowKeys: (string | number)[]) {
