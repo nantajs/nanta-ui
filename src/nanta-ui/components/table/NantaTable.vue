@@ -126,8 +126,10 @@ const getWrapperClass = computed(() => {
 
 function setProps(props: Partial<BasicTableProps>) {
     innerPropsRef.value = { ...unref(innerPropsRef), ...props };
-    
+
     /**
+     * Notice: force to get it make cache update, or getProps (useTableHeade) gets the last cache data, 
+     * which finally cases to : Hydration node mismatch!
      * 注意：调用下get方法，更新下数据，否则在useTableHeader里拿到的getProps是上次的缓存数据，（computed会缓存）
      * 会导致SSR在服务端渲染的时候获取到的title为null，最终产生: Hydration node mismatch （Nuxt 生态！）
      */
