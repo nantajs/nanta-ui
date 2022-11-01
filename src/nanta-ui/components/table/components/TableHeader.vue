@@ -3,12 +3,16 @@
     <div v-if="$slots.headerTop" style="margin: 5px">
       <slot name="headerTop"></slot>
     </div>
-    <div class="flex items-center">
-      <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
-      <TableTitle :helpMessage="titleHelpMessage" :title="title" v-if="!$slots.tableTitle && title" />
-      <div :class="`${prefixCls}__toolbar`">
-        <slot name="toolbar"></slot>
-        <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
+    <div style="display:flex;justify-content:space-between">
+      <div>
+        <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
+        <TableTitle :helpMessage="titleHelpMessage" :title="title" v-if="!$slots.tableTitle && title" />
+      </div>
+      <div>
+        <div :class="`${prefixCls}__toolbar`" v-if="$slots.toolbar">
+          <slot name="toolbar"></slot>
+          <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
+        </div>
       </div>
     </div>
   </div>
