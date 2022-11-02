@@ -22,5 +22,6 @@ export const nantaFormModalProps = {
         type: [Array] as PropType<FormSchema[]>,
         default: () => [],
     },
+    colon: propTypes.bool.def(true),
     modalProps: Object as PropType<PartModelProps>
 }
