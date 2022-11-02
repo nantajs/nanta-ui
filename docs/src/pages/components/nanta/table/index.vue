@@ -25,6 +25,13 @@
                 </template>
             </a-alert>
         </template>
+        <template #toolbar>
+            <div>
+                <NantaButton type="primary" class="button-s">
+                    Show details
+                </NantaButton>
+            </div>
+        </template>
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'action'">
                 <NantaTableAction :actions="getAction(record)" />
@@ -39,17 +46,18 @@
             </template>
         </template>
     </NantaTable>
-    <NantaFormModal @register="registerModal" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
+    <NantaFormModal @register="registerModal" @regmethod="regMothod" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
     <NantaFormModal @register="registerModal2" v-bind="mProps2" @ok="handleOK2" @cancel="handleCancel2" />
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton, ModalProps } from "/~/main";
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton, ModalProps, useFormModal } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 import { useModal } from "/~/main";
+import { sleep } from "@antfu/utils";
 // import { url } from '/@/settings/localSetting';
 const url = 'https://mock.data/api/mock/meta';
 
@@ -152,27 +160,31 @@ const mProps: NantaFormModalProps = {
     }
 }
 
-const [registerModal, { openModal, closeModal, setModalProps }] = useModal();
+const [registerModal, regMothod, { openModal, closeModal, setModalProps, changeLoading, changeOkLoading }] = useFormModal();
 
 const mProps2: NantaFormModalProps = {
     schemas: editModalSchema2,
     colon: true
 }
 
-const [registerModal2, { openModal: openModal2, closeModal: closeModal2 }] = useModal();
-
-const handleOK = (newRecord: Recordable, oldRecord: Recordable) => {
-    console.log('handle ok in outer event callback', newRecord, oldRecord)
+const handleOK = async (newRecord: Recordable, oldRecord: Recordable) => {
+    console.log('handleOK in outer event callback', newRecord, oldRecord)
     updateTableDataRecord(oldRecord.key, newRecord)
-    closeModal()
+    changeLoading(true);
+    changeOkLoading(true);
+    await new Promise(r => setTimeout(r, 5000));
+    // closeModal()
+    changeOkLoading(false)
 }
 
 const handleCancel = (newRecord: Recordable, oldRecord: Recordable) => {
     console.log('handle cancel in outer event callback', newRecord, oldRecord);
 }
 
+const [registerModal2, { openModal: openModal2, closeModal: closeModal2 }] = useModal();
+
 const handleOK2 = (newRecord: Recordable, oldRecord: Recordable) => {
-    console.log('handle ok in outer event callback', newRecord, oldRecord)
+    console.log('handleOK2 in outer event callback', newRecord, oldRecord)
     updateTableDataRecord(oldRecord.key, newRecord)
     closeModal()
 }
@@ -265,5 +277,13 @@ function onSelectChange(selectedRowKeys: (string | number)[]) {
 <style scoped>
 .button-s {
     margin-right: 4px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: large;
+    font-weight: 500;
 }
 </style>

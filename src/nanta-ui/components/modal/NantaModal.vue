@@ -51,18 +51,18 @@ const getBindValue = computed((): Recordable => {
   return attr;
 });
 
-// 初始化
+// init
 const instance = getCurrentInstance()
 if (instance) {
   emit('register', modalMethods, instance.uid)
 }
 
-// 确认的Button
+// OK Button
 const handleOk = (e: MouseEvent) => {
   emit('ok', e)
 }
 
-// 取消的Button
+// Cancel Button
 const handleCancel = (e: any) => {
   visibleRef.value = false
   emit('cancel', e)
