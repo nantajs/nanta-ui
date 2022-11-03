@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 import type { BasicColumn } from '../types/table';
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 import BasicHelp from '../../help/BasicHelp.vue';
 import EditTableHeaderCell from './EditTableHeaderIcon.vue';
 

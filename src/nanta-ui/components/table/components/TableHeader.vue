@@ -19,7 +19,6 @@
 </template>
 <script lang="ts" setup>
 import type { PropType } from 'vue';
-import { defineProps } from 'vue';
 import { Divider } from 'ant-design-vue';
 import TableTitle from './TableTitle.vue';
 import { Recordable } from '../../..'
