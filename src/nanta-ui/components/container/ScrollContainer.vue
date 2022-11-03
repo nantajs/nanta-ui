@@ -83,11 +83,10 @@ export default defineComponent({
 .scroll-container {
   width: 100%;
   height: 100%;
-  padding-top: 10px;
   padding-right: 20px;
 
   .scrollbar__wrap {
-    margin-bottom: 5px !important;
+    margin-top: 10px !important;
     overflow-x: hidden;
   }
 
