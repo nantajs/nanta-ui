@@ -46,7 +46,7 @@
             </template>
         </template>
     </NantaTable>
-    <NantaFormModal @register="registerModal" @regmethod="regMothod" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
+    <NantaFormModal @register="registerModal" @regmethod="regMethod" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
     <NantaFormModal @register="registerModal2" v-bind="mProps2" @ok="handleOK2" @cancel="handleCancel2" />
 </template>
 
@@ -160,7 +160,7 @@ const mProps: NantaFormModalProps = {
     }
 }
 
-const [registerModal, regMothod, { openModal, closeModal, setModalProps, changeLoading, changeOkLoading }] = useFormModal();
+const [registerModal, regMethod, { openModal, closeModal, setModalProps, changeLoading, changeOkLoading }] = useFormModal();
 
 const mProps2: NantaFormModalProps = {
     schemas: editModalSchema2,
