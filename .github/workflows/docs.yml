@@ -31,7 +31,7 @@ jobs:
         run: yarn install
 
       - name: Upgrade @nanta/ui to latest.
-        run: yarn upgrade @nanta/ui --latest
+        run: yarn install && yarn upgrade @nanta/ui --latest
         working-directory: ./docs
 
       - name: Install @docs dependencies
