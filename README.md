@@ -39,7 +39,10 @@ yarn install
 ```js
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
-createApp(App).use(Antd).mount('#app')
+import { setupNanta } from '@nanta/ui';
+const app = createApp(App);
+setupNanta(app);
+app.use(Antd).mount('#app')
 ```
 
 Here is an example in `docs`, and another example [nanta-ui-vue](https://github.com/nantajs/nanta-ui-vue):   

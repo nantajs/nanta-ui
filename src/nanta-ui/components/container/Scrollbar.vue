@@ -7,8 +7,8 @@
       </component>
     </div>
     <template v-if="!native">
-      <bar :move="moveX" :size="sizeWidth" />
-      <bar vertical :move="moveY" :size="sizeHeight" />
+      <Bar :move="moveX" :size="sizeWidth" />
+      <Bar vertical :move="moveY" :size="sizeHeight" />
     </template>
   </div>
 </template>
@@ -60,7 +60,7 @@ export default defineComponent({
       default: 'div',
     },
   },
-  setup(props) {
+  setup(props) {    
     const sizeWidth = ref('0');
     const sizeHeight = ref('0');
     const moveX = ref(0);

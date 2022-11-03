@@ -6,11 +6,17 @@ import NantaTable from './nanta-ui/components/table/NantaTable.vue'
 import NantaTableAction from './nanta-ui/components/table/components/NantaTableAction.vue'
 
 import { Icon, SvgIcon } from './nanta-ui/components/icon/index'
-import type { VueNode } from './nanta-ui/core/types/type'
+import type { VueNode, Recordable, Fn } from './nanta-ui/core/types/type'
 
-export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, VueNode, NantaTableAction, NantaFormModal }
+export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, NantaTableAction, NantaFormModal }
+export type { VueNode, Recordable, Fn }
+
+import { setupNantaDirectives as setupNanta } from './nanta-ui/directives'
+export { setupNanta }
+
 export * from './nanta-ui/components/button'
 export * from './nanta-ui/components/form'
+export * from './nanta-ui/components/loading'
 export * from './nanta-ui/components/modal'
 export * from './nanta-ui/components/table'
 export * from './nanta-ui/utils/propTypes'
