@@ -15,7 +15,7 @@ Ant-design based UI framework. [Docs](https://nantajs.github.io/nanta-ui/#/).
 - Schema-style form/table design.  
 - Light-weight ui component library.  
 - Typescript support.  
-- Support vue 3 and nuxt 3.  
+- Support vue 3 and nuxt 3 (SSR support).  
 - Vite support.  
 
 ## Deps
@@ -42,7 +42,7 @@ import 'ant-design-vue/dist/antd.css';
 import { setupNanta } from '@nanta/ui';
 const app = createApp(App);
 setupNanta(app);
-app.use(Antd).mount('#app')
+app.use(Antd).mount('#app');
 ```
 
 Here is an example in `docs`, and another example [nanta-ui-vue](https://github.com/nantajs/nanta-ui-vue):   
@@ -54,10 +54,10 @@ yarn docs
   Auto-install Antd plguin, create `nantaui.ts` in `<projectDir>/plugins/` with the following boilerplate:  
 ```js
 // plugins/nantaui.ts
-import { defineNuxtPlugin } from '#app'
+import { defineNuxtPlugin } from '#app';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
-import { setupNanta } from '@nanta/ui'
+import { setupNanta } from '@nanta/ui';
 
 export default defineNuxtPlugin(nuxtApp => {
   setupNanta(nuxtApp.vueApp);
