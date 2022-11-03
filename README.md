@@ -7,7 +7,7 @@
      <a href="https://www.npmjs.com/package/@nanta/ui"><img src="https://badgen.net/npm/license/@nanta/ui" alt="License"></a> 
 </p>
 
-Ant-design based UI framework.
+Ant-design based UI framework. [Docs](https://nantajs.github.io/nanta-ui/#/).  
 
 ![index](docs/nantaui.png)
 

@@ -4,7 +4,7 @@
   </BasicTitle>
 </template>
 <script lang="ts" setup>
-import { computed, defineProps, PropType } from 'vue';
+import { computed, PropType } from 'vue';
 import BasicTitle from '../../basic/BasicTitle.vue';
 import { isFunction } from 'lodash-es';
 import { Recordable } from '../../..'
