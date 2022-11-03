@@ -63,6 +63,12 @@ export const editModalSchema: FormSchema[] = [
     component: 'InputTextArea',
     colProps: { span: 24 },
   }, 
+  {
+    field: 'tags',
+    label: 'Tags',
+    component: 'Input',
+    colProps: { span: 24 },
+  }, 
 ]
 
 export const editModalSchema2: FormSchema[] = [
