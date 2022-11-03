@@ -1,24 +1,27 @@
 <template>
-    <div class="container">
-        <span style="font-size: 2.5rem">
-            nanta-ui: Ant-design based UI framework.
-        </span>
-        <div class="fbox-line">
-            <div v-for="item in menus" :key="item.key">
-                <NantaButton type="dashed" :icon="item.icon">
-                    <router-link :to="item.path" style="margin-left: .5rem">{{ item.name }}</router-link>
-                </NantaButton>
+    <div class="section-container" style="padding: 20px;">
+        <div>
+            <span style="font-size: 2.5rem">
+                nanta-ui: Ant-design based UI framework.
+            </span>
+            <div class="fbox-line">
+                <div v-for="item in menus" :key="item.key">
+                    <NantaButton type="dashed" :icon="item.icon">
+                        <router-link :to="item.path" style="margin-left: .5rem">{{ item.name }}</router-link>
+                    </NantaButton>
+                </div>
             </div>
         </div>
-        <div class="version-line">
-            <NantaTable @register="registerTable" />
-        </div>
+
+    </div>
+    <div class="section-container" style="background-color: #fff; margin-top: 10px;">
+        <NantaTable @register="registerTable" />
     </div>
 </template>
 
 <script lang="ts" setup>
 import { getMenus, getMenuList } from "/@/layouts/menu"
-import { Icon, NantaButton, useTable, NantaTable, BasicColumn } from "/~/main";
+import { Icon, NantaButton, useTable, NantaTable, BasicColumn, FormSchema } from "/~/main";
 import { version as docsVersion, dependencies } from '../../package.json'
 import { version as nantaVersion, dependencies as nantaDeps } from '../../node_modules/@nanta/ui/package.json'
 import { h } from "vue";
@@ -58,11 +61,27 @@ const data = [
     }
 ]
 
+const searchFormSchema: FormSchema[] = [
+    {
+        field: 'name',
+        label: 'Package Name',
+        component: 'Input',
+        colProps: { span: 8 },
+    },
+];
+
 const [registerTable] = useTable({
     title: '@nant/ui version list.',
     columns,
     dataSource: data,
     pagination: false,
+    useSearchForm: true,
+    searchFormConfig: {
+        labelWidth: 120,
+        schemas: searchFormSchema,
+        autoSubmitOnEnter: true,
+        submitButtonOptions: { text: 'search' }
+    },
 })
 
 for (let [key, value] of Object.entries(nantaDeps)) {
