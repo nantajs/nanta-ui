@@ -57,7 +57,7 @@ import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } fr
 import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 import { useModal } from "/~/main";
-import { sleep } from "@antfu/utils";
+import { sleep } from "/@/utils/sleep";
 // import { url } from '/@/settings/localSetting';
 const url = 'https://mock.data/api/mock/meta';
 
@@ -172,9 +172,10 @@ const handleOK = async (newRecord: Recordable, oldRecord: Recordable) => {
     updateTableDataRecord(oldRecord.key, newRecord)
     changeLoading(true);
     changeOkLoading(true);
-    await new Promise(r => setTimeout(r, 5000));
+    await sleep(3)
     // closeModal()
     changeOkLoading(false)
+    changeLoading(false)
 }
 
 const handleCancel = (newRecord: Recordable, oldRecord: Recordable) => {
