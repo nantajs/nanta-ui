@@ -38,7 +38,25 @@ export const editModalSchema: FormSchema[] = [
     label: 'Age',
     component: 'InputNumber', 
     colProps: { span: 24 },
-  }
+  },
+  {
+    field: 'gender',
+    label: 'Gender',
+    component: 'Select',
+    componentProps: {
+      options: [
+        { label: 'male', value: 1 },
+        { label: 'female', value: 2 },
+      ],
+    },
+    colProps: { span: 8 },
+  },
+  {
+    field: 'address',
+    label: 'address',
+    component: 'InputTextArea',
+    colProps: { span: 24 },
+  }, 
 ]
 
 export const editModalSchema2: FormSchema[] = [

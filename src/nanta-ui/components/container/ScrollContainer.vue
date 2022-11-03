@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, unref, nextTick } from 'vue';
-import Scrollbar from './Scrollbar.vue';
-import type { ScrollbarType } from './types/bar'
-import { useScrollTo } from './hooks/event/useScrollTo';
-import type { Nullable } from '../..'
+import { defineComponent, ref, unref, nextTick } from "vue";
+import Scrollbar from "./Scrollbar.vue";
+import type { ScrollbarType } from "./types/bar";
+import { useScrollTo } from "./hooks/event/useScrollTo";
+import type { Nullable } from "../..";
 
 export default defineComponent({
-  name: 'ScrollContainer',
+  name: "ScrollContainer",
   components: { Scrollbar },
   setup() {
     const scrollbarRef = ref<Nullable<ScrollbarType>>(null);
@@ -83,6 +83,7 @@ export default defineComponent({
 .scroll-container {
   width: 100%;
   height: 100%;
+  padding: 30px;
 
   .scrollbar__wrap {
     margin-bottom: 18px !important;

@@ -26,7 +26,7 @@ const props = defineProps({
 
 const emit = defineEmits(['cancel', 'fullscreen'])
 
-const prefixCls = 'basic-modal-close';
+const prefixCls = 'nanta-basic-modal-close';
 
 const getClass = computed(() => {
   return [
