@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { getMenus, getMenuList } from "/@/layouts/menu"
-import { Icon, NantaButton, useTable, NantaTable, BasicColumn, FormSchema } from "/~/main";
+import { NantaButton, useTable, NantaTable, BasicColumn, FormSchema } from "/~/main";
 import { version as docsVersion, dependencies } from '../../package.json'
 import { version as nantaVersion, dependencies as nantaDeps } from '../../node_modules/@nanta/ui/package.json'
 import { h } from "vue";
