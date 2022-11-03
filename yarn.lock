@@ -470,6 +470,11 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-18.8.3.tgz#ce750ab4017effa51aed6a7230651778d54e327c"
   integrity sha512-0os9vz6BpGwxGe9LOhgP/ncvYN5Tx1fNcd2TM3rD/aCGBkysb+ZWpXEocG24h6ZzOi13+VB8HndAQFezsSOw1w==
 
+"@types/web-bluetooth@^0.0.16":
+  version "0.0.16"
+  resolved "https://registry.npmjs.org/@types/web-bluetooth/-/web-bluetooth-0.0.16.tgz#1d12873a8e49567371f2a75fe3e7f7edca6662d8"
+  integrity sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==
+
 "@vitejs/plugin-vue-jsx@^2.0.1":
   version "2.0.1"
   resolved "https://registry.npmjs.org/@vitejs/plugin-vue-jsx/-/plugin-vue-jsx-2.0.1.tgz#563a844964f5b025c828b452d6a9882df7194f9a"
@@ -649,6 +654,28 @@
   version "3.2.40"
   resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.2.40.tgz#e57799da2a930b975321981fcee3d1e90ed257ae"
   integrity sha512-0PLQ6RUtZM0vO3teRfzGi4ltLUO5aO+kLgwh4Um3THSR03rpQWLTuRCkuO5A41ITzwdWeKdPHtSARuPkoo5pCQ==
+
+"@vueuse/core@^9.4.0":
+  version "9.4.0"
+  resolved "https://registry.npmjs.org/@vueuse/core/-/core-9.4.0.tgz#afb30f9494b0954e51a489526566b14f1e2c5fb3"
+  integrity sha512-JzgenGj1ZF2BHOen5rsFiAyyI9sXAv7aKhNLlm9b7SwYQeKTcxTWdhudonURCSP3Egl9NQaRBzes2lv/1JUt/Q==
+  dependencies:
+    "@types/web-bluetooth" "^0.0.16"
+    "@vueuse/metadata" "9.4.0"
+    "@vueuse/shared" "9.4.0"
+    vue-demi "*"
+
+"@vueuse/metadata@9.4.0":
+  version "9.4.0"
+  resolved "https://registry.npmjs.org/@vueuse/metadata/-/metadata-9.4.0.tgz#5c8eb105a8ad9eb7b47f78a226ff993560d0bd7f"
+  integrity sha512-7GKMdGAsJyQJl35MYOz/RDpP0FxuiZBRDSN79QIPbdqYx4Sd0sVTnIC68KJ6Oln0t0SouvSUMvRHuno216Ud2Q==
+
+"@vueuse/shared@9.4.0":
+  version "9.4.0"
+  resolved "https://registry.npmjs.org/@vueuse/shared/-/shared-9.4.0.tgz#634022fe42b3d5ece1d81d749724966f5071c8c3"
+  integrity sha512-fTuem51KwMCnqUKkI8B57qAIMcFovtGgsCtAeqxIzH3i6nE9VYge+gVfneNHAAy7lj8twbkNfqQSygOPJTm4tQ==
+  dependencies:
+    vue-demi "*"
 
 acorn@^8.8.0:
   version "8.8.0"
@@ -1833,6 +1860,11 @@ vite@^3.1.0:
     rollup "~2.78.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+vue-demi@*:
+  version "0.13.11"
+  resolved "https://registry.npmjs.org/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
+  integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
 
 vue-tsc@^0.40.4:
   version "0.40.13"
