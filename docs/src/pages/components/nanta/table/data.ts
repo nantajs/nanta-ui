@@ -40,6 +40,12 @@ export const editModalSchema: FormSchema[] = [
     colProps: { span: 24 },
   },
   {
+    field: 'email',
+    label: 'Email',
+    component: 'Input', 
+    colProps: { span: 24 },
+  },
+  {
     field: 'gender',
     label: 'Gender',
     component: 'Select',
