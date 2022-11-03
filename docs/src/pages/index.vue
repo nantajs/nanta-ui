@@ -1,5 +1,5 @@
 <template>
-    <div class="section-container" style="padding: 20px;">
+    <div class="section-container">
         <div>
             <span style="font-size: 2.5rem">
                 nanta-ui: Ant-design based UI framework.
