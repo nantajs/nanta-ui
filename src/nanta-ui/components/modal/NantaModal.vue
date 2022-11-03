@@ -108,6 +108,7 @@ const getBindValue = computed((): Recordable => {
     ...attrs,
     ...unref(getMergeProps),
     visible: unref(visibleRef),
+    wrapClassName: unref(getWrapClassName),
   };
   return attr;
 });
