@@ -1,4 +1,15 @@
 import { Menu } from './types/type'
+import { basicRouteItems } from '../router/routes'
+
+const componentsList = basicRouteItems.filter(item => 'components' === item.group).map(item => {
+    return {
+        name: item.name,
+        icon: 'quill:creditcard',
+        path: item.path,
+        key: item.group + item.name,
+    } as Menu
+});
+
 // menu datas
 const localMenus: Menu[] = [
     {
@@ -40,38 +51,7 @@ const localMenus: Menu[] = [
         icon: 'ic:outline-featured-video',
         key: 's',
         path: '/components/table',
-        children: [
-            {
-                name: 'Nanta Button',
-                path: '/components/nanta/button/index',
-                icon: 'quill:creditcard',
-                key: 'nantaButton'
-            },
-            {
-                name: 'Nanta Form',
-                path: '/components/form/basic',
-                icon: 'quill:creditcard',
-                key: 'basicForm'
-            },
-            {
-                name: 'Nanta Table',
-                path: '/components/table/nantaTable',
-                icon: 'quill:creditcard',
-                key: 'nantaTable'
-            },
-            {
-                name: 'Nanta Icon',
-                path: '/components/icon/index',
-                icon: 'quill:creditcard',
-                key: 'icon'
-            },
-            {
-                name: 'Basic Table',
-                path: '/components/table/basic',
-                icon: 'quill:creditcard',
-                key: 'basicTable'
-            },
-        ]
+        children: componentsList,
     }
 ]
 
