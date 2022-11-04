@@ -12,6 +12,8 @@ export interface ReturnMethods extends ModalMethods {
   openModal: <T = any>(props?: boolean, data?: T, openOnSet?: boolean) => void;
   closeModal: () => void;
   getVisible?: ComputedRef<boolean>;
+  changeLoading: (loading: boolean) => void;
+  changeOkLoading: (loading: boolean) => void;
 }
 
 export type UseModalReturnType = [RegisterFn, ReturnMethods];
@@ -24,18 +26,6 @@ export interface ReturnInnerMethods extends ModalMethods {
 }
 
 export type UseModalInnerReturnType = [RegisterFn, ReturnInnerMethods];
-
-export interface ReturnFormModalMethods extends ModalMethods {
-  openModal: <T = any>(props?: boolean, data?: T, openOnSet?: boolean) => void;
-  closeModal: () => void;
-  changeLoading: (loading: boolean) => void;
-  changeOkLoading: (loading: boolean) => void;
-  getVisible?: ComputedRef<boolean>;
-}
-
-export type RegMethodFn = (modalMethods: ReturnFormModalMethods) => void;
-
-export type UseFormModalReturnType = [RegisterFn, RegMethodFn, ReturnFormModalMethods];
 
 export interface ModalProps {
   /**

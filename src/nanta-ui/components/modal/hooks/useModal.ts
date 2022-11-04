@@ -71,6 +71,14 @@ export function useModal(): UseModalReturnType {
     closeModal: () => {
       getInstance()?.setModalProps({ visible: false });
     },
+
+    changeLoading: (loading = true) => {
+      getInstance()?.setModalProps({ loading });
+    },
+
+    changeOkLoading: (loading = true) => {
+      getInstance()?.setModalProps({ confirmLoading: loading });
+    },
   };
   return [register, methods];
 }

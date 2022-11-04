@@ -46,13 +46,13 @@
             </template>
         </template>
     </NantaTable>
-    <NantaFormModal @register="registerModal" @regmethod="regMethod" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
+    <NantaFormModal @register="registerModal" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
     <NantaFormModal @register="registerModal2" v-bind="mProps2" @ok="handleOK2" @cancel="handleCancel2" />
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton, ModalProps, useFormModal } from "/~/main";
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton} from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
@@ -160,7 +160,7 @@ const mProps: NantaFormModalProps = {
     }
 }
 
-const [registerModal, regMethod, { openModal, closeModal, setModalProps, changeLoading, changeOkLoading }] = useFormModal();
+const [registerModal, { openModal, closeModal, setModalProps, changeLoading, changeOkLoading }] = useModal();
 
 const mProps2: NantaFormModalProps = {
     schemas: editModalSchema2,

@@ -5,7 +5,7 @@
 </template>
   
 <script lang="ts" setup>
-import { ref, computed, unref, useAttrs, watch, getCurrentInstance } from 'vue';
+import { ref, computed, unref, useAttrs } from 'vue';
 import { useForm, FormProps, } from "../form";
 import { useModalInner } from '.'
 import { Recordable } from '../..'
@@ -13,7 +13,6 @@ import type { ModalInnerRecord } from './types/nantaFormModal'
 import NantaForm from "../form/NantaForm.vue";
 import NantaModal from './NantaModal.vue'
 import { nantaFormModalProps } from './types/nantaFormModal'
-import type { ReturnFormModalMethods } from "./types/type"
 
 const props = defineProps(nantaFormModalProps);
 const getSchemas = computed(() => props.schemas)
@@ -49,12 +48,6 @@ const [register, innerMethods] = useModalInner(async (data: ModalInnerRecord) =>
     setFieldsValue(data.record);
   }
 })
-
-// init
-const instance = getCurrentInstance()
-if (instance) {
-  emit('regmethod', innerMethods)
-}
 
 const handleOk = async () => {
   const values = await validateFields();
