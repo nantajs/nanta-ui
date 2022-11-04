@@ -40,6 +40,7 @@ import ModalWrapper from './components/ModalWrapper.vue';
 import ModalClose from './components/ModalClose.vue';
 import ModalFooter from './components/ModalFooter.vue';
 import ModalHeader from './components/ModalHeader.vue';
+import type { BasicProps } from './types/props'
 import { basicProps } from './types/props';
 const props = defineProps(basicProps);
 
@@ -62,9 +63,14 @@ function setModalProps(props: Partial<ModalProps>): void {
     fullScreenRef.value = !!props.defaultFullscreen;
   }
 }
+async function setProps(props: BasicProps): Promise<void> {
+  propsRef.value = deepMerge(unref(propsRef) || {}, props);
+  console.log(propsRef.value)
+}
 
 const modalMethods: ModalMethods = {
   setModalProps,
+  setProps,
   emitVisible: undefined,
   redoModalHeight: () => {
     nextTick(() => {

@@ -1,5 +1,7 @@
-import type { PropType } from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
 import type { ButtonType } from './button'
+
+export declare type ButtonProps = Partial<ExtractPropTypes<typeof buttonProps>>;
 
 export const buttonProps = {
     // color: { type: String, validator: (v: string) => ['error', 'warning', 'success', ''].includes(v) },

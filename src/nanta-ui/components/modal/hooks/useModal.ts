@@ -7,13 +7,15 @@ import type {
   RegisterFn
 } from "../types/type";
 import type { Nullable, Fn } from '../../..'
+import type { BasicProps } from '../types/props'
 import { isFunction, isEqual } from 'lodash-es'
-import { ref, unref, reactive, getCurrentInstance, computed, toRaw, watchEffect, nextTick } from 'vue'
+import { ref, unref, reactive, getCurrentInstance, computed, toRaw, watchEffect, nextTick, watch } from 'vue'
+import { getDynamicProps, error } from '../../../utils/util'
 
 const dataTransfer = reactive<any>({});
 const visibleData = reactive<{ [key: number]: boolean }>({});
 
-export function useModal(): UseModalReturnType {
+export function useModal(props?: BasicProps): UseModalReturnType {
   const modal = ref<Nullable<ModalMethods>>(null);
   const loaded = ref<Nullable<boolean>>(false);
   const uid = ref<string>("");
@@ -31,6 +33,17 @@ export function useModal(): UseModalReturnType {
     modalMethod.emitVisible = (visible: boolean, uid: number) => {
       visibleData[uid] = visible;
     };
+
+    watch(
+      () => props,
+      () => {
+        props && modalMethod.setProps && modalMethod.setProps(getDynamicProps(props))
+      },
+      {
+        immediate: true,
+        deep: true
+      }
+    )
   }
 
   const getInstance = () => {
@@ -51,21 +64,30 @@ export function useModal(): UseModalReturnType {
     }),
 
     openModal: <T = any>(visible = true, data?: T, openOnSet = true): void => {
-      getInstance()?.setModalProps({
+      const inst = getInstance();
+      inst?.setModalProps({
         visible: visible,
       });
 
       if (!data) return;
       const id = unref(uid);
+
+      if (Reflect.has(data, 'title')) {
+        if (inst && inst.setProps) {
+          inst.setProps({ title: data['title']});
+        }
+      }
+
       if (openOnSet) {
         dataTransfer[id] = null;
         dataTransfer[id] = toRaw(data);
         return;
       }
+
       const equal = isEqual(toRaw(dataTransfer[id]), toRaw(data));
       if (!equal) {
         dataTransfer[id] = toRaw(data);
-      }
+      }      
     },
 
     closeModal: () => {
@@ -79,6 +101,13 @@ export function useModal(): UseModalReturnType {
     changeOkLoading: (loading = true) => {
       getInstance()?.setModalProps({ confirmLoading: loading });
     },
+
+    setProps: (props: BasicProps) => {
+      const inst = getInstance();
+      if (inst && inst.setProps) {
+        return inst.setProps(props);
+      }
+    }
   };
   return [register, methods];
 }

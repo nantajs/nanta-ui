@@ -1,9 +1,11 @@
 import type { ComputedRef } from 'vue';
+import type { BasicProps } from './props';
 
 export interface ModalMethods {
-  setModalProps: (props: Partial<ModalProps>) => void;
+  setModalProps: (modalProps: Partial<ModalProps>) => void;
   emitVisible?: (visible: boolean, uid: number) => void;
   redoModalHeight?: () => void;
+  setProps?: (props: BasicProps) => Promise<void> | undefined;
 }
 
 export type RegisterFn = (modalMethods: ModalMethods, uuid?: string) => void;
