@@ -19,11 +19,11 @@
 import { NantaButton, NantaFormModal, NantaModal, useModal, NantaFormModalProps } from "/~/main";
 import { editModalSchema } from '../table/data'
 
-const [registerBasic, { openModal, closeModal }] = useModal({ title: 'Basic Modal', okText: 'Yes' });
+const [registerBasic, { openModal }] = useModal({ title: 'Basic Modal', okText: 'Yes' });
 const [registerFormModal, { openModal: openFormModal }] = useModal();
 
 function clickBasicModal() {
-    openModal(true, { title: 'Basic Nanta Modal', record: { "a": "value" } });
+    openModal(true, { title: 'Basic Nanta Modal', record: { "name": "Nanta UI" } });
 }
 
 function clickFormModal() {
