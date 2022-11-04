@@ -10,7 +10,7 @@
           item
           }}</a-breadcrumb-item>
         </a-breadcrumb>
-        <a-layout-content :style="{ padding: '5px', margin: 0, minHeight: '280px' }">
+        <a-layout-content>
           <slot />
         </a-layout-content>
       </a-layout>
