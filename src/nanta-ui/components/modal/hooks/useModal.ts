@@ -74,6 +74,7 @@ export function useModal(props?: BasicProps): UseModalReturnType {
 
       if (Reflect.has(data, 'title')) {
         if (inst && inst.setProps) {
+          // @ts-ignore
           inst.setProps({ title: data['title']});
         }
       }
