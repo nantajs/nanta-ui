@@ -48,7 +48,7 @@ const comp: AppRouteModule = {
     {
       path: 'basic',
       name: 'Basic',
-      component: () => import('/@/pages/components/form/basic.vue'),
+      component: () => import('/@/pages/components/nanta/form/basic.vue'),
       meta: {
         // affix: true,
         title: "基础表单",
