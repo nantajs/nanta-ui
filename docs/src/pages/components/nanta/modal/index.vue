@@ -11,12 +11,13 @@
         </div>
 
         <NantaModal @register="registerBasic"></NantaModal>
-        <NantaFormModal @register="registerFormModal"></NantaFormModal>
+        <NantaFormModal @register="registerFormModal" v-bind="mProps"></NantaFormModal>
     </div>
 </template>
 
 <script setup lang="ts">
-import { Icon, NantaButton, NantaFormModal, NantaModal, useModal } from "/~/main";
+import { NantaButton, NantaFormModal, NantaModal, useModal, NantaFormModalProps } from "/~/main";
+import { editModalSchema } from '../table/data'
 
 const [registerBasic, { openModal, closeModal }] = useModal();
 const [registerFormModal, { openModal: openFormModal }] = useModal();
@@ -27,6 +28,15 @@ function clickBasicModal() {
 
 function clickFormModal() {
     openFormModal(true, { title: "Nanta Form Modal", record: { "name": "Aborn Jiang" } })
+}
+
+const mProps: NantaFormModalProps = {
+    schemas: editModalSchema,
+    colon: true,
+    modalProps: {
+        okText: "I'm sure.",
+        cancelText: 'Reject',
+    }
 }
 
 </script>

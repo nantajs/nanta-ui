@@ -55,7 +55,7 @@ export const editModalSchema: FormSchema[] = [
         { label: 'female', value: 2 },
       ],
     },
-    colProps: { span: 8 },
+    colProps: { span: 12 },
   },
   {
     field: 'address',
