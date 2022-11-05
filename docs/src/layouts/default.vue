@@ -148,7 +148,7 @@ export default {
 
     const onSideSelected = (item: any) => {
       initBreadcrumbList(item.keyPath);
-      const activeSide = findItemByPath(sideMenus, null, item.key);
+      const activeSide = activeSideBar(null, item.key);
       selectedNavKeys.value.pop()
       if (activeSide && activeSide.group) {
         activeNavbar(activeSide.group);
@@ -172,7 +172,7 @@ export default {
       }
     }
 
-    function activeSideBar(path: string, key?: string): Menu | undefined {
+    function activeSideBar(path: string | null, key?: string): Menu | undefined {
       const activeSide = findItemByPath(sideMenus, path, key);
       console.log(path);
       console.log(activeSide)
