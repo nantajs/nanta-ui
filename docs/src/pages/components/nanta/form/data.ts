@@ -218,7 +218,7 @@ export const schemes: FormSchema[] = [
     slot: 'selectA',
     colProps: { span: 12 },
 //    defaultValue: ['value_1'],
-    placeholder: 'Please select type.',
+    placeholder: 'Pls select mulit options.',
     componentProps: {
       options: [
         {

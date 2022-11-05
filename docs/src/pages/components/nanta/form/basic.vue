@@ -1,9 +1,9 @@
 <template>
   <div>
-    <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm" @submit="handleSubmit"
+    <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm" @submit="handleSubmit" 
       @reset="handleReset">
-      <template #selectA="{ model, field }">
-        <a-select :options="optionsA" mode="multiple" v-model:value="model[field]" allowClear />
+      <template #selectA="{ model, field, schema }">
+        <a-select :options="optionsA" mode="multiple" v-model:value="model[field]" :placeholder="schema.placeholder" allowClear />
       </template>
     </NantaForm>
   </div>
