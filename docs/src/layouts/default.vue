@@ -215,12 +215,20 @@ export default {
     $route(to, from) {
       console.log('change route from:' + from.path + ' -> to:' + to.path)
       // todo: TypeError: this.activeSideBar is not a function in production env. why ??
-      // const activeSide = this.activeSideBar(to.path)
-      // if (activeSide && activeSide.group) {
-      //  this.activeNavbar(activeSide.group);
-      // }
-      // this.initBreadcrumbList(this.findKeyPath(to.path));
+      const activeSide = this.activeSideBar(to.path)
+      if (activeSide && activeSide.group) {
+        this.activeNavbar(activeSide.group);
+      }
+      this.initBreadcrumbList(this.findKeyPath(to.path));
     },
+  },
+  updated() {
+    console.log(this.$route)
+  },
+  mounted() {
+    /* to be executed when mounted */
+    console.log('mounted...')
+    console.log(this.$route)
   },
 }
 </script>
