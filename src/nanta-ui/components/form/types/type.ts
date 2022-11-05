@@ -158,6 +158,7 @@ export interface FormSchema {
   helpComponentProps?: Partial<HelpComponentProps>;
   itemProps?: Partial<FormItem>;
   ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
+  ifHideLabel?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
   label: string;
   labelWidth?: string | number;
   placeholder?: string;

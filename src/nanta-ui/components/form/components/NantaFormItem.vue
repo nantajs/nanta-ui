@@ -265,7 +265,16 @@ export default {
     }
 
     function renderLabelHelpMessage() {
-      const { label, helpMessage, helpComponentProps, subLabel } = props.schema;
+      const { label, helpMessage, helpComponentProps, subLabel, ifHideLabel } = props.schema;
+      if (ifHideLabel) {
+        if (isBoolean(ifHideLabel) && ifHideLabel) {
+          return;
+        }
+        if (isFunction(ifHideLabel) && ifHideLabel(unref(getValues))) {
+          return;
+        }        
+      }
+
       const renderLabel = subLabel ? (
         <span>
           {label} <span class="text-secondary">{subLabel}</span>

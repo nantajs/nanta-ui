@@ -17,12 +17,12 @@ export const schemes: FormSchema[] = [
   {
     field: 'name2',
     label: "Info",
-    component: "Label",    
+    component: "Label",
   },
   {
     field: 'name',
     label: "Info",
-    component: "Label",   
+    component: "Label",
   },
   {
     field: 'name',
@@ -101,7 +101,9 @@ export const schemes: FormSchema[] = [
     field: 'type',
     component: 'Select',
     label: 'Type',
+    ifHideLabel: true,
     colProps: { span: 12 },
+    placeholder: 'Please select type.',
     componentProps: {
       options: [
         {
@@ -215,7 +217,8 @@ export const schemes: FormSchema[] = [
     label: 'Multi Select',
     slot: 'selectA',
     colProps: { span: 12 },
-    defaultValue: ['value_1'],
+//    defaultValue: ['value_1'],
+    placeholder: 'Please select type.',
     componentProps: {
       options: [
         {
