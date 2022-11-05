@@ -25,3 +25,4 @@ dist-ssr
 
 # local file only
 src/settings/localSetting.ts
+yarn.lock

@@ -69,7 +69,7 @@ export default defineNuxtPlugin(nuxtApp => {
 Here is an exmple [nanta-ui-nuxt](https://github.com/nantajs/nanta-ui-nuxt)
 
 - **Nuxt 3 Module** setup (recommended)  
-   The simplest way to setup nanta in Nuxt env. Your can use [nanta](https://github.com/nantajs/nuxt-nanta) module.  
+The simplest way to setup nanta in Nuxt env. Your can use [nanta](https://github.com/nantajs/nuxt-nanta) module.  
 
 ```shell
 yarn add @nanta/nuxt-nanta
