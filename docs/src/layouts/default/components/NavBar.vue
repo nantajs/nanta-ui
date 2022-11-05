@@ -8,7 +8,7 @@
 
     <a-row>
       <a-col :span="12">
-        <a-menu v-model="selectedKeys" theme="dark" mode="horizontal" @select="onSelect"
+        <a-menu :selectedKeys="selectedKeys" theme="dark" mode="horizontal" @select="onSelect"
           :style="{ lineHeight: '64px', fontSize: 'large' }">
           <a-menu-item v-for="item in navItems" :key="item.key">{{ item.name }}</a-menu-item>
         </a-menu>

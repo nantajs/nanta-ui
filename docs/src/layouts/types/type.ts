@@ -19,10 +19,13 @@ export interface Menu {
   orderNo?: number;
 
   hideMenu?: boolean;
+
+  group?: string;
 }
 
 export interface Nav {
   name: string;
   path?: string;
   key?: string;
+  group?: string;
 }

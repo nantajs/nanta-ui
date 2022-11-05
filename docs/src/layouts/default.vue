@@ -1,8 +1,8 @@
 <template>
   <a-layout>
-    <NavBar :navItems="navItems" :selectedKeys="selectedKeys" @selectd="onSelected"/>
+    <NavBar :navItems="navItems" :selectedKeys="selectedNavKeys" @selectd="onNavSelected" />
     <a-layout>
-      <SideBar :sideMenus="sideMenus" @menu-selected="onMenuSelected" :selectedKeys="selectedKeys"
+      <SideBar :sideMenus="sideMenus" @menu-selected="onSideSelected" :selectedKeys="selectedKeys"
         :openKeys="openKeys" />
       <a-layout style="padding: 0 24px 24px">
         <a-breadcrumb style="margin: 16px 0">
@@ -30,6 +30,7 @@ import { useRoute, useRouter } from "vue-router";
 import { getMenus, iteratorMenu, getMenuNode } from "./menu";
 
 const selectedKeys = ref<string[]>([]);
+const selectedNavKeys = ref<string[]>([]);
 const openKeys = ref<string[]>([]);
 
 const breadcrumbList = ref<string[]>([]);
@@ -117,31 +118,31 @@ function initBreadcrumbList(keyPath: string[] | undefined) {
 }
 
 initBreadcrumbList(keyPath);
-const onMenuSelected = (item: Menu) => {
-  initBreadcrumbList(item.keyPath);
-}
 
 const navItems: Nav[] = [
   {
     name: "Get Started",
     key: "getstarted",
-    path: "/"
+    path: "/",
+    group: 'index',
   },
   {
     name: "Guide",
     key: "guide",
+    group: "components",
   },
   {
     name: "API",
     key: "api",
+    group: 'api'
   }
 ];
 
-const findItemByPath = (menus: Menu[], path: string) => {
+const findItemByPath = (menus: Menu[], path: string | null, key?: string) => {
   let res: Menu | undefined;
   menus.forEach((item) => {
     iteratorMenu(item, (i) => {
-      if (i.path === path) {
+      if ((path && i.path === path) || i.key == key) {
         res = i;
         return;
       }
@@ -152,32 +153,51 @@ const findItemByPath = (menus: Menu[], path: string) => {
 
 const router = useRouter()
 
-const onSelected = (item: Nav, key: string) => {
+const onSideSelected = (item: any) => {
+  initBreadcrumbList(item.keyPath);
+  const activeSide = findItemByPath(sideMenus, null, item.key);
+  selectedNavKeys.value.pop()
+  if (activeSide && activeSide.group) {
+    activeNavbar(activeSide.group);
+  }
+}
+
+const onNavSelected = (item: Nav, key: string) => {
   console.log('selectd key', key)
-  const nav = navItems.find(item=>item.key === key);
+  const nav = navItems.find(item => item.key === key);
   if (nav && nav.path) {
     router.push(nav.path)
+    activeNavbar(nav.group)
+  }
+}
+
+function activeNavbar(group?: string) {
+  const activeNav = navItems.find(item => item.group === group);
+  if (activeNav && activeNav.key) {
+    selectedNavKeys.value.pop()
+    selectedNavKeys.value.push(activeNav.key);
+    console.log(selectedNavKeys.value)
+  }
+}
+
+function activeSideBar(path: string, key?: string): Menu | undefined {
+  const activeSide = findItemByPath(sideMenus, path, key);
+  if (activeSide && activeSide.key) {
+    selectedKeys.value.pop();
+    selectedKeys.value.push(activeSide.key);
+    return activeSide;
   }
 }
 
 onMounted(async () => {
   await router.isReady()
   const currentPath = route.path
-  console.log(route.path);
-  const activeSide = findItemByPath(sideMenus, currentPath);
-
-  console.log(activeSide)
-  //console.log(sideMenus)
-
-  if (activeSide && activeSide.key) {
-    selectedKeys.value.push(activeSide.key);
-  }
-
+  const activeSide = activeSideBar(currentPath);
 
   initBreadcrumbList(findKeyPath(currentPath));
-
-  //const activeNav = navItems.find(item => item.path === route.path);
-
+  if (activeSide && activeSide.group) {
+    activeNavbar(activeSide.group)
+  }
 })
 
 </script>

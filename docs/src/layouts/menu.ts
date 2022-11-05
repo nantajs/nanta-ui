@@ -7,6 +7,7 @@ const componentsList = basicRouteItems.filter(item => 'components' === item.grou
         icon: 'quill:creditcard',
         path: item.path,
         key: item.group + item.name,
+        group: item.group,
     } as Menu
 });
 
@@ -16,7 +17,8 @@ const localMenus: Menu[] = [
         name: 'Dashboard',
         icon: 'ic:baseline-home',
         key: 'dashboard',
-        path: '/index'
+        path: '/index', 
+        group: 'index'
     },
     {
         name: 'Pages',
