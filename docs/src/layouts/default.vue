@@ -194,7 +194,9 @@ defineExpose(
   {
     activeSideBar,
     activeNavbar,
-    selectedKeys
+    selectedKeys, 
+    initBreadcrumbList,
+    findKeyPath,
   }
 )
 </script>
@@ -209,6 +211,7 @@ export default {
       if (activeSide && activeSide.group) {
         this.activeNavbar(activeSide.group);
       }
+      this.initBreadcrumbList(this.findKeyPath(to.path));
     },
   },
 }
