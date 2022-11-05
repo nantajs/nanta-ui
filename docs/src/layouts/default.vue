@@ -27,11 +27,11 @@ import NavBar from "./default/components/NavBar.vue";
 import SideBar from "./default/components/SideBar.vue";
 import Footer from "./default/components/Footer.vue";
 import { makeid } from "./default/index";
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getMenus, iteratorMenu, getMenuNode, findItemByPath } from "./menu";
 
-export default {
+export default defineComponent({
   components: { NavBar, SideBar, Footer },
   setup(props, { slots }) {
     const selectedKeys = ref<string[]>([]);
@@ -174,13 +174,9 @@ export default {
 
     function activeSideBar(path: string | null, key?: string): Menu | undefined {
       const activeSide = findItemByPath(sideMenus, path, key);
-      console.log(path);
-      console.log(activeSide)
       if (activeSide && activeSide.key) {
-        console.log(selectedKeys.value);
         selectedKeys.value.pop();
         selectedKeys.value.push(activeSide.key);
-        console.log(selectedKeys.value);
         return activeSide;
       }
     }
@@ -230,7 +226,7 @@ export default {
     console.log('mounted...')
     console.log(this.$route)
   },
-}
+})
 </script>
 
 <style>
