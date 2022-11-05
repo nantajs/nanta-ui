@@ -13,7 +13,6 @@
 import { NantaButton, NantaForm, useForm, FormProps, Recordable } from '/~/main'
 import { schemes } from "./data";
 import { computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
 
 const optionsA = [
   {
@@ -32,8 +31,6 @@ const optionsA = [
     key: '3',
   },
 ]
-
-console.log(useRoute().path)
 
 const [
   registerForm,

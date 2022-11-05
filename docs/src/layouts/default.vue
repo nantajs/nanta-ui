@@ -214,11 +214,12 @@ export default {
   watch: {
     $route(to, from) {
       console.log('change route from:' + from.path + ' -> to:' + to.path)
-      const activeSide = this.activeSideBar(to.path)
-      if (activeSide && activeSide.group) {
-        this.activeNavbar(activeSide.group);
-      }
-      this.initBreadcrumbList(this.findKeyPath(to.path));
+      // todo: TypeError: this.activeSideBar is not a function in production env. why ??
+      // const activeSide = this.activeSideBar(to.path)
+      // if (activeSide && activeSide.group) {
+      //  this.activeNavbar(activeSide.group);
+      // }
+      // this.initBreadcrumbList(this.findKeyPath(to.path));
     },
   },
 }
