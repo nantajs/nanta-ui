@@ -689,10 +689,10 @@ ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ant-design-vue@^3.3.0-beta.3:
-  version "3.3.0-beta.3"
-  resolved "https://registry.npmjs.org/ant-design-vue/-/ant-design-vue-3.3.0-beta.3.tgz#8f2ce68d79ded96367068564be26c71bfd77388f"
-  integrity sha512-xA7clMwKRw2S6E8etiq7FRN8qktRW6xr9HBuEuUDQwsbxLIy1kVKfiTbdbh+CklmasKGd9qvEJbzc65U/HJeOw==
+ant-design-vue@^3.2.13:
+  version "3.2.13"
+  resolved "https://registry.npmjs.org/ant-design-vue/-/ant-design-vue-3.2.13.tgz#2e2823d2ee84b83827816a5591c7bb7563852662"
+  integrity sha512-zO+0hhu5LN+UQOL9L+7Wlpj3WZcG6DT41OyuMJNS6Ja3impLNR2d1UwAVXr+eRdMd3TKd6dRc+KYn5/XTS9K8Q==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons-vue" "^6.1.0"

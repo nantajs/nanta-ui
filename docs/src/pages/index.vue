@@ -80,7 +80,7 @@ const [registerTable] = useTable({
         labelWidth: 120,
         schemas: searchFormSchema,
         autoSubmitOnEnter: true,
-        submitButtonOptions: { text: 'search' }
+        submitButtonOptions: { text: 'search' },
     },
 })
 
