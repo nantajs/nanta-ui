@@ -21,11 +21,6 @@ export const schemes: FormSchema[] = [
   },
   {
     field: 'name',
-    label: "Info",
-    component: "Label",
-  },
-  {
-    field: 'name',
     label: "Name",
     component: 'Input',
     defaultValue: 'nanta',

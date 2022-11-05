@@ -1,16 +1,19 @@
 <template>
   <div>
-    <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm" @submit="handleSubmit" 
+    <NantaForm @register="registerSearch"></NantaForm>
+
+    <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm" @submit="handleSubmit"
       @reset="handleReset">
       <template #selectA="{ model, field, schema }">
-        <a-select :options="optionsA" mode="multiple" v-model:value="model[field]" :placeholder="schema.placeholder" allowClear />
+        <a-select :options="optionsA" mode="multiple" v-model:value="model[field]" :placeholder="schema.placeholder"
+          allowClear />
       </template>
     </NantaForm>
   </div>
 </template>
 
 <script setup lang="ts">
-import { NantaButton, NantaForm, useForm, FormProps, Recordable } from '/~/main'
+import { NantaButton, NantaForm, useForm, FormProps, Recordable, FormSchema } from '/~/main'
 import { schemes } from "./data";
 import { computed } from "vue";
 
@@ -42,6 +45,14 @@ const [
     span: 24,
   },
 });
+
+const schemes2: FormSchema[] = [{
+  field: 'name',
+  label: "Name",
+  component: 'Input',
+}]
+
+const [registerSearch] = useForm({ labelWidth: 150, schemas: schemes2, layout: 'horizontal' })
 
 const customizeResetFn = (): Promise<void> => {
   console.log("here is a customize resetFn called!");
