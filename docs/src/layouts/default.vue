@@ -19,7 +19,9 @@
   </a-layout>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" >
+
+
 import { Menu, Nav } from "./types/type";
 import NavBar from "./default/components/NavBar.vue";
 import SideBar from "./default/components/SideBar.vue";
@@ -29,181 +31,186 @@ import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getMenus, iteratorMenu, getMenuNode, findItemByPath } from "./menu";
 
-const selectedKeys = ref<string[]>([]);
-const selectedNavKeys = ref<string[]>([]);
-const openKeys = ref<string[]>([]);
+export default {
+  components: { NavBar, SideBar, Footer },
+  setup(props, { slots }) {
+    const selectedKeys = ref<string[]>([]);
+    const selectedNavKeys = ref<string[]>([]);
+    const openKeys = ref<string[]>([]);
 
-const breadcrumbList = ref<string[]>([]);
-const sideMenus = getMenus();
-const route = useRoute();
-const path = route.path;
+    const breadcrumbList = ref<string[]>([]);
+    const sideMenus = getMenus();
+    const route = useRoute();
+    const path = route.path;
 
-console.log("current path=", path);
+    console.log("current path=", path);
 
-const menuNodes = getMenuNode(getMenus());
-menuNodes.forEach((item: Menu) => {
-  item.key && openKeys.value.push(item.key);
-})
-console.log(openKeys.value)
+    const menuNodes = getMenuNode(getMenus());
+    menuNodes.forEach((item: Menu) => {
+      item.key && openKeys.value.push(item.key);
+    })
+    console.log(openKeys.value)
 
-const getKeyAttributeMenuMap = (() => {
-  const res = {};
+    const getKeyAttributeMenuMap = (() => {
+      const res = {};
 
-  // make sure each menu has key attribute else random makeid!
-  sideMenus.forEach((item: Menu) => {
-    iteratorMenu(
-      item,
-      (item, keyPath) => {
-        if (!item.key || item.key.length == 0) {
-          item.key = makeid(5);
-        }
-        item.keyPath = [];
-        if (keyPath && keyPath.length > 0) {
-          keyPath.forEach((i) => {
-            item.keyPath && item.keyPath.push(i);
-          });
-        }
-        item.keyPath.push(item.key);
-      },
-      []
-    );
-  });
+      // make sure each menu has key attribute else random makeid!
+      sideMenus.forEach((item: Menu) => {
+        iteratorMenu(
+          item,
+          (item, keyPath) => {
+            if (!item.key || item.key.length == 0) {
+              item.key = makeid(5);
+            }
+            item.keyPath = [];
+            if (keyPath && keyPath.length > 0) {
+              keyPath.forEach((i) => {
+                item.keyPath && item.keyPath.push(i);
+              });
+            }
+            item.keyPath.push(item.key);
+          },
+          []
+        );
+      });
 
-  console.log(sideMenus);
+      console.log(sideMenus);
 
-  sideMenus.forEach((item: Menu) => {
-    iteratorMenu(item, (item) => {
-      const { name, path } = item;
-      if (item.key) {
-        res[item.key] = { name, path };
+      sideMenus.forEach((item: Menu) => {
+        iteratorMenu(item, (item) => {
+          const { name, path } = item;
+          if (item.key) {
+            res[item.key] = { name, path };
+          }
+        });
+      });
+
+      return res;
+    })();
+
+    function findKeyPath(path: string) {
+      let res: string[] | undefined;
+      sideMenus.forEach((item) => {
+        iteratorMenu(item, (item) => {
+          if (item.path === path) {
+            res = item.keyPath;
+          }
+        });
+      });
+      return res;
+    }
+
+    const keyPath = findKeyPath(path);
+    console.log(keyPath);
+    if (keyPath && keyPath.length > 0) {
+      const leng = keyPath.length;
+      selectedKeys.value = [keyPath[leng - 1]];
+      // openKeys.value = keyPath.slice(0, leng - 1);
+    }
+
+    function initBreadcrumbList(keyPath: string[] | undefined) {
+      if (!keyPath) {
+        return;
       }
-    });
-  });
-
-  return res;
-})();
-
-function findKeyPath(path: string) {
-  let res: string[] | undefined;
-  sideMenus.forEach((item) => {
-    iteratorMenu(item, (item) => {
-      if (item.path === path) {
-        res = item.keyPath;
-      }
-    });
-  });
-  return res;
-}
-
-const keyPath = findKeyPath(path);
-console.log(keyPath);
-if (keyPath && keyPath.length > 0) {
-  const leng = keyPath.length;
-  selectedKeys.value = [keyPath[leng - 1]];
-  // openKeys.value = keyPath.slice(0, leng - 1);
-}
-
-function initBreadcrumbList(keyPath: string[] | undefined) {
-  if (!keyPath) {
-    return;
-  }
-  // init it!
-  breadcrumbList.value = [];
-  if (keyPath && keyPath.length > 0) {
-    for (let i = 0; i < keyPath.length; i++) {
-      if (getKeyAttributeMenuMap[keyPath[i]]) {
-        breadcrumbList.value.push(getKeyAttributeMenuMap[keyPath[i]].name);
+      // init it!
+      breadcrumbList.value = [];
+      if (keyPath && keyPath.length > 0) {
+        for (let i = 0; i < keyPath.length; i++) {
+          if (getKeyAttributeMenuMap[keyPath[i]]) {
+            breadcrumbList.value.push(getKeyAttributeMenuMap[keyPath[i]].name);
+          }
+        }
       }
     }
-  }
-}
 
-initBreadcrumbList(keyPath);
+    initBreadcrumbList(keyPath);
 
-const navItems: Nav[] = [
-  {
-    name: "Get Started",
-    key: "getstarted",
-    path: "/",
-    group: 'index',
+    const navItems: Nav[] = [
+      {
+        name: "Get Started",
+        key: "getstarted",
+        path: "/",
+        group: 'index',
+      },
+      {
+        name: "Guide",
+        key: "guide",
+        group: "components",
+      },
+      {
+        name: "API",
+        key: "api",
+        group: 'api'
+      }
+    ];
+
+    const router = useRouter()
+
+    const onSideSelected = (item: any) => {
+      initBreadcrumbList(item.keyPath);
+      const activeSide = findItemByPath(sideMenus, null, item.key);
+      selectedNavKeys.value.pop()
+      if (activeSide && activeSide.group) {
+        activeNavbar(activeSide.group);
+      }
+    }
+
+    const onNavSelected = (item: Nav, key: string) => {
+      console.log('selectd key', key)
+      const nav = navItems.find(item => item.key === key);
+      if (nav && nav.path) {
+        router.push(nav.path)
+        activeNavbar(nav.group)
+      }
+    }
+
+    function activeNavbar(group?: string) {
+      const activeNav = navItems.find(item => item.group === group);
+      if (activeNav && activeNav.key) {
+        selectedNavKeys.value.pop()
+        selectedNavKeys.value.push(activeNav.key);
+      }
+    }
+
+    function activeSideBar(path: string, key?: string): Menu | undefined {
+      const activeSide = findItemByPath(sideMenus, path, key);
+      console.log(path);
+      console.log(activeSide)
+      if (activeSide && activeSide.key) {
+        console.log(selectedKeys.value);
+        selectedKeys.value.pop();
+        selectedKeys.value.push(activeSide.key);
+        console.log(selectedKeys.value);
+        return activeSide;
+      }
+    }
+
+    onMounted(async () => {
+      await router.isReady()
+      const currentPath = route.path
+      const activeSide = activeSideBar(currentPath);
+
+      initBreadcrumbList(findKeyPath(currentPath));
+      if (activeSide && activeSide.group) {
+        activeNavbar(activeSide.group)
+      }
+    })
+
+    return {
+      navItems,
+      selectedNavKeys,
+      onNavSelected,
+      onSideSelected,
+      selectedKeys,
+      breadcrumbList,
+      openKeys,
+      activeSideBar,
+      activeNavbar,
+      initBreadcrumbList,
+      findKeyPath,
+      sideMenus
+    }
   },
-  {
-    name: "Guide",
-    key: "guide",
-    group: "components",
-  },
-  {
-    name: "API",
-    key: "api",
-    group: 'api'
-  }
-];
-
-const router = useRouter()
-
-const onSideSelected = (item: any) => {
-  initBreadcrumbList(item.keyPath);
-  const activeSide = findItemByPath(sideMenus, null, item.key);
-  selectedNavKeys.value.pop()
-  if (activeSide && activeSide.group) {
-    activeNavbar(activeSide.group);
-  }
-}
-
-const onNavSelected = (item: Nav, key: string) => {
-  console.log('selectd key', key)
-  const nav = navItems.find(item => item.key === key);
-  if (nav && nav.path) {
-    router.push(nav.path)
-    activeNavbar(nav.group)
-  }
-}
-
-function activeNavbar(group?: string) {
-  const activeNav = navItems.find(item => item.group === group);
-  if (activeNav && activeNav.key) {
-    selectedNavKeys.value.pop()
-    selectedNavKeys.value.push(activeNav.key);
-  }
-}
-
-function activeSideBar(path: string, key?: string): Menu | undefined {
-  const activeSide = findItemByPath(sideMenus, path, key);
-  console.log(path);
-  console.log(activeSide)
-  if (activeSide && activeSide.key) {
-    console.log(selectedKeys.value);
-    selectedKeys.value.pop();
-    selectedKeys.value.push(activeSide.key);
-    console.log(selectedKeys.value);
-    return activeSide;
-  }
-}
-
-onMounted(async () => {
-  await router.isReady()
-  const currentPath = route.path
-  const activeSide = activeSideBar(currentPath);
-
-  initBreadcrumbList(findKeyPath(currentPath));
-  if (activeSide && activeSide.group) {
-    activeNavbar(activeSide.group)
-  }
-})
-defineExpose(
-  {
-    activeSideBar,
-    activeNavbar,
-    selectedKeys, 
-    initBreadcrumbList,
-    findKeyPath,
-  }
-)
-</script>
-
-<script lang="ts">
-
-export default {
   watch: {
     $route(to, from) {
       console.log('change route from:' + from.path + ' -> to:' + to.path)
