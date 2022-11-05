@@ -45,14 +45,17 @@
 import { Nav } from "../../types/type";
 import { PropType, Icon as NantaIcon } from "@nanta/ui";
 
-defineProps({
+const props = defineProps({
   navItems: Array as PropType<Array<Nav>>,
   selectedKeys: Array as PropType<Array<string>>,
 });
 
+const emits = defineEmits(["selectd"])
+
 const onSelect = ({ item, key, selectedKeys }) => {
   console.log("selectd");
-  console.log(item);
+  console.log(item, key);
+  emits("selectd", item, key);
 };
 </script>
 

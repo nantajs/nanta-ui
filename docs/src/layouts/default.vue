@@ -1,13 +1,13 @@
 <template>
   <a-layout>
-    <NavBar :navItems="navItems" :selectedKeys="selectedKeys" />
+    <NavBar :navItems="navItems" :selectedKeys="selectedKeys" @selectd="onSelected"/>
     <a-layout>
       <SideBar :sideMenus="sideMenus" @menu-selected="onMenuSelected" :selectedKeys="selectedKeys"
         :openKeys="openKeys" />
       <a-layout style="padding: 0 24px 24px">
         <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item v-for="item in breadcrumbList" :key="item">{{
-          item
+              item
           }}</a-breadcrumb-item>
         </a-breadcrumb>
         <a-layout-content>
@@ -117,25 +117,69 @@ function initBreadcrumbList(keyPath: string[] | undefined) {
 }
 
 initBreadcrumbList(keyPath);
-
-const onMenuSelected = (item) => {
+const onMenuSelected = (item: Menu) => {
   initBreadcrumbList(item.keyPath);
-};
+}
 
 const navItems: Nav[] = [
   {
     name: "Get Started",
-    key: "1",
+    key: "getstarted",
+    path: "/"
   },
   {
     name: "Guide",
-    key: "2",
+    key: "guide",
   },
   {
     name: "API",
-    key: "3",
-  },
+    key: "api",
+  }
 ];
+
+const findItemByPath = (menus: Menu[], path: string) => {
+  let res: Menu | undefined;
+  menus.forEach((item) => {
+    iteratorMenu(item, (i) => {
+      if (i.path === path) {
+        res = i;
+        return;
+      }
+    })
+  })
+  return res;
+};
+
+const router = useRouter()
+
+const onSelected = (item: Nav, key: string) => {
+  console.log('selectd key', key)
+  const nav = navItems.find(item=>item.key === key);
+  if (nav && nav.path) {
+    router.push(nav.path)
+  }
+}
+
+onMounted(async () => {
+  await router.isReady()
+  const currentPath = route.path
+  console.log(route.path);
+  const activeSide = findItemByPath(sideMenus, currentPath);
+
+  console.log(activeSide)
+  //console.log(sideMenus)
+
+  if (activeSide && activeSide.key) {
+    selectedKeys.value.push(activeSide.key);
+  }
+
+
+  initBreadcrumbList(findKeyPath(currentPath));
+
+  //const activeNav = navItems.find(item => item.path === route.path);
+
+})
+
 </script>
 
 <style>
