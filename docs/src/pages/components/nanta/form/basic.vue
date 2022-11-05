@@ -52,7 +52,10 @@ const schemes2: FormSchema[] = [{
   component: 'Input',
 }]
 
-const [registerSearch] = useForm({ labelWidth: 150, schemas: schemes2, layout: 'horizontal' })
+const [registerSearch] = useForm({
+  labelWidth: 150, schemas: schemes2, layout: 'horizontal',
+  submitButtonOptions: { text: 'POST' }, showResetButton: false,
+})
 
 const customizeResetFn = (): Promise<void> => {
   console.log("here is a customize resetFn called!");

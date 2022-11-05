@@ -25,6 +25,8 @@ export interface FormProps {
   resetFn?: () => Promise<void>;
   schemas?: FormSchema[];
   showActionButtons?: boolean;
+  showResetButton?: boolean;
+  showSubmitButton?: boolean;
   size?: 'default' | 'small' | 'large';
   submitOnReset?: boolean;
   submitButtonOptions?: Partial<ButtonOptions>;
@@ -70,6 +72,8 @@ export const formProps = {
     default: () => [],
   },
   showActionButtons: propTypes.bool.def(true),
+  showResetButton: propTypes.bool.def(true),
+  showSubmitButton: propTypes.bool.def(true),
   size: propTypes.oneOf(['default', 'small', 'large']).def('default'),
   submitButtonOptions: Object as PropType<ButtonOptions>,
   submitFn: Function as PropType<() => Promise<void>>,
