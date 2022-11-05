@@ -27,7 +27,7 @@ import Footer from "./default/components/Footer.vue";
 import { makeid } from "./default/index";
 import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getMenus, iteratorMenu, getMenuNode } from "./menu";
+import { getMenus, iteratorMenu, getMenuNode, findItemByPath } from "./menu";
 
 const selectedKeys = ref<string[]>([]);
 const selectedNavKeys = ref<string[]>([]);
@@ -44,6 +44,7 @@ const menuNodes = getMenuNode(getMenus());
 menuNodes.forEach((item: Menu) => {
   item.key && openKeys.value.push(item.key);
 })
+console.log(openKeys.value)
 
 const getKeyAttributeMenuMap = (() => {
   const res = {};
@@ -99,7 +100,7 @@ console.log(keyPath);
 if (keyPath && keyPath.length > 0) {
   const leng = keyPath.length;
   selectedKeys.value = [keyPath[leng - 1]];
-  openKeys.value = keyPath.slice(0, leng - 1);
+  // openKeys.value = keyPath.slice(0, leng - 1);
 }
 
 function initBreadcrumbList(keyPath: string[] | undefined) {
@@ -138,19 +139,6 @@ const navItems: Nav[] = [
   }
 ];
 
-const findItemByPath = (menus: Menu[], path: string | null, key?: string) => {
-  let res: Menu | undefined;
-  menus.forEach((item) => {
-    iteratorMenu(item, (i) => {
-      if ((path && i.path === path) || i.key == key) {
-        res = i;
-        return;
-      }
-    })
-  })
-  return res;
-};
-
 const router = useRouter()
 
 const onSideSelected = (item: any) => {
@@ -176,15 +164,18 @@ function activeNavbar(group?: string) {
   if (activeNav && activeNav.key) {
     selectedNavKeys.value.pop()
     selectedNavKeys.value.push(activeNav.key);
-    console.log(selectedNavKeys.value)
   }
 }
 
 function activeSideBar(path: string, key?: string): Menu | undefined {
   const activeSide = findItemByPath(sideMenus, path, key);
+  console.log(path);
+  console.log(activeSide)
   if (activeSide && activeSide.key) {
+    console.log(selectedKeys.value);
     selectedKeys.value.pop();
     selectedKeys.value.push(activeSide.key);
+    console.log(selectedKeys.value);
     return activeSide;
   }
 }
@@ -199,7 +190,28 @@ onMounted(async () => {
     activeNavbar(activeSide.group)
   }
 })
+defineExpose(
+  {
+    activeSideBar,
+    activeNavbar,
+    selectedKeys
+  }
+)
+</script>
 
+<script lang="ts">
+
+export default {
+  watch: {
+    $route(to, from) {
+      console.log('change route from:' + from.path + ' -> to:' + to.path)
+      const activeSide = this.activeSideBar(to.path)
+      if (activeSide && activeSide.group) {
+        this.activeNavbar(activeSide.group);
+      }
+    },
+  },
+}
 </script>
 
 <style>

@@ -17,7 +17,7 @@ const localMenus: Menu[] = [
         name: 'Dashboard',
         icon: 'ic:baseline-home',
         key: 'dashboard',
-        path: '/index', 
+        path: '/',
         group: 'index'
     },
     {
@@ -103,3 +103,16 @@ export function getMenuNode(rootMenus: Menu[]): Menu[] {
     })
     return menuList;
 }
+
+export function findItemByPath(menus: Menu[], path: string | null, key?: string) {
+    let res: Menu | undefined;
+    menus.forEach((item) => {
+        iteratorMenu(item, (i) => {
+            if ((path && i.path === path) || i.key == key) {
+                res = i;
+                return;
+            }
+        })
+    })
+    return res;
+};
