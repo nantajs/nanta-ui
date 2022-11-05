@@ -104,7 +104,7 @@ export default {
     console.log(keyPath);
     if (keyPath && keyPath.length > 0) {
       const leng = keyPath.length;
-      selectedKeys.value = [keyPath[leng - 1]];
+      // selectedKeys.value = [keyPath[leng - 1]];
       // openKeys.value = keyPath.slice(0, leng - 1);
     }
 
