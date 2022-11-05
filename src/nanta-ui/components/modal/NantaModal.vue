@@ -65,7 +65,6 @@ function setModalProps(props: Partial<ModalProps>): void {
 }
 async function setProps(props: BasicProps): Promise<void> {
   propsRef.value = deepMerge(unref(propsRef) || {}, props);
-  console.log(propsRef.value)
 }
 
 const modalMethods: ModalMethods = {

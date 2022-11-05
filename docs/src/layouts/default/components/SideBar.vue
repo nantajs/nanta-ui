@@ -23,7 +23,7 @@ console.log(props.selectedKeys);
 const emit = defineEmits(['menu-selected']);
 const onSelect = e => {
   const { key, keyPath } = e;
-  console.log(e)
+  // console.log(e)
   emit('menu-selected', { key, keyPath })
 }
 </script>

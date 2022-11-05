@@ -29,7 +29,7 @@ import Footer from "./default/components/Footer.vue";
 import { makeid } from "./default/index";
 import { ref, computed, onMounted, defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getMenus, iteratorMenu, getMenuNode, findItemByPath } from "./menu";
+import { getMenus, iteratorMenu, getMenuNode, findItemByPath, navItems } from "./menu";
 
 export default defineComponent({
   components: { NavBar, SideBar, Footer },
@@ -43,13 +43,10 @@ export default defineComponent({
     const route = useRoute();
     const path = route.path;
 
-    console.log("current path=", path);
-
     const menuNodes = getMenuNode(getMenus());
     menuNodes.forEach((item: Menu) => {
       item.key && openKeys.value.push(item.key);
     })
-    console.log(openKeys.value)
 
     const getKeyAttributeMenuMap = (() => {
       const res = {};
@@ -101,7 +98,6 @@ export default defineComponent({
     }
 
     const keyPath = findKeyPath(path);
-    console.log(keyPath);
     if (keyPath && keyPath.length > 0) {
       const leng = keyPath.length;
       // selectedKeys.value = [keyPath[leng - 1]];
@@ -124,25 +120,6 @@ export default defineComponent({
     }
 
     initBreadcrumbList(keyPath);
-
-    const navItems: Nav[] = [
-      {
-        name: "Get Started",
-        key: "getstarted",
-        path: "/",
-        group: 'index',
-      },
-      {
-        name: "Guide",
-        key: "guide",
-        group: "components",
-      },
-      {
-        name: "API",
-        key: "api",
-        group: 'api'
-      }
-    ];
 
     const router = useRouter()
 
@@ -181,15 +158,18 @@ export default defineComponent({
       }
     }
 
-    onMounted(async () => {
-      await router.isReady()
-      const currentPath = route.path
-      const activeSide = activeSideBar(currentPath);
+    function initActiveNavAndSider(path: string) {
+      const activeSide = activeSideBar(path);
 
-      initBreadcrumbList(findKeyPath(currentPath));
+      initBreadcrumbList(findKeyPath(path));
       if (activeSide && activeSide.group) {
         activeNavbar(activeSide.group)
       }
+    }
+
+    onMounted(async () => {
+      await router.isReady()
+      initActiveNavAndSider(route.path)
     })
 
     return {
@@ -200,31 +180,15 @@ export default defineComponent({
       selectedKeys,
       breadcrumbList,
       openKeys,
-      activeSideBar,
-      activeNavbar,
-      initBreadcrumbList,
-      findKeyPath,
-      sideMenus
+      sideMenus,
+      initActiveNavAndSider
     }
   },
   watch: {
     $route(to, from) {
       console.log('change route from:' + from.path + ' -> to:' + to.path)
-      // todo: TypeError: this.activeSideBar is not a function in production env. why ??
-      const activeSide = this.activeSideBar(to.path)
-      if (activeSide && activeSide.group) {
-        this.activeNavbar(activeSide.group);
-      }
-      this.initBreadcrumbList(this.findKeyPath(to.path));
+      this.initActiveNavAndSider(to.path)
     },
-  },
-  updated() {
-    console.log(this.$route)
-  },
-  mounted() {
-    /* to be executed when mounted */
-    console.log('mounted...')
-    console.log(this.$route)
   },
 })
 </script>

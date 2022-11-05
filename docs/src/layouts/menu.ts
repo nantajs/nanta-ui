@@ -1,4 +1,4 @@
-import { Menu } from './types/type'
+import { Menu, Nav } from './types/type'
 import { basicRouteItems } from '../router/routes'
 
 const componentsList = basicRouteItems.filter(item => 'components' === item.group).map(item => {
@@ -56,6 +56,25 @@ const localMenus: Menu[] = [
         children: componentsList,
     }
 ]
+
+export const navItems: Nav[] = [
+    {
+        name: "Get Started",
+        key: "getstarted",
+        path: "/",
+        group: 'index',
+    },
+    {
+        name: "Guide",
+        key: "guide",
+        group: "components",
+    },
+    {
+        name: "API",
+        key: "api",
+        group: 'api'
+    }
+];
 
 export function iteratorMenu(
     item: Menu,
