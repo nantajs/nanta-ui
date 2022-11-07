@@ -2,24 +2,14 @@
   <a-col v-if="showActionButtons" v-bind="getActionColOptions">
     <div style="width: 100%" :style="{ textAlign: getActionColOptions.style.textAlign }">
       <slot name="resetBefore" />
-      <a-button
-        v-if="showResetButton"
-        type="default"
-        style="margin-left: .5rem;"
-        v-bind="getResetBtnOptions"
-        @click="resetAction"
-      >
+      <a-button v-if="showResetButton" type="default" style="margin-left: .5rem;" v-bind="getResetBtnOptions"
+        @click="resetAction">
         {{ getResetBtnOptions.text }}
       </a-button>
       <slot name="submitBefore" />
 
-      <a-button
-        v-if="showSubmitButton"
-        type="primary"
-        style="margin-left: .5rem;"
-        v-bind="getSubmitBtnOptions"
-        @click="submitAction"
-      >
+      <a-button v-if="showSubmitButton" type="primary" style="margin-left: .5rem;" v-bind="getSubmitBtnOptions"
+        @click="submitAction">
         {{ getSubmitBtnOptions.text }}
       </a-button>
     </div>

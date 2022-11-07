@@ -50,11 +50,17 @@ const schemes2: FormSchema[] = [{
   field: 'name',
   label: "Name",
   component: 'Input',
+  colProps: {
+    span: 8,
+  }
 }]
 
 const [registerSearch] = useForm({
   labelWidth: 150, schemas: schemes2, layout: 'horizontal',
   submitButtonOptions: { text: 'POST' }, showResetButton: false,
+  actionColOptions: {
+    span: 1
+  }
 })
 
 const customizeResetFn = (): Promise<void> => {

@@ -66,7 +66,7 @@ const searchFormSchema: FormSchema[] = [
         field: 'name',
         label: 'Package Name',
         component: 'Input',
-        colProps: { span: 8 },
+        colProps: { span: 12 },
     },
 ];
 
@@ -80,7 +80,9 @@ const [registerTable] = useTable({
         labelWidth: 120,
         schemas: searchFormSchema,
         autoSubmitOnEnter: true,
+        colon: true,
         submitButtonOptions: { text: 'search' },
+        actionColOptions: {span: 12},
     },
 })
 
