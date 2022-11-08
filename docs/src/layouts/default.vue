@@ -20,8 +20,6 @@
 </template>
 
 <script lang="ts" >
-
-
 import { Menu, Nav } from "./types/type";
 import NavBar from "./default/components/NavBar.vue";
 import SideBar from "./default/components/SideBar.vue";

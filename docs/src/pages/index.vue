@@ -82,7 +82,12 @@ const [registerTable] = useTable({
         autoSubmitOnEnter: true,
         colon: true,
         submitButtonOptions: { text: 'search' },
-        actionColOptions: {span: 12},
+        actionColOptions: {
+            span: 12,
+            style: {
+                'text-align': 'left'
+            }
+        },
     },
 })
 
