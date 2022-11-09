@@ -114,12 +114,7 @@ export const schemes: FormSchema[] = [
       ],
     },
   },
-  {
-    field: 'tags',
-    label: "Tags",
-    colProps: { span: 12 },
-    component: 'Input',
-  },
+  
   {
     field: 'address',
     label: "Address",
@@ -205,6 +200,14 @@ export const schemes: FormSchema[] = [
     component: 'DatePicker',
     colProps: { span: 12 },
     label: 'DatePicker_6',
+  },
+  {
+    field: 'tags',
+    label: "Tags",
+    colProps: { span: 12 },
+    component: 'Select',
+    slot: 'selectB',
+    placeholder: 'Please input your tag and then press return.'
   },
   {
     field: 'field7',

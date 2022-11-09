@@ -11,7 +11,12 @@
         </div>
 
         <NantaModal @register="registerBasic"></NantaModal>
-        <NantaFormModal @register="registerFormModal" v-bind="mProps" @ok="onSubmit"></NantaFormModal>
+        <NantaFormModal @register="registerFormModal" v-bind="mProps" @ok="onSubmit">
+            <template #selectTag="{ model, field, schema }">
+                <a-select :options="optionsTag" mode="tags" :token-separators="[',']" v-model:value="model[field]"
+                    :placeholder="schema.placeholder" allowClear />
+            </template>
+        </NantaFormModal>
     </div>
 </template>
 
@@ -24,6 +29,8 @@ import {
     NantaFormModalProps,
 } from "/~/main";
 import { editModalSchema } from "../table/data";
+import type { SelectProps } from 'ant-design-vue';
+import { ref } from 'vue';
 
 const [registerBasic, { openModal }] = useModal({ title: "Basic Modal", okText: "Yes" });
 const [registerFormModal, { openModal: openFormModal }] = useModal();
@@ -35,9 +42,12 @@ function clickBasicModal() {
 function clickFormModal() {
     openFormModal(true, {
         title: "Nanta Form Modal",
-        record: { name: "Aborn Jiang", id: "20220412" },
+        record: { name: "Aborn Jiang", id: "20220412", tags: ['init', 'ie'] },
     });
 }
+
+const optionsTag = ref<SelectProps['options']>([
+]);
 
 const mProps: NantaFormModalProps = {
     schemas: editModalSchema,

@@ -1,6 +1,10 @@
 <template>
   <NantaModal @register="register" @ok="handleOk" @cancel="handleCancel" v-bind="getBindValue">
-    <NantaForm @register="registerForm" @submit="handleOk" v-bind="getFormProps" />
+    <NantaForm @register="registerForm" @submit="handleOk" v-bind="getFormProps">
+      <template #[item]="data" v-for="item in Object.keys($slots)">
+        <slot :name="item" v-bind="data || {}"></slot>
+      </template>
+    </NantaForm>
   </NantaModal>
 </template>
   

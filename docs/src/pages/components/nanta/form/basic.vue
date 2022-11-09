@@ -8,12 +8,18 @@
         <a-select :options="optionsA" mode="multiple" v-model:value="model[field]" :placeholder="schema.placeholder"
           allowClear />
       </template>
+      <template #selectB="{ model, field, schema }">
+        <a-select :options="optionsB" mode="tags" :token-separators="[',']" v-model:value="model[field]" :placeholder="schema.placeholder"
+          allowClear />
+      </template>
     </NantaForm>
   </div>
 </template>
 
 <script setup lang="ts">
 import { NantaButton, NantaForm, useForm, FormProps, Recordable, FormSchema } from '/~/main'
+import type { SelectProps } from 'ant-design-vue';
+import { defineComponent, ref, watch } from 'vue';
 import { schemes } from "./data";
 import { computed } from "vue";
 
@@ -34,6 +40,9 @@ const optionsA = [
     key: '3',
   },
 ]
+
+const optionsB = ref<SelectProps['options']>([
+]);
 
 const [
   registerForm,

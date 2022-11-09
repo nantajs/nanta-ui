@@ -73,8 +73,10 @@ export const editModalSchema: FormSchema[] = [
   {
     field: 'tags',
     label: 'Tags',
-    component: 'Input',
+    component: 'Select',
     colProps: { span: 24 },
+    slot: 'selectTag',
+    placeholder: 'Please input your tag and then press return.'
   }, 
 ]
 
