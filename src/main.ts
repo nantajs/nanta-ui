@@ -16,6 +16,7 @@ export { setupNanta }
 
 export * from './nanta-ui/components/button'
 export * from './nanta-ui/components/form'
+export * from './nanta-ui/components/form/validators/index'
 export * from './nanta-ui/components/loading'
 export * from './nanta-ui/components/modal'
 export * from './nanta-ui/components/table'

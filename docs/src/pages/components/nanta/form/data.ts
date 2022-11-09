@@ -1,4 +1,4 @@
-import { FormSchema } from "/~/main";
+import { FormSchema, VALIDATORS } from "/~/main";
 export const schemes: FormSchema[] = [
   {
     field: 'id',
@@ -18,6 +18,30 @@ export const schemes: FormSchema[] = [
     field: 'name2',
     label: "Info",
     component: "Label",
+  },
+  {
+    field: 'homepage',
+    label: "URL",
+    component: "Input",
+    colProps: { span: 24 },
+    placeholder: 'Validate url is valid.',
+    rules: [
+      {
+        required: true,
+        validator: VALIDATORS.url,
+        trigger: 'change',
+      }
+    ]
+  },
+  {
+    field: 'description',
+    label: "Desc",
+    component: "InputTextArea",
+    componentProps: {
+      'auto-size': { minRows: 2, maxRows: 5 },
+    },
+    placeholder: 'Autosize height with minimum and maximum number of lines',
+    colProps: { span: 24 },
   },
   {
     field: 'name',
@@ -70,18 +94,9 @@ export const schemes: FormSchema[] = [
       {
         required: true,
         // @ts-ignore
-        validator: async (rule, value) => {
-          if (!value) {
-            /* eslint-disable-next-line */
-            return Promise.reject('值不能为空');
-          }
-          if (value === '1') {
-            /* eslint-disable-next-line */
-            return Promise.reject('值不能为1');
-          }
-          return Promise.resolve();
-        },
+        validator: VALIDATORS.email,
         trigger: 'change',
+        message: 'The email illegal.'
       },
     ],
   },
@@ -114,7 +129,7 @@ export const schemes: FormSchema[] = [
       ],
     },
   },
-  
+
   {
     field: 'address',
     label: "Address",
@@ -215,7 +230,7 @@ export const schemes: FormSchema[] = [
     label: 'Multi Select',
     slot: 'selectA',
     colProps: { span: 12 },
-//    defaultValue: ['value_1'],
+    //    defaultValue: ['value_1'],
     placeholder: 'Pls select mulit options.',
     componentProps: {
       options: [
