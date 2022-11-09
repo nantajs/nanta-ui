@@ -25,3 +25,4 @@ dist-ssr
 
 # build/test files
 *.tgz
+vite.config.ts.timestamp-*.mjs
