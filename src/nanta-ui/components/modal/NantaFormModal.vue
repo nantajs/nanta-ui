@@ -50,7 +50,8 @@ const [register, innerMethods] = useModalInner(async (data: ModalInnerRecord) =>
 })
 
 const handleOk = async () => {
-  const values = await validateFields();
+  await validateFields();
+  const values = getFieldsValue();
   // console.log(values);
   emit("ok", values, recordRef.value);
 }

@@ -28,6 +28,13 @@ export const searchFormSchema: FormSchema[] = [
 
 export const editModalSchema: FormSchema[] = [
   {
+    field: 'id',
+    label: 'id',
+    component: 'Input',
+    ifShow: false,
+    colProps: { span: 24 },
+  }, 
+  {
     field: 'name',
     label: 'Name',
     component: 'Input',
