@@ -96,7 +96,7 @@ export const schemes: FormSchema[] = [
         // @ts-ignore
         validator: VALIDATORS.email,
         trigger: 'change',
-        message: 'Please input your valid email address.'
+        message: 'Please input an valid email address.'
       },
     ],
   },
