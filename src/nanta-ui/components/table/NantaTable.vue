@@ -23,7 +23,7 @@ import HeaderCell from "./components/HeaderCell.vue";
 import { omit, isFunction } from "lodash-es";
 import { Table } from "ant-design-vue";
 import { tableProps, BasicTableProps } from "./props";
-import { Recordable } from "../..";
+import type { Recordable } from '../../core/types/type';
 import { useColumns } from "./hooks/useColumns";
 import { usePagination } from "./hooks/usePagination";
 import { useDataSource } from "./hooks/useDataSource";

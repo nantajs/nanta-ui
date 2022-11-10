@@ -1,6 +1,6 @@
 {
   "name": "@nanta/ui",
-  "version": "0.1.0-rc.12",
+  "version": "0.1.0-rc.13",
   "type": "module",
   "files": [
     "dist"
@@ -23,6 +23,7 @@
     "preview": "vite preview",
     "packlocal": "npm pack",
     "package": "vite build && vue-tsc --emitDeclarationOnly",
+    "pkg": "vite build && vue-tsc --emitDeclarationOnly",
     "pub": "npm publish --access public"
   },
   "dependencies": {
@@ -40,7 +41,8 @@
     "nuxt-lodash": "^2.3.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
-    "vue-tsc": "^0.40.4"
+    "vite-plugin-dts": "^1.7.0",
+    "vue-tsc": "^1.0.9"
   },
   "description": "ant-design based ui framework.",
   "directories": {

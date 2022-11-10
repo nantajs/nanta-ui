@@ -24,7 +24,8 @@
 import { Form, Row } from "ant-design-vue";
 import type { NamePath } from "ant-design-vue/lib/form/interface";
 import { cloneDeep, set, isFunction } from "lodash-es";
-import { FormSchema, formProps, FormProps, FormActionType } from ".";
+import { formProps, FormProps } from "./types/formProps";
+import { FormSchema, FormActionType } from './types/type';
 import { useFormSchema } from "./hooks/useFormSchema";
 import NantaFormItem from "./components/NantaFormItem.vue";
 import NantaFormAction from "./components/NantaFormAction.vue";
@@ -33,7 +34,7 @@ import { itemIsDateType, dateUtil, tryDeconstructArray, tryDeconstructObject, ha
 import { handleInputNumberValue } from "./help"
 import { isNullOrUnDef, isObject, isArray, isString } from "../../utils/is";
 import { deepMerge } from "../../utils/util";
-import type { Nullable, Recordable } from "../..";
+import type { Nullable, Recordable } from "../../core/types/type";
 import { ref, unref, getCurrentInstance, reactive, computed, toRaw, watch, onMounted, nextTick, useAttrs } from "vue";
 
 const props = defineProps(formProps);

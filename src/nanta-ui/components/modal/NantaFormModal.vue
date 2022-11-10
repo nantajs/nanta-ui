@@ -11,8 +11,8 @@
 <script lang="ts" setup>
 import { ref, computed, unref, useAttrs } from 'vue';
 import { useForm, FormProps, } from "../form";
-import { useModalInner } from '.'
-import { Recordable } from '../..'
+import { useModalInner } from './hooks/useModal';
+import type { Recordable } from '../../core/types/type';
 import type { ModalInnerRecord } from './types/nantaFormModal'
 import NantaForm from "../form/NantaForm.vue";
 import NantaModal from './NantaModal.vue'

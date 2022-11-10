@@ -21,7 +21,7 @@ export interface NantaFormModalProps {
 export const nantaFormModalProps = {
     schemas: {
         type: [Array] as PropType<FormSchema[]>,
-        default: () => [],
+        default: () => [] as FormSchema[],
     },
     colon: propTypes.bool.def(true),
     modalProps: Object as PropType<PartModelProps>,
