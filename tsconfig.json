@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -13,8 +14,11 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "paths": {
+      "@/*": ["src/*"]
+    },
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "env.d.ts", "src/**/*", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
