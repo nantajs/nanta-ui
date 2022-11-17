@@ -148,6 +148,7 @@ const tableAction: TableActionType = {
         return unref(getBindValues).size as SizeType;
     },
     insertTableDataRecord,
+    reload,
     setLoading,
     setSelectedRowKeys,
     setShowPagination,

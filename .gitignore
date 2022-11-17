@@ -26,3 +26,5 @@ dist-ssr
 # build/test files
 *.tgz
 vite.config.ts.timestamp-*.mjs
+docs/src/pages/components/nanta/table/mTable.vue
+docs/src/pages/components/nanta/table/mTableData.ts

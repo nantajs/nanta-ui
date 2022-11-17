@@ -7,6 +7,7 @@ import type { WatchStopHandle } from 'vue';
 import { ref, onUnmounted, unref, watch, toRaw } from 'vue';
 import { getDynamicProps, error } from '../../../utils/util'
 import { ACTION_COLUMN_FLAG, INDEX_COLUMN_FLAG } from "../const";
+import { getInstance } from 'ant-design-vue/lib/message';
 
 type Props = Partial<DynamicProps<BasicTableProps>>;
 
@@ -108,6 +109,9 @@ export function useTable(tableProps?: Props): [
         },
         insertTableDataRecord: (record: Recordable | Recordable[], index?: number) => {
             return getTableInstance().insertTableDataRecord(record, index);
+        },
+        reload: async (opt?: FetchParams) => {
+            return await getTableInstance().reload(opt);
         },
         setLoading: (loading: boolean) => {
             getTableInstance().setLoading(loading);
