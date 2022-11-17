@@ -46,9 +46,9 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
 
     return {
       current: 1,
-      pageSize: PAGE_SIZE,
+      pageSize: isBoolean(pagination) ? PAGE_SIZE : pagination?.pageSize || pagination?.defaultPageSize || PAGE_SIZE,
       size: 'small',
-      defaultPageSize: PAGE_SIZE,
+      defaultPageSize: isBoolean(pagination) ? PAGE_SIZE : pagination?.defaultPageSize || PAGE_SIZE,
       showTotal: (total) => { return 'total of ' + total },
       showSizeChanger: true,
       pageSizeOptions: PAGE_SIZE_OPTIONS,
