@@ -9,6 +9,8 @@ export const basicRouteItems = [
     { path: '/components/modal/index', name: 'Modal', group: 'components', component: () => import('/@/pages/components/nanta/modal/index.vue') },
     { path: '/components/table/index', name: 'Table', group: 'components', component: () => import('/@/pages/components/nanta/table/index.vue') },
 
+    { path: '/antv/table/index', name: 'Table', group: 'antv', component: () => import('/@/pages/components/table/basic.vue') },
+
     { path: '/demo', name: 'Demo', component: () => import('/@/pages/demo.vue') },
     { path: '/index', name: 'Index', component: () => import('/@/pages/index.vue') },
     { path: '/404', name: '404Page', component: E404_COMPONENT },

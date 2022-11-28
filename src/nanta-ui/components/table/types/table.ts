@@ -4,7 +4,7 @@ import type { PaginationProps } from './pagination';
 import type { BasicTableProps } from '../props'
 import type { TableRowSelection as ITableRowSelection } from 'ant-design-vue/lib/table/interface';
 
-export type CellFormat = string | ((text: string, record: Recordable, index: number) => string | number) | Map<string | number, any> | object;
+export type CellFormat = string | ((text: string, record: Recordable, index: number) => string | number | VueNode) | Map<string | number, any> | object;
 
 export declare type SortOrder = 'ascend' | 'descend';
 

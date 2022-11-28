@@ -13,7 +13,7 @@ export const schemes: FormSchema[] = [
     defaultValue: 'nanta',
     required: true,
     placeholder: 'Please input user name.',
-  }, 
+  },
   {
     field: 'email',
     label: "Email",
@@ -54,3 +54,44 @@ export const schemes: FormSchema[] = [
     component: 'InputTextArea',
   },
 ]
+
+export const columns = [
+  {
+    name: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    key: "age",
+    customRender: ({ text, record, index }: { text: string, record: Recordable, index: number }) => {
+      console.log(text)
+      return (
+        <a-tooltip>
+          <template v-slot:title>prompt text</template>
+          Age: {text}
+        </a-tooltip>
+      )
+    }
+  },
+  {
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+    key: "address",
+  },
+  {
+    title: "Tags",
+    key: "tags",
+    dataIndex: "tags",
+  },
+  {
+    title: "Action",
+    key: "action",
+  },
+];

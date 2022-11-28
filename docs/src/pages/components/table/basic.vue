@@ -51,47 +51,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
+import { SmileOutlined } from "@ant-design/icons-vue";
 import { useModal, Icon, NantaFormModal, NantaFormModalProps } from "/~/main";
 import IconRiDeleteBin6Line from "~icons/ri/delete-bin6-line";
-import { schemes } from "./data";
+import { schemes, columns } from "./data";
 
 const mProps : NantaFormModalProps = {
     schemas: schemes,
     colon: true
 }
-
-const columns = [
-  {
-    name: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-  },
-  {
-    title: "Action",
-    key: "action",
-  },
-];
 
 const data = [
   {
