@@ -17,6 +17,6 @@
     "declaration": true,   
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "env.d.ts", "src/**/*", "src/**/*.vue"],
-  "exclude": ["*.json"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["config", "dist", "node_modules"],
+  "references": [{ "path": "./config/tsconfig.node.json" }]
 }
