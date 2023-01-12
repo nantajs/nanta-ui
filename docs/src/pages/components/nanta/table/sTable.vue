@@ -4,12 +4,8 @@
         :clickToRowSelect="false">
         <template #headerTop>
             <div style="margin-bottom: 10px;">
-                <NantaButton type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled"
-                    class="button-s" preIcon="ic:baseline-content-copy">Copy create</NantaButton>
                 <NantaButton type="primary" @click="handleCreate" :disabled="!operation.createEnabled" class="button-s"
-                    preIcon="ic:baseline-plus">Create new</NantaButton>
-                <NantaButton color="success" type="primary" @click="handleModify" :disabled="!operation.modifyEnabled"
-                    class="button-s" preIcon="ic:baseline-edit">Modify</NantaButton>
+                    preIcon="ic:baseline-plus">Add Reg</NantaButton>
                 <NantaButton type="primary" danger @click="handleMultiDelete" :disabled="!operation.deleteEnabled"
                     class="button-s" preIcon="ic:baseline-delete">Delete</NantaButton>
             </div>
@@ -51,15 +47,25 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton} from "/~/main";
-import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton, useModal, Recordable, BasicColumn } from "/~/main";
+import { searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
-import { useModal } from "/~/main";
-import { sleep } from "/@/utils/sleep";
-// import { url } from '/@/settings/localSetting';
-const url = 'https://mock.data/api/mock/meta';
+const url = 'http://127.0.0.1:8090/api/v1/read?area=QNA3E&address=D100';
+
+const columns: BasicColumn[] = [
+    {
+        title: "Address",
+        dataIndex: "address",
+        key: "address",
+    },
+    {
+        title: "Value",
+        dataIndex: "value",
+        key: "value",
+    },
+];
 
 const checkedKeys = ref<Array<string | number>>([]);
 const operation = ref({ copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: false });
@@ -91,34 +97,18 @@ function getAction(record: Recordable): ActionItem[] {
     return actions;
 }
 
-interface DemoResult {
-    createBy?: string;
-    updateBy?: string;
-    createTime?: number;
-    updateTime?: number;
-    id: number;
-    articleid: string;
-    title: string;
-    desc: string;
-    tags?: string;
-    space?: string;
-    category?: string;
-    refArticleid?: string;
+interface RegData {
+    address: string;
+    value: string;
 }
 
-function transfer(params: DemoResult[]) {
+function transfer(params: RegData[]) {
     const tData = params.map((item) => {
         return {
-            key: item.articleid,
-            name: item.title,
-            age: item.id,
-            email: item.space,
-            address: item.desc.substring(0, 10),
-            tags: [item.tags],
-            gender: 1,
+            address: item.address,
+            value: item.value,
         }
     })
-    console.log(tData)
     return tData;
 }
 
@@ -129,10 +119,9 @@ const fetchSetting = {
     totalField: 'totalElements',
 };
 
-const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableDataRecord }] = useTable({
-    title: 'NantaTable Usage Example.',
+const [registerTable, { updateTableDataRecord, findTableDataRecord, reload }] = useTable({
+    title: 'PLC Simulator Example.',
     columns,
-    // dataSource: data,
     api: createAxiosFetch(url),
     afterFetch: transfer,
     fetchSetting,
@@ -172,7 +161,6 @@ const handleOK = async (newRecord: Recordable, oldRecord: Recordable) => {
     updateTableDataRecord(oldRecord.key, newRecord)
     changeLoading(true);
     changeOkLoading(true);
-    await sleep(3)
     // closeModal()
     changeOkLoading(false)
     changeLoading(false)
@@ -273,6 +261,19 @@ function onSelectChange(selectedRowKeys: (string | number)[]) {
         operation.value = { copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: true };
     }
 }
+
+let timer: any = null;
+onMounted(() => {
+    timer = setInterval(() => {
+        reload({ reload: false })
+    }, 1000);
+})
+
+onBeforeUnmount(() => {
+    if (timer) {
+        clearInterval(timer);
+    }
+})
 </script>
 
 <style scoped>

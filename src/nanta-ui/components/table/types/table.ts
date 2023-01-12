@@ -74,7 +74,7 @@ export interface FetchParams {
     page?: number;
     sortInfo?: Recordable;
     filterInfo?: Recordable;
-    reload?:boolean;
+    reload?: boolean;
 }
 
 export interface GetColumnsParams {

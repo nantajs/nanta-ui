@@ -7,7 +7,6 @@ import { buildUUID } from '../../../utils/uuid';
 import { get, cloneDeep, merge, isFunction, isBoolean } from 'lodash-es';
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
 import { Recordable, EmitType } from "../../.."
-import { treeMap } from '../../../core/hooks/treeHelper';
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
@@ -241,9 +240,12 @@ export function useDataSource(
     if (!api) return;
     if (!isFetchRemote()) return;
     try {
-      if (opt?.reload && !opt.reload) {
+      if (opt && opt.reload === false) {
+        setLoading(false);
+      } else {
         setLoading(true);
       }
+
       const { pageField, sizeField, listField, totalField } = Object.assign(
         {},
         FETCH_SETTING,

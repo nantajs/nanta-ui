@@ -20,7 +20,7 @@ export function createAxiosFetch(url: string, method?: string) {
                     space: 'bixintech',
                 }
             }).then(function (response) {
-                resolve(response.data);
+                resolve(response.data.result);
             }).catch(function (error) {
                 console.log(error);
                 reject(error)
