@@ -14,7 +14,7 @@ export default defineComponent({
   setup(props) {
     
     return () => {
-      const title = "Good" || {};
+      const title = "Page Not Find." || {};
       return (
         <Result  title={props.title || title} >
           {{

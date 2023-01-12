@@ -241,7 +241,9 @@ export function useDataSource(
     if (!api) return;
     if (!isFetchRemote()) return;
     try {
-      setLoading(true);
+      if (opt?.reload && !opt.reload) {
+        setLoading(true);
+      }
       const { pageField, sizeField, listField, totalField } = Object.assign(
         {},
         FETCH_SETTING,
