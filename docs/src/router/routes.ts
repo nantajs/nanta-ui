@@ -8,7 +8,7 @@ export const basicRouteItems = [
     { path: '/components/icon/index', name: 'Icon', group: 'components', component: () => import('/@/pages/components/nanta/icon/icon.vue') },
     { path: '/components/modal/index', name: 'Modal', group: 'components', component: () => import('/@/pages/components/nanta/modal/index.vue') },
     { path: '/components/table/index', name: 'Table', group: 'components', component: () => import('/@/pages/components/nanta/table/index.vue') },
-    { path: '/components/table/sTable', name: 'STable', group: 'components', component: () => import('/@/pages/components/nanta/table/sTable.vue') },
+    { path: '/components/table/sTable', name: 'STable', group: 'components', hide: true, component: () => import('/@/pages/components/nanta/table/sTable.vue') },
 
     { path: '/antv/table/index', name: 'Table2', group: 'antv', component: () => import('/@/pages/components/table/basic.vue') },
 

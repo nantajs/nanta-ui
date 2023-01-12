@@ -132,8 +132,8 @@ const fetchSetting = {
 const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableDataRecord }] = useTable({
     title: 'NantaTable Usage Example.',
     columns,
-    // dataSource: data,
-    api: createAxiosFetch(url),
+    dataSource: data,
+    // api: createAxiosFetch(url),
     afterFetch: transfer,
     fetchSetting,
     actionColumn: {

@@ -1,15 +1,16 @@
 import { Menu, Nav } from './types/type'
 import { basicRouteItems } from '../router/routes'
 
-const componentsList = basicRouteItems.filter(item => 'components' === item.group).map(item => {
-    return {
-        name: item.name,
-        icon: 'quill:creditcard',
-        path: item.path,
-        key: item.group + item.name,
-        group: item.group,
-    } as Menu
-});
+const componentsList = basicRouteItems.filter(item => 'components' === item.group
+    && item.hide !== true).map(item => {
+        return {
+            name: item.name,
+            icon: 'quill:creditcard',
+            path: item.path,
+            key: item.group + item.name,
+            group: item.group,
+        } as Menu
+    });
 
 // menu datas
 const localMenus: Menu[] = [
