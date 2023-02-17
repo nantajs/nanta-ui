@@ -4,7 +4,7 @@ import type { BasicTableProps } from "../props";
 import { provide, inject, ComputedRef } from 'vue';
 import { Recordable, Nullable } from '../../..'
 
-const key = Symbol('basic-table');
+const key = Symbol('nanta-table');
 
 type Instance = TableActionType & {
   wrapRef: Ref<Nullable<HTMLElement>>;

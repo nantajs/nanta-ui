@@ -29,9 +29,11 @@ import { usePagination } from "./hooks/usePagination";
 import { useDataSource } from "./hooks/useDataSource";
 import { useSearchForm } from "./hooks/useSearchForm";
 import { useRowSelection } from "./hooks/useRowSelection";
+import { createTableContext } from './hooks/useTableContext';
 import { useLoading } from "./hooks/useLoading";
 import { useTableHeader } from "./hooks/useTableHeader";
 import { useForm } from "../../components/form";
+
 import NantaForm from "../../components/form/NantaForm.vue"
 import type { TableActionType, SizeType } from "./types/table";
 
@@ -157,6 +159,7 @@ const tableAction: TableActionType = {
     setTableData,
     updateTableDataRecord,
 };
+createTableContext({ ...tableAction, wrapRef, getBindValues });
 
 emits("register", tableAction, formActions);
 </script>

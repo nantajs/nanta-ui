@@ -41,7 +41,6 @@
         const btnBind = omit(bindValues, 'title') as Recordable;
         if (btnBind.disabled) btnBind.color = '';
         const Button = h(BasicButton, btnBind, extendSlots(slots));
-
         // If it is not enabled, it is a normal button
         if (!props.enable) {
           return Button;
