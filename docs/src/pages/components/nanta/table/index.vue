@@ -34,7 +34,18 @@
         </template>
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'action'">
-                <NantaTableAction :actions="getAction(record)" />
+                <NantaTableAction :actions="getAction(record)" :dropDownActions="[
+                    {
+                        label: 'More',
+                        popConfirm: {
+                            title: 'has more ?',
+                            confirm: handleMore.bind(null, record),
+                        },
+                        ifShow: (_action) => {
+                            return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
+                        },
+                    },                    
+                ]" />
             </template>
             <template v-else-if="column.key === 'tags'">
                 <span>
@@ -92,8 +103,8 @@ function getAction(record: Recordable): ActionItem[] {
             },
         },
         {
-            icon: 'ic:baseline-more-horiz',
-            label: 'more',
+            icon: 'ic:baseline-api',
+            label: 'Detail',
             onClick: handleOther.bind(null, record),
         }
     ]
@@ -203,6 +214,10 @@ const handleOK2 = (newRecord: Recordable, oldRecord: Recordable) => {
 
 const handleCancel2 = (newRecord: Recordable, oldRecord: Recordable) => {
     console.log('handle cancel in outer event callback', newRecord, oldRecord);
+}
+
+function handleMore(record: Recordable) {
+    console.log('hand more clicked!', record);
 }
 
 function handleEdit(record: Recordable) {

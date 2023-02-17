@@ -1,25 +1,35 @@
 <template>
   <div @click="onCellClick">
-    <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">      
+    <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
       <Tooltip v-if="action.tooltip" v-bind="getTooltip(action.tooltip)">
         <PopConfirmButton v-bind="action">
-          <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName" :color="action.color"/>
+          <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName"
+            :color="action.color" />
           <template v-if="action.label">{{ action.label }}</template>
         </PopConfirmButton>
       </Tooltip>
       <PopConfirmButton v-else v-bind="action">
-        <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName" :color="action.color"/>
+        <Icon :icon="action.iconName" :class="{ 'mr-1': !!action.label }" v-if="action.iconName" :color="action.color" />
         <template v-if="action.label">{{ action.label }}</template>
       </PopConfirmButton>
       <Divider type="vertical" class="action-divider" v-if="divider && index < getActions.length - 1" />
     </template>
+    <Dropdown :trigger="['hover']" :dropMenuList="getDropdownList" popconfirm
+      v-if="dropDownActions && getDropdownList.length > 0">
+      <slot name="more"></slot>
+      <a-button type="link" size="small" v-if="!$slots.more">
+        <MoreOutlined class="icon-more" />
+      </a-button>
+    </Dropdown>
 </div>
 </template>
 <script lang="ts" setup>
 import { PropType, computed, toRaw, unref } from 'vue';
-import { Divider, Tooltip, TooltipProps, Button } from 'ant-design-vue';
+import { Divider, Tooltip, TooltipProps } from 'ant-design-vue';
 import Icon from '../../icon';
-import { ActionItem, ActionType } from '../types/tableAction';
+import Dropdown from '../../dropdown/Dropdown.vue';
+import { MoreOutlined } from '@ant-design/icons-vue';
+import { ActionItem } from '../types/tableAction';
 import type { TableActionType } from '../types/table';
 import { propTypes } from '../../../utils/propTypes';
 import { omit, isBoolean, isFunction, isString } from 'lodash-es';
@@ -79,6 +89,23 @@ const getActions = computed(() => {
         ...omit(action, 'icon'),  // 去掉icon属性，否则会和antd原生的icon冲突。
       };
     });
+});
+
+const getDropdownList = computed((): any[] => {
+  const list = (toRaw(props.dropDownActions) || []).filter((action) => {
+    return isIfShow(action);
+  });
+  return list.map((action, index) => {
+    const { label, popConfirm } = action;
+    return {
+      ...action,
+      ...popConfirm,
+      onConfirm: popConfirm?.confirm,
+      onCancel: popConfirm?.cancel,
+      text: label,
+      divider: index < list.length - 1 ? props.divider : false,
+    };
+  });
 });
 
 function onCellClick(e: MouseEvent) {
