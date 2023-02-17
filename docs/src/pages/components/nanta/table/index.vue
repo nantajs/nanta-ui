@@ -8,8 +8,8 @@
                     preIcon="ic:baseline-content-copy">Copy create</NantaButton>
                 <NantaButton type="primary" @click="handleCreate" :disabled="!operation.createEnabled" class="button-s"
                     preIcon="ic:baseline-plus">Create new</NantaButton>
-                <NantaButton color="success" type="primary" @click="handleModify" :disabled="!operation.modifyEnabled"
-                    class="button-s" preIcon="ic:baseline-edit">Modify</NantaButton>
+                <NantaButton :color="getModifyButtonColor" type="primary" @click="handleModify"
+                    :disabled="!operation.modifyEnabled" class="button-s" preIcon="ic:baseline-edit">Modify</NantaButton>
                 <NantaButton type="primary" danger @click="handleMultiDelete" :disabled="!operation.deleteEnabled"
                     class="button-s" preIcon="ic:baseline-delete">Delete</NantaButton>
             </div>
@@ -58,11 +58,11 @@
         </template>
     </NantaTable>
     <NantaFormModal @register="registerModal" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
-<NantaFormModal @register="registerModal2" v-bind="mProps2" @ok="handleOK2" @cancel="handleCancel2" />
+    <NantaFormModal @register="registerModal2" v-bind="mProps2" @ok="handleOK2" @cancel="handleCancel2" />
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";  
+import { ref, computed } from "vue";
 import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from './type'
@@ -74,6 +74,8 @@ const url = 'https://mock.data/api/mock/meta';
 
 const checkedKeys = ref<Array<string | number>>([]);
 const operation = ref({ copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: false });
+
+const getModifyButtonColor = computed(() => operation.value.modifyEnabled ? "success" : "")
 
 function getAction(record: Recordable): ActionItem[] {
     const ifShow = (action: ActionItem) => {
