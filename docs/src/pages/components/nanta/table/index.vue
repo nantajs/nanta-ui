@@ -171,6 +171,10 @@ const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableD
         autoSubmitOnEnter: true,
         submitButtonOptions: { text: 'search' }
     },
+    pagination: {
+        showTotal: total => `Now total count is ${total}.`,
+
+    }
 })
 
 const mProps: NantaFormModalProps = {
