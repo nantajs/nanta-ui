@@ -44,7 +44,7 @@
                         ifShow: (_action) => {
                             return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
                         },
-                    },                    
+                    },
                 ]" />
             </template>
             <template v-else-if="column.key === 'tags'">
@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref } from "vue";  
 import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from './type'
@@ -164,7 +164,7 @@ const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableD
         // slots: { customRender: 'action' },
         fixed: undefined,
     },
-    useSearchForm: false,
+    useSearchForm: true,
     searchFormConfig: {
         labelWidth: 120,
         schemas: searchFormSchema,

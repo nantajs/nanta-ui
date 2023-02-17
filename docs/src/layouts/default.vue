@@ -4,8 +4,8 @@
     <a-layout>
       <SideBar :sideMenus="sideMenus" @menu-selected="onSideSelected" :selectedKeys="selectedKeys"
         :openKeys="openKeys" />
-      <a-layout style="padding: 0 24px 24px">
-        <a-breadcrumb style="margin: 16px 0">
+      <a-layout style="padding: 0 15px 15px">
+        <a-breadcrumb style="margin: 10px 0">
           <a-breadcrumb-item v-for="item in breadcrumbList" :key="item">{{
               item
           }}</a-breadcrumb-item>

@@ -204,13 +204,14 @@ emits("register", tableAction, formActions);
     }
 
     .ant-table-wrapper {
-        padding: 6px;
         background-color: @component-background;
         border-radius: 2px;
+        padding: 0px;
 
         .ant-table-title {
             min-height: 40px;
             padding: 0 0 8px !important;
+            margin: 10px;
         }
 
         .ant-table.ant-table-bordered .ant-table-title {

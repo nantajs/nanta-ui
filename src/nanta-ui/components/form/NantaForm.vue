@@ -1,5 +1,5 @@
 <template>
-  <Form v-bind="getBindValue" ref="formElRef" :model="formModel" @keypress.enter="handleEnterPress">
+  <Form v-bind="getBindValue" :class="getFormClass" ref="formElRef" :model="formModel" @keypress.enter="handleEnterPress">
     <Row v-bind="getRow">
       <slot name="formHeader" />
       <template v-for="schema in getSchema" :key="schema.field">
@@ -10,6 +10,7 @@
           </template>
         </NantaFormItem>
       </template>
+
       <NantaFormAction v-bind="getFormActionBindProps">
         <template v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']" #[item]="data">
           <slot :name="item" v-bind="data || {}" />
@@ -17,7 +18,7 @@
       </NantaFormAction>
       <slot name="formFooter" />
     </Row>
-  </Form>
+</Form>
 </template>
 
 <script lang="ts" setup>
@@ -61,6 +62,16 @@ const getRow = computed((): Recordable => {
   };
 }
 );
+
+const prefixCls = 'nanta-basic-form';
+const getFormClass = computed(() => {
+  return [
+    prefixCls,
+    {
+      [`${prefixCls}--compact`]: unref(getProps).compact,
+    },
+  ];
+});
 
 const actionProps = {
   resetAction: handleReset,
@@ -323,3 +334,51 @@ onMounted(() => {
   emits("register", formActionType);
 });
 </script>
+<style lang="less">
+
+@prefix-cls: ~'nanta-basic-form';
+
+.@{prefix-cls} {
+  .ant-form-item {
+    &-label label::after {
+      margin: 0 6px 0 2px;
+    }
+
+    &-with-help {
+      margin-bottom: 0;
+    }
+
+    &:not(.ant-form-item-with-help) {
+      margin-bottom: 20px;
+    }
+
+    &.suffix-item {
+      .ant-form-item-children {
+        display: flex;
+      }
+
+      .ant-form-item-control {
+        margin-top: 4px;
+      }
+
+      .suffix {
+        display: inline-flex;
+        padding-left: 6px;
+        margin-top: 1px;
+        line-height: 1;
+        align-items: center;
+      }
+    }
+  }
+
+  .ant-form-explain {
+    font-size: 14px;
+  }
+
+  &--compact {
+    .ant-form-item {
+      margin-bottom: 8px !important;
+    }
+  }
+}
+</style>

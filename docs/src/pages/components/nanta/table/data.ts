@@ -10,7 +10,7 @@ export const searchFormSchema: FormSchema[] = [
     field: 'name',
     label: 'Name',
     component: 'Input',
-    colProps: { span: 8 },
+    colProps: { span: 8 }, 
   },
   {
     field: 'gender',
