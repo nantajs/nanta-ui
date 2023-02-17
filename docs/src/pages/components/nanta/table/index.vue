@@ -85,6 +85,11 @@ function getAction(record: Recordable): ActionItem[] {
             label: 'Delete',
             onClick: handleDelete.bind(null, record),
         },
+        {
+            icon: 'ic:baseline-more-horiz',
+            label: 'more',
+            onClick: handleOther.bind(null, record),
+        }
     ]
     actions.forEach(item => { item.ifShow = ifShow })
 
@@ -230,6 +235,10 @@ function handleModify() {
         const record = findTableDataRecord(key)
         doModifyAction(key, ActionType.MODIFY, record as Recordable);
     }
+}
+
+function handleOther(record: Recordable) {
+    console.log('handle others', record)
 }
 
 function handleMultiDelete() {

@@ -77,7 +77,7 @@ export const editModalSchema: FormSchema[] = [
     colProps: { span: 24 },
     slot: 'selectTag',
     placeholder: 'Please input your tag and then press return.'
-  }, 
+  },
 ]
 
 export const editModalSchema2: FormSchema[] = [
@@ -127,6 +127,7 @@ export const columns: BasicColumn[] = [
     key: "gender",
     dataIndex: "gender",
     format: GENDER,
+
   },
   /**
   {
