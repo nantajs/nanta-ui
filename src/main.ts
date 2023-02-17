@@ -1,4 +1,5 @@
 import NantaButton from './nanta-ui/components/button/NantaButton.vue'
+import PopConfirmButton from './nanta-ui/components/button/PopConfirmButton.vue'
 import NantaForm from './nanta-ui/components/form/NantaForm.vue'
 import NantaModal from './nanta-ui/components/modal/NantaModal.vue'
 import NantaFormModal from './nanta-ui/components/modal/NantaFormModal.vue';
@@ -8,7 +9,7 @@ import NantaTableAction from './nanta-ui/components/table/components/NantaTableA
 import { Icon, SvgIcon } from './nanta-ui/components/icon/index'
 import type { VueNode, Recordable, Fn } from './nanta-ui/core/types/type'
 
-export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, NantaTableAction, NantaFormModal }
+export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, NantaTableAction, NantaFormModal, PopConfirmButton }
 export type { VueNode, Recordable, Fn }
 
 import { setupNantaDirectives as setupNanta } from './nanta-ui/directives'

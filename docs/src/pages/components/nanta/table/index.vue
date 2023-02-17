@@ -4,8 +4,8 @@
         :clickToRowSelect="false">
         <template #headerTop>
             <div style="margin-bottom: 10px;">
-                <NantaButton type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled"
-                    class="button-s" preIcon="ic:baseline-content-copy">Copy create</NantaButton>
+                <NantaButton type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled" class="button-s"
+                    preIcon="ic:baseline-content-copy">Copy create</NantaButton>
                 <NantaButton type="primary" @click="handleCreate" :disabled="!operation.createEnabled" class="button-s"
                     preIcon="ic:baseline-plus">Create new</NantaButton>
                 <NantaButton color="success" type="primary" @click="handleModify" :disabled="!operation.modifyEnabled"
@@ -47,12 +47,12 @@
         </template>
     </NantaTable>
     <NantaFormModal @register="registerModal" v-bind="mProps" @ok="handleOK" @cancel="handleCancel" />
-    <NantaFormModal @register="registerModal2" v-bind="mProps2" @ok="handleOK2" @cancel="handleCancel2" />
+<NantaFormModal @register="registerModal2" v-bind="mProps2" @ok="handleOK2" @cancel="handleCancel2" />
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton} from "/~/main";
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from './type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
@@ -83,7 +83,11 @@ function getAction(record: Recordable): ActionItem[] {
             icon: 'ant-design:delete-outlined',
             color: 'error',
             label: 'Delete',
-            onClick: handleDelete.bind(null, record),
+            popConfirm: {
+                title: '是否确认删除',
+                placement: 'left',
+                confirm: handleDelete.bind(null, record),
+            },
         },
         {
             icon: 'ic:baseline-more-horiz',
