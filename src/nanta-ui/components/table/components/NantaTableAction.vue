@@ -76,6 +76,7 @@ const getActions = computed(() => {
         type: 'link' as ButtonType,
         size: 'small' as SizeType,
         iconName: action?.icon,
+        ...(popConfirm || {}),
         onConfirm: popConfirm?.confirm,
         onCancel: popConfirm?.cancel,
         enable: !!popConfirm,

@@ -84,7 +84,9 @@ function getAction(record: Recordable): ActionItem[] {
             color: 'error',
             label: 'Delete',
             popConfirm: {
-                title: '是否确认删除',
+                title: 'Are you sure to delete?',
+                okText: 'Yes',
+                cancelText: "No",
                 placement: 'left',
                 confirm: handleDelete.bind(null, record),
             },
