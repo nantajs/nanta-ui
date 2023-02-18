@@ -78,6 +78,11 @@ export const editModalSchema: FormSchema[] = [
     slot: 'selectTag',
     placeholder: 'Please input your tag and then press return.'
   },
+  {
+    field: 'date',
+    label: 'Date',
+    component: 'DatePicker',    
+  }
 ]
 
 export const editModalSchema2: FormSchema[] = [

@@ -17,6 +17,8 @@
                     :placeholder="schema.placeholder" allowClear />
             </template>
         </NantaFormModal>
+
+        <DatePicker v-model:value="value1" :format="dateFormat" />
     </div>
 </template>
 
@@ -30,7 +32,9 @@ import {
 } from "/~/main";
 import { editModalSchema } from "../table/data";
 import type { SelectProps } from 'ant-design-vue';
+import { DatePicker } from 'ant-design-vue';
 import { ref } from 'vue';
+import dayjs, { Dayjs } from 'dayjs';
 
 const [registerBasic, { openModal }] = useModal({ title: "Basic Modal", okText: "Yes" });
 const [registerFormModal, { openModal: openFormModal }] = useModal();
@@ -39,10 +43,13 @@ function clickBasicModal() {
     openModal(true, { title: "Basic Nanta Modal", record: { name: "Nanta UI" } });
 }
 
+const dateFormat = 'YYYY/MM/DD';
+const value1 = ref<Dayjs>(dayjs('2015/01/01', dateFormat));
+
 function clickFormModal() {
     openFormModal(true, {
         title: "Nanta Form Modal",
-        record: { name: "Aborn Jiang", id: "20220412", tags: ['init', 'ie'] },
+        record: { name: "Aborn Jiang", id: "20220412", tags: ['init', 'ie'], date: dayjs('2023/02/13', dateFormat) },
     });
 }
 

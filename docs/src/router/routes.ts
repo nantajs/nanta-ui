@@ -12,6 +12,7 @@ export const basicRouteItems = [
 
     { path: '/antv/table/index', name: 'Table2', group: 'antv', component: () => import('/@/pages/components/table/basic.vue') },
 
+    { path: '/datepicker', name: 'DatePicker', component: () => import('/@/pages/datepicker.vue') },
     { path: '/demo', name: 'Demo', component: () => import('/@/pages/demo.vue') },
     { path: '/index', name: 'Index', component: () => import('/@/pages/index.vue') },
     { path: '/404', name: '404Page', component: E404_COMPONENT },

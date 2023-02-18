@@ -47,6 +47,11 @@ const localMenus: Menu[] = [
                 key: 'demo',
                 icon: 'ic:twotone-local-dining',
             },
+            {
+                name: 'DatePicker',
+                path: '/datepicker',
+                key: 'datepicker'
+            }
         ]
     },
     {

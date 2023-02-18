@@ -85,7 +85,7 @@ export default {
         const field = values.field;
         const value = unref(getComponentsProps)?.label || values.values[field];
         isShowComp = value && value.length > 0
-      }      
+      }
 
       isShow = isShow && itemIsAdvanced;
       isIfShow = isIfShow && isShowComp;
@@ -272,7 +272,7 @@ export default {
         }
         if (isFunction(ifHideLabel) && ifHideLabel(unref(getValues))) {
           return;
-        }        
+        }
       }
 
       const renderLabel = subLabel ? (
