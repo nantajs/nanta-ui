@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import { deepMerge } from '../../utils/util'
 import { ModalMethods, ModalProps } from './types/type'
-import type { Nullable, Recordable } from "../..";
+import type { Recordable } from "../..";
 import { omit } from 'lodash-es'
 import { toRef, ref, unref, getCurrentInstance, computed, useAttrs, watch, watchEffect, nextTick } from 'vue'
 import { useFullScreen } from './hooks/useModalFullScreen'
