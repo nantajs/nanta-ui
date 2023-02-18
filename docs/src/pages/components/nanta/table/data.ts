@@ -81,7 +81,26 @@ export const editModalSchema: FormSchema[] = [
   {
     field: 'date',
     label: 'Date',
-    component: 'DatePicker',    
+    component: 'DatePicker',   
+    componentProps: {
+      format: 'YYYY/MM/DD'
+    }
+  },
+  {
+    field: 'date2',
+    label: 'Date',
+    component: 'DatePicker',   
+    componentProps: {
+      format: 'YYYY-MM/DD'
+    }
+  },
+  {
+    field: 'date3',
+    label: 'Date',
+    component: 'DatePicker',   
+    componentProps: {
+      format: 'YYYY:MM/DD'
+    }
   }
 ]
 

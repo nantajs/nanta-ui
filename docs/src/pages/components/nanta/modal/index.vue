@@ -46,10 +46,13 @@ function clickBasicModal() {
 const dateFormat = 'YYYY/MM/DD';
 const value1 = ref<Dayjs>(dayjs('2015/01/01', dateFormat));
 
+const date = new Date('2023-02-11T07:29:09.000+00:00');
+const date2 = '2023-02-14T07:29:09.000+00:00';
+const date3 = '2023-02-17T07:29:09.000+00:00';
 function clickFormModal() {
     openFormModal(true, {
         title: "Nanta Form Modal",
-        record: { name: "Aborn Jiang", id: "20220412", tags: ['init', 'ie'], date: dayjs('2023/02/13', dateFormat) },
+        record: { name: "Aborn Jiang", id: "20220412", tags: ['init', 'ie'], date: date, date2: date2, date3: dayjs(date3) },
     });
 }
 

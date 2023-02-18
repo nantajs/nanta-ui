@@ -17,6 +17,7 @@ import type { ModalInnerRecord } from './types/nantaFormModal'
 import NantaForm from "../form/NantaForm.vue";
 import NantaModal from './NantaModal.vue'
 import { nantaFormModalProps } from './types/nantaFormModal'
+import dayjs from 'dayjs';
 
 const props = defineProps(nantaFormModalProps);
 const getSchemas = computed(() => props.schemas)
@@ -48,6 +49,16 @@ const [register, innerMethods] = useModalInner(async (data: ModalInnerRecord) =>
   resetFields();
   getTitle.value = data.title;
   recordRef.value = data.record;
+  const datePickerSchemes = getSchemas.value.filter(item => item.component === 'DatePicker')
+  datePickerSchemes.forEach(item => {
+    const valueField = data.record[item.field];
+    if (valueField && typeof valueField == 'object' && valueField instanceof Date) {
+      data.record[item.field] = dayjs(valueField);
+    } else if (valueField && typeof valueField == 'string') {
+      data.record[item.field] = dayjs(valueField);
+    }
+  })
+
   if (data.record) {
     setFieldsValue(data.record);
   }
@@ -56,7 +67,11 @@ const [register, innerMethods] = useModalInner(async (data: ModalInnerRecord) =>
 const handleOk = async () => {
   await validateFields();
   const values = getFieldsValue();
-  // console.log(values);
+  const datePickerSchemes = getSchemas.value.filter(item => item.component === 'DatePicker')
+  datePickerSchemes.forEach(item => {
+    const valueField = values[item.field];
+    values[item.field] = new Date(valueField);
+  })
   emit("ok", values, recordRef.value);
 }
 
