@@ -4,7 +4,7 @@
             <div class="fbox-line">
                 <NantaButton type="primary" @click="clickBasicModal">NantaModal</NantaButton>
                 <NantaButton @click="clickFormModal">NantaFormModal</NantaButton>
-                <NantaButton type="dashed">Dashed Button</NantaButton>
+                <NantaButton type="dashed" @click="clickModal">ConfirmModal</NantaButton>
                 <NantaButton type="text">Text Button</NantaButton>
                 <NantaButton type="link">Link Button</NantaButton>
             </div>
@@ -32,9 +32,10 @@ import {
 } from "/~/main";
 import { editModalSchema } from "../table/data";
 import type { SelectProps } from 'ant-design-vue';
-import { DatePicker } from 'ant-design-vue';
-import { ref } from 'vue';
+import { DatePicker, Modal } from 'ant-design-vue';
+import { ref, createVNode } from 'vue';
 import dayjs, { Dayjs } from 'dayjs';
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 
 const [registerBasic, { openModal }] = useModal({ title: "Basic Modal", okText: "Yes" });
 const [registerFormModal, { openModal: openFormModal }] = useModal();
@@ -53,6 +54,22 @@ function clickFormModal() {
     openFormModal(true, {
         title: "Nanta Form Modal",
         record: { name: "Aborn Jiang", id: "20220412", tags: ['init', 'ie'], date: date, date2: date2, date3: dayjs(date3) },
+    });
+}
+
+function clickModal() {
+    Modal.confirm({
+        title: 'Confirm',
+        icon: createVNode(ExclamationCircleOutlined as any),
+        content: 'Bla bla ...',
+        okText: '确认',
+        cancelText: '取消',
+        onCancel: (...args: any[]) => {
+            console.log('cancel...', args)
+        },
+        onOk: (...args: any[]) => {
+            console.log('ok...', args)
+        }
     });
 }
 
