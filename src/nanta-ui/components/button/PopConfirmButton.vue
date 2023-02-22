@@ -6,6 +6,7 @@
   import { omit } from 'lodash-es';
   import { useAttrs } from '../../core/hooks/useAttrs';
   import { Recordable } from '../..'
+  import { t } from '../../locales/useI18n';
 
   const props = {
     /**
@@ -29,8 +30,8 @@
       const getBindValues = computed(() => {
         return Object.assign(
           {
-            okText: 'OK',
-            cancelText: 'Cancel',
+            okText: t('common.okText'),
+            cancelText: t('common.cancelText'),
           },
           { ...props, ...unref(attrs) },
         );

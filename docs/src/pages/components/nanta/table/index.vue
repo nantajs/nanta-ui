@@ -98,8 +98,6 @@ function getAction(record: Recordable): ActionItem[] {
             label: 'Delete',
             popConfirm: {
                 title: 'Are you sure to delete?',
-                okText: 'Yes',
-                cancelText: "No",
                 placement: 'left',
                 confirm: handleDelete.bind(null, record),
             },
