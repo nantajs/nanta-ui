@@ -3,19 +3,19 @@ import type { ModalWrapperProps } from './typing';
 import type { ButtonProps} from '../../button/types/buttonProps';
 import type { ExtractPropTypes } from 'vue';
 import type { VueNode } from '../../..'
+import { t } from '../../../locales/useI18n';
 
-export const modalProps = {
-  visible: { type: Boolean },
-  scrollTop: { type: Boolean, default: true },
-  height: { type: Number },
-  minHeight: { type: Number },
+export const modalProps = {  
   // open drag
   draggable: { type: Boolean, default: true },
-  centered: { type: Boolean },
   cancelText: { type: String, default: 'Cancel' },
-  okText: { type: String, default: 'OK' },
-
+  centered: { type: Boolean },
   closeFunc: Function as PropType<() => Promise<boolean>>,
+  height: { type: Number },
+  minHeight: { type: Number },
+  okText: { type: String, default: () => t('message.okText') },
+  scrollTop: { type: Boolean, default: true },
+  visible: { type: Boolean },
 };
 
 export declare type BasicProps = Partial<ExtractPropTypes<typeof basicProps>>;

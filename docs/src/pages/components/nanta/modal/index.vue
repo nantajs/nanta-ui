@@ -37,7 +37,7 @@ import { ref, createVNode } from 'vue';
 import dayjs, { Dayjs } from 'dayjs';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 
-const [registerBasic, { openModal }] = useModal({ title: "Basic Modal", okText: "Yes" });
+const [registerBasic, { openModal }] = useModal({ title: "Basic Modal" });
 const [registerFormModal, { openModal: openFormModal }] = useModal();
 
 function clickBasicModal() {

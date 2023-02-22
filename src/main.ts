@@ -13,7 +13,7 @@ import type { VueNode, Recordable, Fn } from './nanta-ui/core/types/type'
 export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, NantaTableAction, NantaFormModal, PopConfirmButton, Dropdown }
 export type { VueNode, Recordable, Fn }
 
-import { setupNantaDirectives as setupNanta } from './nanta-ui/directives'
+import { setupNanta } from './nanta-ui/setup'
 export { setupNanta }
 
 export * from './nanta-ui/components/button'
