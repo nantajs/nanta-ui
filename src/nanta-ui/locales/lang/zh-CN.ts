@@ -23,4 +23,14 @@ export default {
         maximize: '最大化',
         restore: '还原',
     },
+    validate: {
+        emailAddressInvalid: '邮件地址不正确！',
+        notEmpty: '值不能为空！',
+        urlInvalid: '非法的URL地址！',
+        nonNegative: '不能为负数！',
+        notNumber: '输入的值不是数字！',
+        lenNotEqual: '数值非法，原因：长度不为{0}！',
+        lessThen: '数值非法，原因：长度小于{0}！',
+        greaterThen: '数值非法，原因：长度大于{0}！'
+    }
 }

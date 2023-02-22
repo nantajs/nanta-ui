@@ -34,6 +34,44 @@ export const schemes: FormSchema[] = [
     ]
   },
   {
+    field: 'num',
+    label: 'Number Value',
+    component: 'InputNumber',
+    rules: [
+      {
+        required: true,
+        validator: VALIDATORS.notNegative,
+        trigger: 'change',
+      }
+    ]
+  },
+  {
+    field: 'textV',
+    label: 'Length Validate 3-5',
+    component: 'Input',
+    colProps: { span: 24 },
+    rules: [
+      {
+        required: true,
+        validator: VALIDATORS.len(3, 5),
+        trigger: 'change',
+      }
+    ]
+  },
+  {
+    field: 'textV3',
+    label: 'Length Validate 3',
+    component: 'Input',
+    colProps: { span: 24 },
+    rules: [
+      {
+        required: true,
+        validator: VALIDATORS.len(3, 3),
+        trigger: 'change',
+      }
+    ]
+  },
+  {
     field: 'description',
     label: "Desc",
     component: "InputTextArea",
@@ -42,6 +80,13 @@ export const schemes: FormSchema[] = [
     },
     placeholder: 'Autosize height with minimum and maximum number of lines',
     colProps: { span: 24 },
+    rules: [
+      {
+        required: true,
+        validator: VALIDATORS.notBlank,
+        trigger: 'change',
+      }
+    ]
   },
   {
     field: 'name',

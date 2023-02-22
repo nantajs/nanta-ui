@@ -17,4 +17,14 @@ export default {
         maximize: 'Maximize',
         restore: 'Restore',
     },
+    validate: {
+        emailAddressInvalid: 'The email address is invalid.',
+        notEmpty: 'Value cannot be empty.',
+        urlInvalid: 'Illgal value as url.',
+        nonNegative: 'Value cannot be negative number.',
+        notNumber: 'Value is not number.',
+        lenNotEqual: 'Value is illgal, reason text length not equal {0}.',
+        lessThen: 'Value is illgal, reason text length less then {0}！',
+        greaterThen: 'Value is illgal, reason text length greater then {0}！'
+    }
 }

@@ -1,14 +1,57 @@
 
 import type { Rule } from "ant-design-vue/lib/form/interface";
+import { t } from '../../../locales/useI18n';
 declare type Validator = (rule: Rule, value: any, callback: (error?: string) => void) => Promise<void> | void;
 
 export const VAL_EMAIL: Validator = (rule, value, callback) => {
     if (!value) {
-        return Promise.reject('Value cannot be empty.');
+        return Promise.reject(t('validate.notEmpty'));
     }
 
     if (!validateEmail(value)) {
-        return Promise.reject('The email address is invalid.');
+        return Promise.reject(t('validate.emailAddressInvalid'));
+    }
+    return Promise.resolve();
+}
+
+export const NOT_NEGATIVE: Validator = (rule, value, callback) => {
+    if (!value) {
+        return Promise.reject(t('validate.notEmpty'));
+    }
+
+    if (typeof value !== 'number') {
+        return Promise.reject(t('validate.notNumber'));
+    }
+
+    if (value < 0) {
+        return Promise.reject(t('validate.nonNegative'));
+    }
+    return Promise.resolve();
+}
+
+// included
+export const INVALIDATE_LENGTH: Function = (minLen: number, maxLen: number) => {
+    return ((rule, value, callback) => {
+        if (!value) {
+            return minLen == 0 ? Promise.resolve() : Promise.reject(t('validate.notEmpty'));
+        } else {
+            if (maxLen == minLen && value.length !== minLen) {
+                return Promise.reject(t('validate.lenNotEqual', [minLen]));
+            } else if (value.length < minLen) {
+                return Promise.reject(t('validate.lessThen', [minLen]));
+            } else if (value.length > maxLen) {
+                return Promise.reject(t('validate.greaterThen', [maxLen]));
+            } else {
+                return Promise.resolve();
+            }
+
+        }
+    }) as Validator
+}
+
+export const NOT_BLANK: Validator = (rule, value, callback) => {
+    if (!value || value.length == 0) {
+        return Promise.reject(t('validate.notEmpty'));
     }
     return Promise.resolve();
 }
@@ -23,7 +66,7 @@ const validateEmail = (email: string) => {
 
 export const VAL_URL: Validator = (rule, value, callback) => {
     if (!isValidHttpUrl(value)) {
-        return Promise.reject('Illgal value as url.');
+        return Promise.reject(t('validate.urlInvalid'));
     }
     return Promise.resolve();
 }
