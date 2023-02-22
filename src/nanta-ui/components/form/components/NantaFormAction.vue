@@ -22,6 +22,8 @@ import type { PropType } from '../../..'
 import type { ColEx } from '../types/type'
 import type { ButtonOptions } from '../../button'
 import { computed } from 'vue'
+import { t } from '../../../locales/useI18n';
+
 const props = defineProps({
   actionColOptions: {
     type: Object as PropType<Partial<ColEx>>,
@@ -56,7 +58,7 @@ const getActionColOptions = computed(() => {
 const getResetBtnOptions = computed((): ButtonOptions => {
   return Object.assign(
     {
-      text: 'Reset'
+      text: t('common.resetText')
     },
     props.resetButtonOptions
   )
@@ -65,7 +67,7 @@ const getResetBtnOptions = computed((): ButtonOptions => {
 const getSubmitBtnOptions = computed(() => {
   return Object.assign(
     {
-      text: 'Submit'
+      text: t('common.queryText')
     },
     props.submitButtonOptions
   )

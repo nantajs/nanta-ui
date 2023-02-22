@@ -64,7 +64,9 @@ export const formProps = {
     default: {},
   },
   rowProps: Object as PropType<RowProps>,
-  resetButtonOptions: Object as PropType<ButtonOptions>,
+  resetButtonOptions: {
+    type: Object as PropType<ButtonOptions>,
+  },
   resetFn: Function as PropType<() => Promise<void>>,
   // 表单配置规则
   schemas: {
