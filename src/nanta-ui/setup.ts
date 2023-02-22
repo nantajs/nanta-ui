@@ -4,20 +4,8 @@
 import type { App } from 'vue';
 import { setupLoadingDirective } from './directives/loading';
 import { setupI18n } from './locales/setupI18n';
-import { I18nOptions } from 'vue-i18n'
-
-const messages = {
-  "en": {
-    message: {
-      okText: 'OK'
-    }
-  },
-  "zh-CN": {
-    message: {
-      okText: '确认'
-    }
-  }
-}
+import { I18nOptions } from 'vue-i18n';
+import { messages } from './locales/messages'
 
 const options = {
   legacy: false,

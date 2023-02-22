@@ -8,12 +8,12 @@ import { t } from '../../../locales/useI18n';
 export const modalProps = {  
   // open drag
   draggable: { type: Boolean, default: true },
-  cancelText: { type: String, default: 'Cancel' },
+  cancelText: { type: String, default: () => t('common.closeText') },
   centered: { type: Boolean },
   closeFunc: Function as PropType<() => Promise<boolean>>,
   height: { type: Number },
   minHeight: { type: Number },
-  okText: { type: String, default: () => t('message.okText') },
+  okText: { type: String, default: () => t('common.okText') },
   scrollTop: { type: Boolean, default: true },
   visible: { type: Boolean },
 };
