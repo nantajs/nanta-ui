@@ -1,14 +1,14 @@
 <template>
   <div :class="getClass">
     <template v-if="canFullscreen">
-      <Tooltip :title="component.modal.restore" placement="bottom" v-if="fullScreen">
+      <Tooltip :title="t('modal.restore')" placement="bottom" v-if="fullScreen">
         <FullscreenExitOutlined role="full" @click="handleFullScreen" />
       </Tooltip>
-      <Tooltip :title="component.modal.maximize" placement="bottom" v-else>
+      <Tooltip :title="t('modal.maximize')" placement="bottom" v-else>
         <FullscreenOutlined role="close" @click="handleFullScreen" />
       </Tooltip>
     </template>
-    <Tooltip :title="component.modal.close" placement="bottom">
+    <Tooltip :title="t('modal.close')" placement="bottom">
       <CloseOutlined @click="handleCancel" />
     </Tooltip>
   </div>
@@ -17,7 +17,7 @@
 import { computed } from 'vue';
 import { FullscreenExitOutlined, FullscreenOutlined, CloseOutlined } from '@ant-design/icons-vue';
 import { Tooltip } from 'ant-design-vue';
-import { componentConst as component } from '../../..'
+import { t } from '../../../locales/useI18n';
 
 const props = defineProps({
   canFullscreen: { type: Boolean, default: true },

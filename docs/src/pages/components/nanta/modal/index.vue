@@ -62,8 +62,8 @@ function clickModal() {
         title: 'Confirm',
         icon: createVNode(ExclamationCircleOutlined as any),
         content: 'Bla bla ...',
-        okText: '确认',
-        cancelText: '取消',
+        okText: 'OK',
+        cancelText: 'Cancel',
         onCancel: (...args: any[]) => {
             console.log('cancel...', args)
         },

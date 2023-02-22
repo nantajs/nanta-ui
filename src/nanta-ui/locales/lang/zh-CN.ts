@@ -9,14 +9,18 @@ export default {
         resetText: '重置',
         searchText: '搜索',
         queryText: '查询',
-
         inputText: '请输入',
         chooseText: '请选择',
-
         redo: '刷新',
         back: '返回',
-
         light: '亮色主题',
         dark: '黑暗主题',
-    }
+    },
+    modal: {
+        cancelText: '关闭',
+        okText: '确认',
+        close: '关闭',
+        maximize: '最大化',
+        restore: '还原',
+    },
 }
