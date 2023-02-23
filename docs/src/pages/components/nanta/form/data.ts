@@ -24,7 +24,7 @@ export const schemes: FormSchema[] = [
     label: "URL",
     component: "Input",
     colProps: { span: 24 },
-    placeholder: 'Validate url is valid.',
+    placeholder: 'Validate whether url is valid.',
     rules: [
       {
         required: true,
