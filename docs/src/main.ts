@@ -10,6 +10,6 @@ import '@nanta/ui/dist/style.css';
 const app = createApp(App);
 setupRouter(app);
 
-setupNanta(app, {locale: 'zh-CN'} as NantaSetupOption);
-// setupNanta(app,  {locale: 'en'} as NantaSetupOption);
+// setupNanta(app, {locale: 'zh-CN'} as NantaSetupOption);
+setupNanta(app,  {locale: 'en'} as NantaSetupOption);
 app.use(Antd).mount('#app')
