@@ -27,10 +27,8 @@ const DEFAULT_OPTION: NantaSetupOption = {
 }
 
 export function setupNanta(app: App<Element>, option?: NantaSetupOption) {
-  console.log(option);
   const options = option ? { ...DEFAULT_OPTION, ...option } : DEFAULT_OPTION;
 
-  console.log(options)
   if (options.locale) {
     options.i18n.locale = options.locale;
   }
