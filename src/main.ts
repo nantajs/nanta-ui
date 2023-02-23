@@ -9,12 +9,11 @@ import Dropdown from './nanta-ui/components/dropdown/Dropdown.vue'
 
 import { Icon, SvgIcon } from './nanta-ui/components/icon/index'
 import type { VueNode, Recordable, Fn } from './nanta-ui/core/types/type'
+import { setupNanta, NantaSetupOption } from './nanta-ui/setup'
 
+export { setupNanta}
 export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, NantaTableAction, NantaFormModal, PopConfirmButton, Dropdown }
-export type { VueNode, Recordable, Fn }
-
-import { setupNanta } from './nanta-ui/setup'
-export { setupNanta }
+export type { VueNode, Recordable, Fn, NantaSetupOption }
 
 export * from './nanta-ui/components/button'
 export * from './nanta-ui/components/form'

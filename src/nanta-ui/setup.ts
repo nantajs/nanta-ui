@@ -15,27 +15,28 @@ const options = {
   messages,
 } as I18nOptions;
 
-export interface NantaOption {
+export interface NantaSetupOption {
   i18n: I18nOptions,
-  locale?: string
+  locale?: string,
+  loadingDir?: boolean;
 }
 
-const DEFAULT_OPTION: NantaOption = {
+const DEFAULT_OPTION: NantaSetupOption = {
   i18n: options,
+  loadingDir: true,
 }
 
-export function setupNanta(app: App<Element>, option?: NantaOption) {
-  if (!option) {
-    option = DEFAULT_OPTION;
-  }
-  if (!option.i18n) {
-    option.i18n = options;
+export function setupNanta(app: App<Element>, option?: NantaSetupOption) {
+  console.log(option);
+  const options = option ? { ...DEFAULT_OPTION, ...option } : DEFAULT_OPTION;
+
+  console.log(options)
+  if (options.locale) {
+    options.i18n.locale = options.locale;
   }
 
-  if (option.locale) {
-    option.i18n.locale = option.locale;
+  setupI18n(app, options.i18n)
+  if (options.loadingDir) {
+    setupLoadingDirective(app);
   }
-
-  setupI18n(app, option.i18n)
-  setupLoadingDirective(app);
 }
