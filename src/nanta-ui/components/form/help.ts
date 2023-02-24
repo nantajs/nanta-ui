@@ -1,13 +1,14 @@
 import type { ComponentType } from './index'
 import type { Rule } from "ant-design-vue/lib/form"
 import { isNumber } from "lodash-es"
+import { t } from '../../locales/useI18n'
 
 export function createPlaceholderMessage(component: ComponentType) {
   if (component.includes('Input') || component.includes('Complete')) {
-    return 'Please enter';
+    return t('common.inputText');
   }
   if (component.includes('Picker')) {
-    return 'Please choose';
+    return t('common.chooseText');
   }
   if (
     component.includes('Select') ||
@@ -16,8 +17,7 @@ export function createPlaceholderMessage(component: ComponentType) {
     component.includes('Radio') ||
     component.includes('Switch')
   ) {
-    // return `请选择${label}`;
-    return 'Please choose';
+    return t('common.chooseText');;
   }
   return '';
 }
