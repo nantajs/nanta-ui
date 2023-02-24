@@ -174,7 +174,13 @@ export const schemes: FormSchema[] = [
       ],
     },
   },
-
+  {
+    field: 'nickName',
+    label: "Nick Name",
+    required: true,
+    colProps: { span: 12 },
+    component: 'Input',
+  },
   {
     field: 'address',
     label: "Address",

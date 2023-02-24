@@ -96,6 +96,7 @@ export default {
       const {
         rules: defRules = [],
         component,
+        rulesMessageJoinLabel,
         label,
         dynamicRules,
         required,
@@ -106,7 +107,11 @@ export default {
       }
 
       let rules: Rule[] = cloneDeep(defRules) as Rule[];
-      const defaultMsg = createPlaceholderMessage(component);
+      const { rulesMessageJoinLabel: globalRulesMessageJoinLabel } = props.formProps;
+      const joinLabel = Reflect.has(props.schema, 'rulesMessageJoinLabel')
+        ? rulesMessageJoinLabel
+        : globalRulesMessageJoinLabel;
+      const defaultMsg = createPlaceholderMessage(component) + `${joinLabel ? label : ''}`;
 
       function validator(rule: any, value: any) {
         const msg = rule.message || defaultMsg;

@@ -23,6 +23,8 @@ export interface FormProps {
   rowProps?: RowProps;
   resetButtonOptions?: Partial<ButtonOptions>;
   resetFn?: () => Promise<void>;
+  // Check whether the information is added to the label
+  rulesMessageJoinLabel?: boolean;
   schemas?: FormSchema[];
   showActionButtons?: boolean;
   showResetButton?: boolean;
@@ -68,6 +70,7 @@ export const formProps = {
     type: Object as PropType<ButtonOptions>,
   },
   resetFn: Function as PropType<() => Promise<void>>,
+  rulesMessageJoinLabel: propTypes.bool.def(true),
   // 表单配置规则
   schemas: {
     type: [Array] as PropType<FormSchema[]>,

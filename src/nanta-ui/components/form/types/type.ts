@@ -165,6 +165,8 @@ export interface FormSchema {
   required?: boolean;
   renderColContent?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string;
   renderComponentContent?: string;
+  // Check whether the information is added to the label
+  rulesMessageJoinLabel?: boolean;
   rules?: Rule[];
   show?: boolean;
   slot?: string;
