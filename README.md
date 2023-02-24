@@ -17,12 +17,14 @@ Ant-design based UI framework. [Docs](https://nantajs.github.io/nanta-ui/#/).
 - Typescript support.  
 - Support vue 3 and nuxt 3 (SSR support).  
 - Vite support.  
+- I18N support (Default 'en').  
 
 ## Deps
 
 - Vue 3.0
 - [ant-design-vue](https://github.com/vueComponent/ant-design-vue)  
 - Lodash
+- vue-i18n
 
 ## Setup
 
