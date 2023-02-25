@@ -18,7 +18,7 @@
       </NantaFormAction>
       <slot name="formFooter" />
     </Row>
-</Form>
+  </Form>
 </template>
 
 <script lang="ts" setup>
@@ -335,10 +335,11 @@ onMounted(() => {
 });
 </script>
 <style lang="less">
-
 @prefix-cls: ~'nanta-basic-form';
 
 .@{prefix-cls} {
+  padding: 16px;
+
   .ant-form-item {
     &-label label::after {
       margin: 0 6px 0 2px;
