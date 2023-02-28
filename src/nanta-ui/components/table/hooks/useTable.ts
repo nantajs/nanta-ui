@@ -6,8 +6,7 @@ import type { BasicTableProps } from '../props'
 import type { WatchStopHandle } from 'vue';
 import { ref, onUnmounted, unref, watch, toRaw } from 'vue';
 import { getDynamicProps, error } from '../../../utils/util'
-import { ACTION_COLUMN_FLAG, INDEX_COLUMN_FLAG } from "../const";
-import { getInstance } from 'ant-design-vue/lib/message';
+import { ACTION_COLUMN_FLAG } from "../const";
 
 type Props = Partial<DynamicProps<BasicTableProps>>;
 
@@ -94,6 +93,9 @@ export function useTable(tableProps?: Props): [
         },
         getRawDataSource: () => {
             return getTableInstance().getRawDataSource();
+        },
+        getSearchFieldsValue: () => {
+            return getTableInstance().getSearchFieldsValue();
         },
         getSelectRows: () => {
             return toRaw(getTableInstance().getSelectRows());

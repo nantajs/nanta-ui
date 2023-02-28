@@ -151,7 +151,7 @@ const fetchSetting = {
     totalField: 'totalElements',
 };
 
-const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableDataRecord }] = useTable({
+const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableDataRecord, getSearchFieldsValue }] = useTable({
     title: 'NantaTable Usage Example.',
     columns,
     dataSource: data,
@@ -227,6 +227,8 @@ function handleMore(record: Recordable) {
 function handleEdit(record: Recordable) {
     console.log('edit clicked!');
     console.log(record);
+    const searchRecords = getSearchFieldsValue()
+    console.log(searchRecords)
     const innerRecord: ModalInnerRecord = {
         title: "Edit",
         record

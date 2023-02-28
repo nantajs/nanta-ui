@@ -93,6 +93,7 @@ export interface TableActionType {
     getDataSource: <T = Recordable>() => T[];
     getPaginationRef: () => PaginationProps | boolean;
     getRawDataSource: <T = Recordable>() => T;
+    getSearchFieldsValue: () => Recordable;
     getSelectRows: <T = Recordable>() => T[];
     getSelectRowKeys: () => string[] | number[];
     getSize: () => SizeType;
