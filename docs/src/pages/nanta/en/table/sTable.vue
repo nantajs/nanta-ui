@@ -50,7 +50,7 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton, useModal, Recordable, BasicColumn } from "/~/main";
 import { searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
-import { ActionType } from '/@/pages/components/nanta/base/type'
+import { ActionType } from '/@/pages/nanta/base/type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 const url = 'http://127.0.0.1:8090/api/v1/read?area=QNA3E&address=D100';
 
