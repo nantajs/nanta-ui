@@ -65,7 +65,7 @@
 import { ref, computed } from "vue";
 import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "/~/main";
 import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
-import { ActionType } from './type'
+import { ActionType } from '/@/pages/components/nanta/base/type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
 import { useModal } from "/~/main";
 import { sleep } from "/@/utils/sleep";

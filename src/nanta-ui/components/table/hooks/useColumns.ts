@@ -83,7 +83,7 @@ function sortFixedColumn(columns: BasicColumn[]) {
     return [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter(item => !item.hidden);
 }
 
-export function formatCell(text: string, format: CellFormat, record: Recordable, index: number) {
+export function formatCell(text: any, format: CellFormat, record: Recordable, index: number) {
     if (!format) {
         return text;
     }
@@ -110,11 +110,18 @@ export function formatCell(text: string, format: CellFormat, record: Recordable,
             return format.get(text);
         }
 
-        // Object
+        // isObject not includes Array
         if (!isString(format) && isObject(format)) {
             const map = new Map(Object.entries(format));
             return map.get('' + text) || text
         }
+
+        if (Array.isArray(format)) {
+            const option = format.find(item => item.value === text)
+            return option && option.label || text;
+        }
+
+        return text
     } catch (error) {
         return text;
     }

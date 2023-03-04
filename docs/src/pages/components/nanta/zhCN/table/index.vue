@@ -4,10 +4,14 @@
         :clickToRowSelect="false">
         <template #headerTop>
             <div style="margin-bottom: 10px;">
+                <NantaButton type="primary" @click="handleCopyCreate" :disabled="!operation.copyEnabled" class="button-s"
+                    preIcon="ic:baseline-content-copy">复制新增</NantaButton>
                 <NantaButton type="primary" @click="handleCreate" :disabled="!operation.createEnabled" class="button-s"
-                    preIcon="ic:baseline-plus">Add Reg</NantaButton>
+                    preIcon="ic:baseline-plus">新增</NantaButton>
+                <NantaButton :color="getModifyButtonColor" type="primary" @click="handleModify"
+                    :disabled="!operation.modifyEnabled" class="button-s" preIcon="ic:baseline-edit">修改</NantaButton>
                 <NantaButton type="primary" danger @click="handleMultiDelete" :disabled="!operation.deleteEnabled"
-                    class="button-s" preIcon="ic:baseline-delete">Delete</NantaButton>
+                    class="button-s" preIcon="ic:baseline-delete">删除</NantaButton>
             </div>
             <a-alert type="info" show-icon>
                 <template #message>
@@ -30,7 +34,18 @@
         </template>
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'action'">
-                <NantaTableAction :actions="getAction(record)" />
+                <NantaTableAction :actions="getAction(record)" :dropDownActions="[
+                    {
+                        label: 'More',
+                        popConfirm: {
+                            title: 'has more ?',
+                            confirm: handleMore.bind(null, record),
+                        },
+                        ifShow: (_action) => {
+                            return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
+                        },
+                    },
+                ]" />
             </template>
             <template v-else-if="column.key === 'tags'">
                 <span>
@@ -47,28 +62,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton, useModal, Recordable, BasicColumn } from "/~/main";
-import { searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
+import { ref, computed } from "vue";
+import { NantaTable, NantaTableAction, useTable, ActionItem, NantaFormModal, ModalInnerRecord, NantaFormModalProps, NantaButton } from "/~/main";
+import { columns, data, searchFormSchema, editModalSchema, editModalSchema2 } from "./data"
 import { ActionType } from '/@/pages/components/nanta/base/type'
 import { createAxiosFetch } from '/@/utils/http/axiosFetch';
-const url = 'http://127.0.0.1:8090/api/v1/read?area=QNA3E&address=D100';
-
-const columns: BasicColumn[] = [
-    {
-        title: "Address",
-        dataIndex: "address",
-        key: "address",
-    },
-    {
-        title: "Value",
-        dataIndex: "value",
-        key: "value",
-    },
-];
+import { useModal } from "/~/main";
+import { sleep } from "/@/utils/sleep";
+// import { url } from '/@/settings/localSetting';
+const url = 'https://mock.data/api/mock/meta';
 
 const checkedKeys = ref<Array<string | number>>([]);
 const operation = ref({ copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: false });
+
+const getModifyButtonColor = computed(() => operation.value.modifyEnabled ? "success" : "")
 
 function getAction(record: Recordable): ActionItem[] {
     const ifShow = (action: ActionItem) => {
@@ -89,26 +96,51 @@ function getAction(record: Recordable): ActionItem[] {
             icon: 'ant-design:delete-outlined',
             color: 'error',
             label: 'Delete',
-            onClick: handleDelete.bind(null, record),
+            popConfirm: {
+                title: 'Are you sure to delete?',
+                placement: 'left',
+                confirm: handleDelete.bind(null, record),
+            },
         },
+        {
+            icon: 'ic:baseline-api',
+            label: 'Detail',
+            onClick: handleOther.bind(null, record),
+        }
     ]
     actions.forEach(item => { item.ifShow = ifShow })
 
     return actions;
 }
 
-interface RegData {
-    address: string;
-    value: string;
+interface DemoResult {
+    createBy?: string;
+    updateBy?: string;
+    createTime?: number;
+    updateTime?: number;
+    id: number;
+    articleid: string;
+    title: string;
+    desc: string;
+    tags?: string;
+    space?: string;
+    category?: string;
+    refArticleid?: string;
 }
 
-function transfer(params: RegData[]) {
+function transfer(params: DemoResult[]) {
     const tData = params.map((item) => {
         return {
-            address: item.address,
-            value: item.value,
+            key: item.articleid,
+            name: item.title,
+            age: item.id,
+            email: item.space,
+            address: item.desc.substring(0, 10),
+            tags: [item.tags],
+            gender: 1,
         }
     })
+    console.log(tData)
     return tData;
 }
 
@@ -119,10 +151,11 @@ const fetchSetting = {
     totalField: 'totalElements',
 };
 
-const [registerTable, { updateTableDataRecord, findTableDataRecord, reload }] = useTable({
-    title: 'PLC Simulator Example.',
+const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableDataRecord, getSearchFieldsValue }] = useTable({
+    title: 'NantaTable Usage Example.',
     columns,
-    api: createAxiosFetch(url),
+    dataSource: data,
+    // api: createAxiosFetch(url),
     afterFetch: transfer,
     fetchSetting,
     actionColumn: {
@@ -131,13 +164,17 @@ const [registerTable, { updateTableDataRecord, findTableDataRecord, reload }] = 
         // slots: { customRender: 'action' },
         fixed: undefined,
     },
-    useSearchForm: false,
+    useSearchForm: true,
     searchFormConfig: {
         labelWidth: 120,
         schemas: searchFormSchema,
         autoSubmitOnEnter: true,
         submitButtonOptions: { text: 'search' }
     },
+    pagination: {
+        showTotal: total => `Now total count is ${total}.`,
+
+    }
 })
 
 const mProps: NantaFormModalProps = {
@@ -161,6 +198,7 @@ const handleOK = async (newRecord: Recordable, oldRecord: Recordable) => {
     updateTableDataRecord(oldRecord.key, newRecord)
     changeLoading(true);
     changeOkLoading(true);
+    await sleep(3)
     // closeModal()
     changeOkLoading(false)
     changeLoading(false)
@@ -182,9 +220,15 @@ const handleCancel2 = (newRecord: Recordable, oldRecord: Recordable) => {
     console.log('handle cancel in outer event callback', newRecord, oldRecord);
 }
 
+function handleMore(record: Recordable) {
+    console.log('hand more clicked!', record);
+}
+
 function handleEdit(record: Recordable) {
     console.log('edit clicked!');
     console.log(record);
+    const searchRecords = getSearchFieldsValue()
+    console.log(searchRecords)
     const innerRecord: ModalInnerRecord = {
         title: "Edit",
         record
@@ -218,6 +262,10 @@ function handleModify() {
         const record = findTableDataRecord(key)
         doModifyAction(key, ActionType.MODIFY, record as Recordable);
     }
+}
+
+function handleOther(record: Recordable) {
+    console.log('handle others', record)
 }
 
 function handleMultiDelete() {
@@ -261,19 +309,6 @@ function onSelectChange(selectedRowKeys: (string | number)[]) {
         operation.value = { copyEnabled: false, createEnabled: true, modifyEnabled: false, deleteEnabled: true };
     }
 }
-
-let timer: any = null;
-onMounted(() => {
-    timer = setInterval(() => {
-        reload({ reload: false })
-    }, 1000);
-})
-
-onBeforeUnmount(() => {
-    if (timer) {
-        clearInterval(timer);
-    }
-})
 </script>
 
 <style scoped>
