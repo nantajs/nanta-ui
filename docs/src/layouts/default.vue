@@ -2,21 +2,22 @@
   <a-layout>
     <NavBar :navItems="navItems" :selectedKeys="selectedNavKeys" @selectd="onNavSelected" />
     <a-layout>
-      <SideBar :sideMenus="sideMenus" @menu-selected="onSideSelected" :selectedKeys="selectedKeys"
-        :openKeys="openKeys" />
+      <SideBar :sideMenus="sideMenus" @menu-selected="onSideSelected" :selectedKeys="selectedKeys" :openKeys="openKeys" />
       <a-layout style="padding: 0 15px 15px">
         <a-breadcrumb style="margin: 10px 0">
           <a-breadcrumb-item v-for="item in breadcrumbList" :key="item">{{
-              item
+            item
           }}</a-breadcrumb-item>
         </a-breadcrumb>
-        <a-layout-content>
+        <a-layout-content style="margin-bottom:30px">
           <slot />
+          <Footer />
         </a-layout-content>
       </a-layout>
     </a-layout>
-    <Footer />
+
   </a-layout>
+
 </template>
 
 <script lang="ts" >
