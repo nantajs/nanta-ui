@@ -8,10 +8,10 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'info',
-        label: "Info",
+        label: "信息",
         component: "Label",
         componentProps: {
-            label: 'Here is an label show.'
+            label: '纯信息展示用'
         }
     },
     {
@@ -21,10 +21,10 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'homepage',
-        label: "URL",
+        label: "普通输入",
         component: "Input",
         colProps: { span: 24 },
-        placeholder: 'Validate whether url is valid.',
+        placeholder: 'URL验证Case',
         rules: [
             {
                 required: true,
@@ -35,8 +35,12 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'num',
-        label: 'Number Value',
+        label: '数字输入',
         component: 'InputNumber',
+        colProps: { span: 24 },
+        componentProps: {
+            style: 'width: 100%'  // 自定义长度
+        },
         rules: [
             {
                 required: true,
@@ -47,7 +51,7 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'textV',
-        label: 'Length Validate 3-5',
+        label: '长度验证3-5字',
         component: 'Input',
         colProps: { span: 24 },
         rules: [
@@ -60,7 +64,7 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'textV3',
-        label: 'Length Validate 3',
+        label: '长度验证==3字',
         component: 'Input',
         colProps: { span: 24 },
         rules: [
@@ -90,12 +94,12 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'name',
-        label: "Name",
+        label: "联动示例",
         component: 'Input',
         defaultValue: 'nanta',
         required: true,
         helpMessage: 'User name.',
-        placeholder: 'Please input user name.',
+        placeholder: '当输入#时，地址栏变成必选',
         colProps: { span: 12 },
         componentProps: ({ formActionType }) => {
             return {
@@ -131,6 +135,16 @@ export const schemes: FormSchema[] = [
         }
     },
     {
+        field: 'address',
+        label: "地址",
+        colProps: { span: 12 },
+        component: 'InputTextArea',
+        placeholder: '自定义组件样式',
+        componentProps: {
+            style: 'margin-top: 30px;',
+        }
+    },
+    {
         field: 'email',
         label: "Email",
         component: 'Input',
@@ -141,7 +155,7 @@ export const schemes: FormSchema[] = [
                 // @ts-ignore
                 validator: VALIDATORS.email,
                 trigger: 'change',
-                message: 'Please input an valid email address.'
+                message: '邮件地址不正确！'
             },
         ],
     },
@@ -158,8 +172,8 @@ export const schemes: FormSchema[] = [
         label: 'Type',
         ifHideLabel: true,
         colProps: { span: 12 },
-        placeholder: 'Please select type.',
-        componentProps: {
+        placeholder: '不显示Label示例',
+        componentProps: {   
             options: [
                 {
                     label: 'Option1',
@@ -180,12 +194,6 @@ export const schemes: FormSchema[] = [
         required: true,
         colProps: { span: 12 },
         component: 'Input',
-    },
-    {
-        field: 'address',
-        label: "Address",
-        colProps: { span: 12 },
-        component: 'InputTextArea',
     },
     {
         field: 'field1',
@@ -265,7 +273,7 @@ export const schemes: FormSchema[] = [
         field: 'field6',
         component: 'DatePicker',
         colProps: { span: 12 },
-        label: 'DatePicker_6',
+        label: '时间件',
     },
     {
         field: 'tags',
