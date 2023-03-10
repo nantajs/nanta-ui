@@ -2,7 +2,7 @@
     <div>
         <a-card title="基础表单" :bordered="false">
             <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm"
-                @submit="handleSubmit" @reset="handleReset">
+                @registered="onRegisted" @submit="handleSubmit" @reset="handleReset">
                 <template #selectA="{ model, field, schema }">
                     <a-select :options="optionsA" mode="multiple" v-model:value="model[field]"
                         :placeholder="schema.placeholder" allowClear />
@@ -57,6 +57,13 @@ const [
         span: 24,
     },
 });
+
+const onRegisted = () => {
+    setFieldsValue({
+        age: 100,
+        email: "aborn@aborn.me"
+    })
+}
 
 const customizeResetFn = (): Promise<void> => {
     console.log("here is a customize resetFn called!");

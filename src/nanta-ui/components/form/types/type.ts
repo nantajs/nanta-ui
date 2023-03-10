@@ -2,33 +2,33 @@ import type { ExtractPropTypes, VNode } from 'vue';
 import type { NamePath, RuleObject } from "ant-design-vue/lib/form/interface";
 import { FormProps } from "./formProps";
 import { FormItem } from "./formItem";
-import type { Recordable, PropType } from '../../..'
+import type { Recordable, PropType, Fn } from '../../..'
 import type { ButtonProps } from '../../button'
 
 export type FieldMapToTime = [string, [string, string], string?][];
 
 export interface FormActionType {
-  submit: () => Promise<void>;
-  setFieldsValue: <T>(values: Recordable) => Promise<void>;
-  resetFields: () => Promise<void>;
-  getFieldsValue: () => Recordable;
-  clearValidate: (name?: string | string[]) => Promise<void>;
-  updateSchema: (
-    data: Partial<FormSchema> | Partial<FormSchema>[]
-  ) => Promise<void>;
-  resetSchema: (
-    data: Partial<FormSchema> | Partial<FormSchema>[]
-  ) => Promise<void>;
-  setProps: (formProps: Partial<FormProps>) => Promise<void>;
-  removeSchemaByFiled: (field: string | string[]) => Promise<void>;
   appendSchemaByField: (
     schema: FormSchema,
     prefixField: string | undefined,
     first?: boolean | undefined
   ) => Promise<void>;
+  clearValidate: (name?: string | string[]) => Promise<void>;
+  getFieldsValue: () => Recordable;
+  resetFields: () => Promise<void>;
+  removeSchemaByFiled: (field: string | string[]) => Promise<void>;
+  setFieldsValue: <T>(values: Recordable) => Promise<void>;
+  setProps: (formProps: Partial<FormProps>) => Promise<void>;
+  resetSchema: (
+    data: Partial<FormSchema> | Partial<FormSchema>[]
+  ) => Promise<void>;
+  scrollToField: (name: NamePath, options?: ScrollOptions) => Promise<void>;
+  submit: () => Promise<void>;
+  updateSchema: (
+    data: Partial<FormSchema> | Partial<FormSchema>[]
+  ) => Promise<void>;
   validateFields: (nameList?: NamePath[]) => Promise<any>;
   validate: (nameList?: NamePath[]) => Promise<any>;
-  scrollToField: (name: NamePath, options?: ScrollOptions) => Promise<void>;
 }
 
 type RegisterFn = (formInstance: FormActionType) => void;
@@ -149,7 +149,7 @@ export interface FormSchema {
   colProps?: Partial<ColEx>;
   colSlot?: string;
   component: ComponentType;
-  componentProps?: ((opt: { schema: FormSchema; formActionType: FormActionType; formModel: Recordable }) => Recordable) | object; 
+  componentProps?: ((opt: { schema: FormSchema; formActionType: FormActionType; formModel: Recordable }) => Recordable) | object;
   defaultValue?: any;
   disabledLabelWidth?: boolean;
   dynamicRules?: (renderCallbackParams: RenderCallbackParams) => Rule[];

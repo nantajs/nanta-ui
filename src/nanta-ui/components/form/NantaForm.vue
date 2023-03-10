@@ -39,7 +39,7 @@ import type { Nullable, Recordable } from "../../core/types/type";
 import { ref, unref, getCurrentInstance, reactive, computed, toRaw, watch, onMounted, nextTick, useAttrs } from "vue";
 
 const props = defineProps(formProps);
-const emits = defineEmits(["register", "field-value-change", "reset", "submit"]);
+const emits = defineEmits(["register", "field-value-change", "reset", "submit", "registered"]);
 const attrs = useAttrs();
 const propsRef = ref<Partial<FormProps>>({});
 const schemaRef = ref<Nullable<FormSchema[]>>(null);
@@ -332,6 +332,7 @@ onMounted(() => {
   // console.log("NantaForm inited, id", instance?.uid);
   initDefault();
   emits("register", formActionType);
+  emits("registered");
 });
 </script>
 <style lang="less">

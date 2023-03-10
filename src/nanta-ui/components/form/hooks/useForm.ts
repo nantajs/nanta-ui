@@ -3,7 +3,7 @@ import { ref, onUnmounted, unref, nextTick, watch } from 'vue'
 import type { FormProps, FormActionType, UseFormReturnType, FormSchema } from '../index'
 import { isProdMode } from '../../../utils/env'
 import { getDynamicProps, error } from '../../../utils/util'
-import type { Nullable, Recordable, DynamicProps } from '../../..'
+import type { Nullable, Recordable, DynamicProps, Fn } from '../../..'
 
 export declare type ValidateFields = (nameList?: NamePath[]) => Promise<Recordable>;
 
@@ -46,6 +46,45 @@ export function useForm (props?: Props): UseFormReturnType {
   }
 
   const methods: FormActionType = {
+    appendSchemaByField: async (schema: FormSchema, prefixField: string | undefined, first?: boolean) => {
+      const form = await getForm()
+      form.appendSchemaByField(schema, prefixField, first)
+    },
+
+    clearValidate: async (name?: string | string[]) => {
+      const form = await getForm()
+      form.clearValidate(name)
+    },
+
+    // TODO promisify
+    getFieldsValue: <T>() => {
+      return unref(formRef)?.getFieldsValue() as T
+    },
+    setFieldsValue: async <T>(values: Recordable) => {
+      const form = await getForm()
+      form.setFieldsValue<T>(values)
+    },
+
+    resetFields: async () => {
+      getForm().then(async (form) => {
+        await form.resetFields()
+      })
+    },
+
+    removeSchemaByFiled: async (field: string | string[]) => {
+      unref(formRef)?.removeSchemaByFiled(field)
+    },
+
+    resetSchema: async (data: Partial<FormSchema> | Partial<FormSchema>[]) => {
+      const form = await getForm()
+      form.resetSchema(data)
+    },
+
+    submit: async (): Promise<any> => {
+      const form = await getForm()
+      return form.submit()
+    },
+
     scrollToField: async (name: NamePath, options?: ScrollOptions | undefined) => {
       const form = await getForm()
       form.scrollToField(name, options)
@@ -60,46 +99,6 @@ export function useForm (props?: Props): UseFormReturnType {
       form.updateSchema(data)
     },
 
-    resetSchema: async (data: Partial<FormSchema> | Partial<FormSchema>[]) => {
-      const form = await getForm()
-      form.resetSchema(data)
-    },
-
-    clearValidate: async (name?: string | string[]) => {
-      const form = await getForm()
-      form.clearValidate(name)
-    },
-
-    resetFields: async () => {
-      getForm().then(async (form) => {
-        await form.resetFields()
-      })
-    },
-
-    removeSchemaByFiled: async (field: string | string[]) => {
-      unref(formRef)?.removeSchemaByFiled(field)
-    },
-
-    // TODO promisify
-    getFieldsValue: <T>() => {
-      return unref(formRef)?.getFieldsValue() as T
-    },
-
-    setFieldsValue: async <T>(values: Recordable) => {
-      const form = await getForm()
-      form.setFieldsValue<T>(values)
-    },
-
-    appendSchemaByField: async (schema: FormSchema, prefixField: string | undefined, first?: boolean) => {
-      const form = await getForm()
-      form.appendSchemaByField(schema, prefixField, first)
-    },
-
-    submit: async (): Promise<any> => {
-      const form = await getForm()
-      return form.submit()
-    },
-
     validate: async (nameList?: NamePath[]): Promise<Recordable> => {
       const form = await getForm()
       return form.validate(nameList)
@@ -108,7 +107,7 @@ export function useForm (props?: Props): UseFormReturnType {
     validateFields: async (nameList?: NamePath[]): Promise<Recordable> => {
       const form = await getForm()
       return form.validateFields(nameList)
-    }
+    }    
   }
 
   return [register, methods]
