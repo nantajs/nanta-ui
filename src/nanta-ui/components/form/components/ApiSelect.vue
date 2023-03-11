@@ -1,5 +1,6 @@
 <template>
-  <Select @dropdown-visible-change="handleFetch" v-bind="$attrs" @change="handleChange" :options="getOptions">
+  <Select @dropdown-visible-change="handleFetch" v-bind="$attrs" @change="handleChange" :options="getOptions"
+    v-model:value="state">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
@@ -15,7 +16,7 @@
   </Select>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, watchEffect, computed, unref, watch } from 'vue';
+import { defineComponent, PropType, ref, watchEffect, computed, unref, watch, reactive } from 'vue';
 import { Select } from 'ant-design-vue';
 import { isFunction } from '../../../utils/is';
 import { useRuleFormItem } from '../hooks/useFormItem';
@@ -65,6 +66,7 @@ export default defineComponent({
 
     // Embedded in the form, just use the hook binding to perform form verification
     const [state] = useRuleFormItem(props, 'value', 'change', emitData);
+    const getValue = props.value;
 
     const getOptions = computed(() => {
       const { labelField, valueField, numberToString } = props;
@@ -136,9 +138,11 @@ export default defineComponent({
     function handleChange(_, ...args) {
       emitData.value = args;
       emit('change', args)
+
+      // value.value = args[0].value;
     }
 
-    return { state, attrs, getOptions, loading, t, handleFetch, handleChange };
+    return { state, attrs, getOptions, loading, t, handleFetch, handleChange, getValue };
   },
 });
 </script>

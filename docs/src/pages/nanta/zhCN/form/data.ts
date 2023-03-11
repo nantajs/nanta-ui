@@ -342,8 +342,7 @@ export const schemes: FormSchema[] = [
             resultField: 'list',
             labelField: 'name',
             valueField: 'value',
-            // not request untill to select
-            immediate: true,
+            immediate: true, // 是否立即请求后端，还是等待用户下拉选择
             onChange: e => {
                 console.log('selected:', e);
             },
@@ -379,7 +378,7 @@ export const schemes: FormSchema[] = [
         colProps: {
             span: 8,
         },
-        defaultValue: 'us',        
+        defaultValue: 'us',
     },
 ]
 

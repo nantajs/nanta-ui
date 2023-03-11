@@ -13,11 +13,12 @@
                 </template>
                 <template #localSearch="{ model, field }">
                     <ApiSelect :api="optionsListApi" showSearch v-model:value="model[field]" optionFilterProp="label"
-                        resultField="list" labelField="name" valueField="value" @change="changedAction"/>
+                        resultField="list" labelField="name" valueField="value" @change="changedAction" />
                 </template>
                 <template #remoteSearch="{ model, field }">
-                    <ApiSelect :api="optionsListApi" showSearch v-model:value="model[field]" :filterOption="false" @change="changedAction"
-                        resultField="list" labelField="name" valueField="value" :params="searchParams" @search="onSearch" />
+                    <ApiSelect :api="optionsListApi" showSearch v-model:value="model[field]" :filterOption="false"
+                        @change="changedAction" resultField="list" labelField="name" valueField="value"
+                        :params="searchParams" @search="onSearch" />
                 </template>
             </NantaForm>
         </a-card>
@@ -87,6 +88,9 @@ const onRegisted = () => {
 }
 
 const customizeResetFn = (): Promise<void> => {
+    const values = getFieldsValue()
+    console.log(values)
+
     console.log("here is a customize resetFn called!");
     setFieldsValue({
         age: 0,
