@@ -61,7 +61,7 @@ export default defineComponent({
     const isFirstLoad = ref(true);
     const emitData = ref<any[]>([]);
     const attrs = useAttrs();
-    console.log(unref(attrs))
+    // console.log(unref(attrs))
 
     // Embedded in the form, just use the hook binding to perform form verification
     const [state] = useRuleFormItem(props, 'value', 'change', emitData);
