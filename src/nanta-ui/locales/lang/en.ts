@@ -17,6 +17,12 @@ export default {
         maximize: 'Maximize',
         restore: 'Restore',
     },
+    form: {
+        putAway: 'Put away',
+        unfold: 'Unfold',
+        maxTip: 'The number of characters should be less than {0}',
+        apiSelectNotFound: 'Wait for data loading to complete...',
+    },
     validate: {
         emailAddressInvalid: 'The email address is invalid.',
         notEmpty: 'Value cannot be empty.',

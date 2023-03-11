@@ -1,4 +1,22 @@
 import { FormSchema, VALIDATORS } from "/~/main";
+import { crud } from "/@/utils/http/crud"
+
+const { api } = crud({ url: '/api/mock/options', 'method': 'get' })
+export const optionsListApi = (params: any): Promise<any> => {
+    return new Promise((resolve, reject) => {
+        api(params).then((response: any) => {
+            resolve(response.data);
+        }).catch((error) => {
+            console.error(error);
+            reject(error)
+        });
+    });
+}
+
+export interface selectParams {
+    id: number | string;
+}
+
 export const schemes: FormSchema[] = [
     {
         field: 'id',
@@ -173,7 +191,7 @@ export const schemes: FormSchema[] = [
         ifHideLabel: true,
         colProps: { span: 12 },
         placeholder: '不显示Label示例',
-        componentProps: {   
+        componentProps: {
             options: [
                 {
                     label: 'Option1',
@@ -286,7 +304,7 @@ export const schemes: FormSchema[] = [
     {
         field: 'field7',
         component: 'Select',
-        label: 'Multi Select',
+        label: '下拉多选',
         slot: 'selectA',
         colProps: { span: 12 },
         //    defaultValue: ['value_1'],
@@ -311,4 +329,57 @@ export const schemes: FormSchema[] = [
             ],
         },
     },
+    {
+        field: 'apiSelect',
+        component: 'ApiSelect',
+        label: '懒加载远程下拉',
+        required: true,
+        componentProps: {
+            api: optionsListApi,
+            params: {
+                id: 1,
+            },
+            resultField: 'list',
+            labelField: 'name',
+            valueField: 'value',
+            // not request untill to select
+            immediate: true,
+            onChange: e => {
+                console.log('selected:', e);
+            },
+            // atfer request callback
+            onOptionsChange: options => {
+                console.log('get options', options.length, options);
+            },
+        },
+        colProps: {
+            span: 8,
+        },
+        defaultValue: 'jp',
+    },
+    {
+        field: 'field31',
+        component: 'Input',
+        label: '下拉本地搜索',
+        helpMessage: ['ApiSelect组件', '远程数据源本地搜索', '只发起一次请求获取所有选项'],
+        required: true,
+        slot: 'localSearch',
+        colProps: {
+            span: 8,
+        },
+        defaultValue: 'hk',
+    },
+    {
+        field: 'field32',
+        component: 'Input',
+        label: '下拉远程搜索',
+        helpMessage: ['ApiSelect组件', '将关键词发送到接口进行远程搜索'],
+        required: true,
+        slot: 'remoteSearch',
+        colProps: {
+            span: 8,
+        },
+        defaultValue: 'us',        
+    },
 ]
+

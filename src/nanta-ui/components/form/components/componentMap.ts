@@ -19,6 +19,7 @@ import type { ComponentType } from '../index'
 
 import RadioButtonGroup from './RadioButtonGroup.vue';
 import NantaLabel from './NantaLabel.vue';
+import ApiSelect from './ApiSelect.vue'
 /**
  * Component list, register here to setting it in the form
  */
@@ -34,6 +35,7 @@ componentMap.set('InputTextArea', Input.TextArea)
 componentMap.set('InputNumber', InputNumber)
 componentMap.set('AutoComplete', AutoComplete)
 componentMap.set('Select', Select)
+componentMap.set('ApiSelect', ApiSelect);
 componentMap.set('TreeSelect', TreeSelect)
 componentMap.set('Switch', Switch)
 componentMap.set('RadioGroup', Radio.Group)

@@ -11,17 +11,38 @@
                     <a-select :options="optionsB" mode="tags" :token-separators="[',']" v-model:value="model[field]"
                         :placeholder="schema.placeholder" allowClear />
                 </template>
+                <template #localSearch="{ model, field }">
+                    <ApiSelect :api="optionsListApi" showSearch v-model:value="model[field]" optionFilterProp="label"
+                        resultField="list" labelField="name" valueField="value" @change="changedAction"/>
+                </template>
+                <template #remoteSearch="{ model, field }">
+                    <ApiSelect :api="optionsListApi" showSearch v-model:value="model[field]" :filterOption="false" @change="changedAction"
+                        resultField="list" labelField="name" valueField="value" :params="searchParams" @search="onSearch" />
+                </template>
             </NantaForm>
         </a-card>
     </div>
 </template>
   
 <script setup lang="ts">
-import { NantaButton, NantaForm, useForm, FormProps, Recordable, FormSchema } from '/~/main'
+import { NantaForm, useForm, FormProps, Recordable, ApiSelect } from '/~/main'
 import type { SelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
-import { schemes } from "./data";
+import { ref, unref } from 'vue';
+import { schemes, optionsListApi } from "./data";
 import { computed } from "vue";
+
+const keyword = ref<string>('');
+const searchParams = computed<Recordable>(() => {
+    return { keyword: unref(keyword) };
+});
+
+function onSearch(value: string) {
+    keyword.value = value;
+}
+
+const changedAction = (options) => {
+    console.log('选中了:', options)
+}
 
 const optionsA = [
     {

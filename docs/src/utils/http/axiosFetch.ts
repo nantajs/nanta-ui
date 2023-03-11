@@ -17,7 +17,6 @@ export function createAxiosFetch(url: string, method?: string) {
                 params: {
                     page: (params.page ? params.page - 1 : 0),
                     size: params.pageSize,
-                    space: 'bixintech',
                 }
             }).then(function (response) {
                 resolve(response.data.result);

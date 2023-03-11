@@ -16,6 +16,12 @@ export default {
         light: '亮色主题',
         dark: '黑暗主题',
     },
+    form: {
+        putAway: '收起',
+        unfold: '展开',
+        maxTip: '字符数应小于{0}位',
+        apiSelectNotFound: '请等待数据加载完成...',
+    },
     modal: {
         cancelText: '关闭',
         okText: '确认',

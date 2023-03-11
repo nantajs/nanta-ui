@@ -4,6 +4,7 @@ import NantaForm from './nanta-ui/components/form/NantaForm.vue'
 import NantaModal from './nanta-ui/components/modal/NantaModal.vue'
 import NantaFormModal from './nanta-ui/components/modal/NantaFormModal.vue'
 import NantaTable from './nanta-ui/components/table/NantaTable.vue'
+import ApiSelect from './nanta-ui/components/form/components/ApiSelect.vue'
 import NantaTableAction from './nanta-ui/components/table/components/NantaTableAction.vue'
 import Dropdown from './nanta-ui/components/dropdown/Dropdown.vue'
 
@@ -12,7 +13,7 @@ import type { VueNode, Recordable, Fn } from './nanta-ui/core/types/type'
 import { setupNanta, NantaSetupOption } from './nanta-ui/setup'
 
 export { setupNanta}
-export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, NantaTableAction, NantaFormModal, PopConfirmButton, Dropdown }
+export { NantaButton, NantaForm, NantaModal, Icon, SvgIcon, NantaTable, NantaTableAction, NantaFormModal, PopConfirmButton, Dropdown, ApiSelect }
 export type { VueNode, Recordable, Fn, NantaSetupOption }
 
 export * from './nanta-ui/components/button'
