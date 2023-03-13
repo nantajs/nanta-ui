@@ -1,9 +1,9 @@
 <template>
     <Tooltip v-if="visiable" :overlayClassName="`${prefixCls}__wrap`" :title="getContent" :autoAdjustOverflow="true"
         :overlayStyle="getOverlayStyle" placement="right" :getPopupContainer="getPopupContainer">
-        <span class="content" :style="getContentStyle" id="saveRef" ref="contRef">{{ getContent }}</span>
+        <span :class="`${prefixCls}-content`" :style="getContentStyle" id="saveRef" ref="contRef">{{ getContent }}</span>
     </Tooltip>
-    <span v-else class="content" :style="getContentStyle" id="saveRef" ref="contRef">{{ getContent }}</span>
+    <span v-else :class="`${prefixCls}-content`" :style="getContentStyle" id="saveRef" ref="contRef">{{ getContent }}</span>
 </template>
 <script lang="ts" setup>
 import { computed, onMounted, ref, useSlots, watch } from 'vue';
@@ -39,7 +39,7 @@ const props = defineProps({
 });
 
 const slots = useSlots()
-const prefixCls = 'basic-help';
+const prefixCls = 'nanta-text-tooltip';
 const getOverlayStyle = computed(() => ({ "max": props.maxWidth }));
 const getContentStyle = computed(() => `max-width: ${props.maxWidth};`)
 
@@ -89,15 +89,7 @@ watch(() => getContent, (newV, oldV) => {
 </script>
 
 <style lang="less">
-@prefix-cls: ~'nanta-basic-help';
-
-.content {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
-    cursor: pointer;
-}
+@prefix-cls: ~'nanta-text-tooltip';
 
 .@{prefix-cls} {
     display: inline-block;
@@ -105,6 +97,14 @@ watch(() => getContent, (newV, oldV) => {
     font-size: 14px;
     color: #909399;
     cursor: pointer;
+
+    &-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+        cursor: pointer;
+    }
 
     &:hover {
         color: #606266;
