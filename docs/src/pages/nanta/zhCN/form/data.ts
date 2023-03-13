@@ -265,7 +265,7 @@ export const schemes: FormSchema[] = [
     {
         field: 'field4',
         component: 'Switch',
-        label: 'Switch_4',
+        label: '开关',
         colProps: { span: 12 },
     },
     {
@@ -288,10 +288,43 @@ export const schemes: FormSchema[] = [
         },
     },
     {
-        field: 'field6',
+        field: 'fieldMonth',
+        component: 'MonthPicker',
+        colProps: { span: 12 },
+        label: '月份选择',
+    },
+    {
+        field: 'fieldWeek',
+        component: 'WeekPicker',
+        colProps: { span: 12 },
+        label: '周选择',
+    },
+    {
+        field: 'fieldDate',
         component: 'DatePicker',
         colProps: { span: 12 },
-        label: '时间件',
+        label: '日期选择',
+    },
+    {
+        field: 'fieldDate2',
+        component: 'DatePicker',
+        colProps: { span: 12 },
+        label: '日期+时间',
+        componentProps: {
+            showTime: true
+        }
+    },
+    {
+        field: 'fieldTime',
+        component: 'TimePicker',
+        colProps: { span: 12 },
+        label: '时间选择',
+    },
+    {
+        field: 'fieldTimeRange',
+        component: 'RangePicker',
+        colProps: { span: 12 },
+        label: '时间范围选择',
     },
     {
         field: 'tags',

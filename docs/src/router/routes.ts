@@ -10,7 +10,7 @@ export const basicRouteItems = [
     { path: '/components/modal/index', name: 'Modal', group: 'components', component: () => import('/@/pages/nanta/en/modal/index.vue') },
     { path: '/components/table/index', name: 'Table', group: 'components', component: () => import('/@/pages/nanta/en/table/index.vue') },
     { path: '/components/table/index-cn', name: '表格', group: 'components', component: () => import('/@/pages/nanta/zhCN/table/index.vue') },
-    { path: '/components/text/index-cn', name: '文字提示', group: 'components', component: () => import('/@/pages/nanta/zhCN/tooltip/index.vue') },
+    { path: '/components/text/index-cn', name: '文字超长自动提示', group: 'components', component: () => import('/@/pages/nanta/zhCN/tooltip/index.vue') },
     { path: '/components/table/sTable', name: 'STable', group: 'components', hide: true, component: () => import('/@/pages/nanta/en/table/sTable.vue') },
 
     { path: '/antv/table/index', name: 'Table2', group: 'antv', component: () => import('/@/pages/table/basic.vue') },
