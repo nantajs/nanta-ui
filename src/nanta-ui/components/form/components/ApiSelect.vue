@@ -1,6 +1,6 @@
 <template>
   <Select @dropdown-visible-change="handleFetch" v-bind="$attrs" @change="handleChange" :options="getOptions"
-    v-model:value="state">
+    :value="state">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
@@ -22,7 +22,7 @@ import type { SelectValue } from 'ant-design-vue/lib/select'
 import { isFunction } from '../../../utils/is';
 import { useRuleFormItem } from '../hooks/useFormItem';
 import { useAttrs } from '../../../core/hooks/useAttrs';
-import { get, omit } from 'lodash-es';
+import { get, isObject, omit } from 'lodash-es';
 import { LoadingOutlined } from '@ant-design/icons-vue';
 import { t } from '../../../locales/useI18n';
 import type { Recordable } from '../../..'
@@ -65,7 +65,7 @@ export default defineComponent({
     const isFirstLoad = ref(true);
     const emitData = ref<any[]>([]);
     const attrs = useAttrs();
-    
+
     // Embedded in the form, just use the hook binding to perform form verification
     const [state] = useRuleFormItem(props, 'value', 'change', emitData);
     const getValue = props.value;
@@ -137,11 +137,10 @@ export default defineComponent({
     }
 
     // @ts-ignore
-    function handleChange(_, ...args) {
+    function handleChange(valuesArr, ...args) {
       emitData.value = args;
       emit('change', args)
-
-      // value.value = args[0].value;
+      state.value = valuesArr
     }
 
     return { state, attrs, getOptions, loading, t, handleFetch, handleChange, getValue };

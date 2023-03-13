@@ -15,7 +15,7 @@ export const schemes: FormSchema[] = [
     }
   },
   {
-    la: 'name2',
+    field: 'name2',
     label: "Info",
     component: "Label",
   },

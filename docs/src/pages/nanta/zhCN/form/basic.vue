@@ -13,7 +13,7 @@
                 </template>
                 <template #localSearch="{ model, field }">
                     <ApiSelect :api="optionsListApi" showSearch v-model:value="model[field]" optionFilterProp="label"
-                        resultField="list" labelField="name" valueField="value" @change="changedAction" />
+                        resultField="list" labelField="name" mode="multiple" valueField="value" @change="changedAction" />
                 </template>
                 <template #remoteSearch="{ model, field }">
                     <ApiSelect :api="optionsListApi" showSearch v-model:value="model[field]" :filterOption="false"
