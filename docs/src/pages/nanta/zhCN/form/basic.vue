@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div>        
         <a-card title="基础表单" :bordered="false">
             <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm"
                 @registered="onRegisted" @submit="handleSubmit" @reset="handleReset">
