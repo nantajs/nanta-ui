@@ -95,7 +95,7 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'description',
-        label: "Desc",
+        label: "描述信息",
         component: "InputTextArea",
         componentProps: {
             'auto-size': { minRows: 2, maxRows: 5 },
@@ -179,7 +179,7 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'age',
-        label: "Age",
+        label: "年龄",
         component: 'InputNumber',
         defaultValue: 1,
         colProps: { span: 12 },

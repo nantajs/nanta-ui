@@ -18,6 +18,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref, watchEffect, computed, unref, watch, reactive } from 'vue';
 import { Select } from 'ant-design-vue';
+import type { SelectValue } from 'ant-design-vue/lib/select'
 import { isFunction } from '../../../utils/is';
 import { useRuleFormItem } from '../hooks/useFormItem';
 import { useAttrs } from '../../../core/hooks/useAttrs';
@@ -37,7 +38,9 @@ export default defineComponent({
   },
   inheritAttrs: false,
   props: {
-    value: [Array, Object, String, Number],
+    value: {
+      type: [Array, Object, String, Number] as PropType<SelectValue>
+    },
     numberToString: propTypes.bool,
     api: {
       type: Function as PropType<(arg?: Recordable) => Promise<OptionsItem[]>>,
@@ -62,8 +65,7 @@ export default defineComponent({
     const isFirstLoad = ref(true);
     const emitData = ref<any[]>([]);
     const attrs = useAttrs();
-    // console.log(unref(attrs))
-
+    
     // Embedded in the form, just use the hook binding to perform form verification
     const [state] = useRuleFormItem(props, 'value', 'change', emitData);
     const getValue = props.value;
