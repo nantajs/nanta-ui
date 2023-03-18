@@ -1,6 +1,7 @@
 <template>
     <NantaTable @register="registerTable"
         :rowSelection="{ type: 'checkbox', selectedRowKeys: checkedKeys, onChange: onSelectChange }"
+        :rowClassName="(_record, index) => (isHighlight(_record, index) ? 'ant-table-row-highlight' : null)"
         :clickToRowSelect="false">
         <template #headerTop>
             <div style="margin-bottom: 10px;">
@@ -77,6 +78,10 @@ const operation = ref({ copyEnabled: false, createEnabled: true, modifyEnabled: 
 
 const getModifyButtonColor = computed(() => operation.value.modifyEnabled ? "success" : "")
 
+function isHighlight(record: Recordable, index: number) {
+    return record.age > 35;
+}
+
 function getAction(record: Recordable): ActionItem[] {
     const ifShow = (action: ActionItem) => {
         const value = (record.gender && (record.gender === 1 || record.gender === 2));
@@ -152,7 +157,7 @@ const fetchSetting = {
 };
 
 const [registerTable, { updateTableDataRecord, deleteTableDataRecord, findTableDataRecord, getSearchFieldsValue }] = useTable({
-    title: 'NantaTable Usage Example.',
+    title: '基础表格使用示例.',
     columns,
     dataSource: data,
     // api: createAxiosFetch(url),
@@ -322,5 +327,9 @@ function onSelectChange(selectedRowKeys: (string | number)[]) {
     align-items: center;
     font-size: large;
     font-weight: 500;
+}
+
+.ant-table-row-highlight {
+    background-color: blueviolet;
 }
 </style>

@@ -43,6 +43,7 @@ const wrapRef = ref(null);
 const formRef = ref(null);
 
 const attrs = useAttrs();
+console.log(attrs)
 const slots = useSlots()
 const tableElRef = ref(null);
 const tableData = ref<Recordable[]>([]);
@@ -108,6 +109,7 @@ const getBindValues = computed(() => {
     };
 
     propsData = omit(propsData, ["class", "onChange"]);
+    // console.log(propsData)
     return propsData;
 });
 
@@ -172,7 +174,6 @@ emits("register", tableAction, formActions);
 @component-background: '#151515';
 
 [data-theme='dark'] {
-
     .ant-table-tbody>tr:hover.ant-table-row-selected>td,
     .ant-table-tbody>tr.ant-table-row-selected td {
         background-color: #262626;
@@ -230,7 +231,7 @@ emits("register", tableAction, formActions);
             border-bottom: none;
             justify-content: space-between;
             align-items: center;
-        }
+        }        
     }
 
     .ant-pagination {
