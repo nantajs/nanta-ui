@@ -15,7 +15,7 @@ export const VAL_EMAIL: Validator = (rule, value, callback) => {
 }
 
 export const NOT_NEGATIVE: Validator = (rule, value, callback) => {
-    if (!value) {
+    if (value == null || value == undefined) {
         return Promise.reject(t('validate.notEmpty'));
     }
 
