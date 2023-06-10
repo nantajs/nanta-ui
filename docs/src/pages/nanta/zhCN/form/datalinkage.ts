@@ -21,7 +21,7 @@ export const schemes: FormSchema[] = [
     {
         field: 'reviewResult',
         component: 'RadioGroup',
-        label: '审核结论',
+        label: '出差审核',
         colProps: { span: 20 },
         required: true,
         componentProps: ({ formActionType }) => {
@@ -43,19 +43,19 @@ export const schemes: FormSchema[] = [
                     const val = value.target.value;
                     console.log('----curentval', val);
                     const { updateSchema, clearValidate, resetSchema } = formActionType;
-                    // clearValidate("reviewNote")
+
                     if (val === '3') { // 审核不通过   
                         console.log('不通过！', val)
-                        console.log('clear')
-                        clearValidate("area")
                         updateSchema({
                             field: "area",
                             component: 'CheckboxGroup',
                             rules: [
                                 {
-                                    required: false,                                   
+                                    required: false,
                                 }]
                         })
+                        // 防止上次的validator显示
+                        clearValidate('area')
                     } else {
                         // 审核通过
                         console.log('通过！', val)
@@ -68,7 +68,7 @@ export const schemes: FormSchema[] = [
                                     validator: async (rule, value) => {
                                         if (!value || value.length === 0) {
                                             console.log('----curentval￥￥￥ ', val);
-                                            return Promise.reject('请选择范围！');
+                                            return Promise.reject('请选择出差国家！');
                                         }
                                     }
                                 }
@@ -94,13 +94,13 @@ export const schemes: FormSchema[] = [
     },
     {
         field: 'area',
-        label: '区域（可多选）',
+        label: '出差国家（可多选）',
         component: 'CheckboxGroup',
         defaultValue: [],
         componentProps: {
             options: [
                 {
-                    label: '中国',
+                    label: '日本',
                     value: '1',
                 },
                 {

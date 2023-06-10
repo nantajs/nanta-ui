@@ -1,8 +1,11 @@
 <template>
-    <div>        
-        <a-card title="基础表单" :bordered="false">
+    <div>
+        <a-card title="联动表单" :bordered="false">
+            <template #extra>
+                显示表单两个字段之间的联动效果
+            </template>
             <NantaForm v-bind="getFormProps" :actionColOptions="{ span: 24 }" @register="registerForm"
-                @registered="onRegisted" @submit="handleSubmit" @reset="handleReset">                
+                @submit="handleSubmit" @reset="handleReset">
             </NantaForm>
         </a-card>
     </div>
@@ -15,7 +18,7 @@ import { computed } from "vue";
 
 const [
     registerForm,
-    { setFieldsValue, updateSchema, resetFields, getFieldsValue, validateFields },
+    { setFieldsValue, updateSchema, resetFields, getFieldsValue, validateFields, clearValidate },
 ] = useForm({
     submitButtonOptions: {
         text: '提交',
@@ -27,23 +30,11 @@ const [
     },
 });
 
-const onRegisted = () => {
-    setFieldsValue({
-        age: 100,
-        email: "aborn@aborn.me"
-    })
-}
-
 const customizeResetFn = (): Promise<void> => {
     const values = getFieldsValue()
     console.log(values)
 
     console.log("here is a customize resetFn called!");
-    setFieldsValue({
-        age: 0,
-        email: "nanta-ui@nantajs.dev",
-        name: "Nanta",
-    });
     return new Promise((resolve, reject) => {
         try {
             resolve();
