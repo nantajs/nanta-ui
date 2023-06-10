@@ -72,6 +72,7 @@ export function useTable(tableProps?: Props): [
         }
         return table as TableActionType;
     }
+    // TODO table 是否初始化判断
     const methods: TableActionType = {
         clearSelectedRowKeys: () => {
             getTableInstance().clearSelectedRowKeys();

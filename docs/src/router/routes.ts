@@ -6,6 +6,7 @@ export const basicRouteItems = [
     { path: '/components/button/index', name: 'Button', group: 'components', component: () => import('/@/pages/nanta/en/button/button.vue') },
     { path: '/components/form/index', name: 'Form', group: 'components', component: () => import('/@/pages/nanta/en/form/basic.vue') },
     { path: '/components/form/index-cn', name: '基础表单', group: 'components', component: () => import('/@/pages/nanta/zhCN/form/basic.vue') },
+    { path: '/components/form/linkage-cn', name: '联动表单', group: 'components', component: () => import('/@/pages/nanta/zhCN/form/linkage.vue') },
     { path: '/components/icon/index', name: 'Icon', group: 'components', component: () => import('/@/pages/nanta/en/icon/icon.vue') },
     { path: '/components/modal/index', name: 'Modal', group: 'components', component: () => import('/@/pages/nanta/en/modal/index.vue') },
     { path: '/components/table/index', name: 'Table', group: 'components', component: () => import('/@/pages/nanta/en/table/index.vue') },
