@@ -106,6 +106,7 @@ for (let [key, value] of Object.entries(nantaDeps)) {
     display: flex;
     margin-right: 1rem;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
 }
 
 .version-line {
