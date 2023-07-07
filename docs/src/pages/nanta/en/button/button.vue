@@ -5,7 +5,7 @@
             <NantaButton>Default Button</NantaButton>
             <NantaButton type="dashed">Dashed Button</NantaButton>
             <NantaButton type="text">Text Button</NantaButton>
-            <NantaButton type="link">Link Button</NantaButton>
+            <NantaButton type="link" href="/">Link Button (TO HOME)</NantaButton>
         </div>
         <div class="fbox-line">
             <NantaButton type="primary" icon="ant-design:delete-outlined">primary</NantaButton>
